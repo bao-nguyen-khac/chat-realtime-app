@@ -121,7 +121,7 @@ class AdminController {
     updateInfo(req, res, next) {
         const id = verifyToken(req.signedCookies.token);
         if (req.file) {
-            req.body.avatar = '/' + req.file.path.split('\\').slice(2).join('/');
+            req.body.avatar = req.file.path;
             Account.updateOne({ _id: id }, {
                 fullname: req.body.fullname,
                 avatar: req.body.avatar
