@@ -1,0 +1,29 @@
+<div class="container p-2">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title text-center">Personal information</h5>
+        </div>
+        <div class="card-body">
+            <form action="/admin/personal-info/update" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Full Name</span>
+                    <input type="text" class="form-control" autocomplete="off" name="fullname" value="{{user.fullname}}" />
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Avatar</span>
+                    <img src="{{user.avatar}}" alt="Avatar" width="80" height="80" style="margin-left: 20px; border-radius: 50%">
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Change your avatar</label>
+                    <input class="form-control" type="file" id="formFile" name="avatar">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">User Name</span>
+                    <input type="text" class="form-control" autocomplete="off" name="username" value="{{user.username}}" disabled/>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

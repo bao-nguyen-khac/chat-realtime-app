@@ -1,0 +1,149 @@
+<h3 class=" text-center"><a href="/admin" style="font-size: 15px; float: left; line-height: 36px">
+        <- Back to Dashboard </a> Your Messenger </h3>
+<div class="messaging">
+    <div class="inbox_msg">
+        <div class="inbox_people">
+            <div class="headind_srch">
+                <div class="recent_heading">
+                    <h4>Recent</h4>
+                </div>
+                <div class="srch_bar">
+                    <div class="stylish-input-group">
+                        <input type="text" class="search-bar" placeholder="Search">
+                        <span class="input-group-addon">
+                            <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="inbox_chat">
+                <div class="chat_list active_chat">
+                    <div class="chat_people">
+                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                        </div>
+                        <div class="chat_ib">
+                            <h5>{{title}}</h5>
+                            {{#each messageLast}}
+                            {{#if (isSame this.id_user ../userInfo.id)}}
+                            <p>You: {{this.message}} - {{this.time}}</p>
+                            {{else}}
+                            <p>{{this.name}}: {{this.message}} - {{this.time}}</p>
+                            {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div class="chat_list">
+                    <div class="chat_people">
+                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                        </div>
+                        <div class="chat_ib">
+                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                                astrology under one roof.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mesgs">
+            <div class="msg_history">
+                {{#each messages}}
+                {{#if (isSame this.id_user ../userInfo.id)}}
+                <div class="outgoing_msg">
+                    <div class="sent_msg">
+                        <span style="font-size: 13px;">You</span>
+                        <p>{{this.message}}</p>
+                        <span class="time_date">{{this.time}}</span>
+                    </div>
+                </div>
+                {{else}}
+                <div class="incoming_msg">
+                    <div class="incoming_msg_img"> <img src="{{this.avatar}}"
+                            alt="sunil"> </div>
+                    <div class="received_msg">
+                        <div class="received_withd_msg">
+                            <span style="font-size: 13px;">{{this.name}}</span>
+                            <p>{{this.message}}</p>
+                            <span class="time_date">{{this.time}}</span>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+            <div class="type_msg">
+                <div class="input_msg_write">
+                    <form action="" class="chat-form">
+                        <input type="text" class="write_msg" placeholder="Type a message" />
+                        <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o"
+                                aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" class="id-user" value="{{userInfo.id}}">
+<input type="hidden" class="name-user" value="{{userInfo.fullname}}">
+<input type="hidden" class="avatar-user" value="{{userInfo.avatar}}">
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const chatForm = document.querySelector('.chat-form');
+    const chatMess = document.querySelector('.write_msg');
+    const messages = document.querySelector('.msg_history');
+    const id_user = document.querySelector('.id-user').value;
+    const name_user = document.querySelector('.name-user').value;
+    const avatar_user = document.querySelector('.avatar-user').value;
+    messages.scrollTop = messages.scrollHeight;
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = chatMess.value;
+        var today = new Date();
+        var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+        var minutes = today.getMinutes() > 9 ? today.getMinutes() : '0' + today.getMinutes();
+        var time = today.getHours() + ":" + minutes;
+        var dateTime = time + ' | ' + date;
+        socket.emit('message-outgoing', {
+            id_user: id_user,
+            name: name_user,
+            message: message,
+            avatar: avatar_user,
+            time: dateTime
+        })
+        chatMess.value = '';
+    })
+
+    socket.on('message-incoming', (message) => {
+        var messageHtml = '';
+        if (id_user === message.id_user) {
+            messageHtml = `
+                <div class="outgoing_msg">
+                    <div class="sent_msg">
+                        <span style="font-size: 13px;">You</span>
+                        <p>${message.message}</p>
+                        <span class="time_date">${message.time}</span>
+                    </div>
+                </div>
+            `;
+        } else {
+            messageHtml = `
+                <div class="incoming_msg">
+                    <div class="incoming_msg_img"> <img src="${message.avatar}"
+                            alt="sunil"> </div>
+                    <div class="received_msg">
+                        <span style="font-size: 13px;">${message.name}</span>
+                        <div class="received_withd_msg">
+                            <p>${message.message}</p>
+                            <span class="time_date">${message.time}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        messages.innerHTML += messageHtml;
+        messages.scrollTop = messages.scrollHeight;
+    })
+</script>
