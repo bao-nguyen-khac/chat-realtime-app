@@ -1,12 +1,10 @@
 const express = require('express');
 const route = express.Router();
 const multer = require('multer');
-// const upload = multer({ dest: './src/public/uploads' });
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true })
-const adminController = require('../app/controllers/AdminController');
 
 cloudinary.config({
     cloud_name: "be-dev",
@@ -20,6 +18,8 @@ const storage = new CloudinaryStorage({
     },
 });
 const upload = multer({ storage: storage });
+
+const adminController = require('../app/controllers/AdminController');
 
 route.get('/messenger', adminController.chatMessage);
 

@@ -126,7 +126,13 @@ class AdminController {
                 fullname: req.body.fullname,
                 avatar: req.body.avatar
             })
-                .then(() => res.redirect('back'))
+                .then(() => {
+                    AdminMessage.updateMany({id_user: id}, {
+                        avatar: req.body.avatar
+                    })
+                    .then(() => res.redirect('/admin/personal-info'))
+                    .catch(next)
+                })
                 .catch(next);
         }
         Account.updateOne({ _id: id }, {
