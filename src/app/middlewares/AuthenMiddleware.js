@@ -16,9 +16,9 @@ module.exports = function AuthenMiddleware(req, res, next) {
                     next();
                 })
         } else {
-            return res.redirect('/auth/admin/login');
+            return res.redirect('/auth/user/login');
         }
     } catch (error) {
-        return res.redirect('/auth/admin/login');
+        return res.redirect('/auth/user/login');
     }
 }

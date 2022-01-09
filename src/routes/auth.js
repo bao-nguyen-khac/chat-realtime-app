@@ -1,12 +1,12 @@
 const express = require('express');
 const route = express.Router();
 
-const adminController = require('../app/controllers/AdminController');
+const UserController = require('../app/controllers/UserController');
 
-route.get('/admin/login', adminController.login);
-route.get('/admin/logout', adminController.logout);
-route.post('/admin/checkLogin', adminController.checkLogin);
-route.get('/admin/register', adminController.register);
-route.post('/admin/create', adminController.storeAccount);
+route.get('/user/login', UserController.login);
+route.get('/user/logout', UserController.logout);
+route.post('/user/checkLogin', UserController.checkLogin);
+route.get('/user/register', UserController.register);
+route.post('/user/create', UserController.storeAccount);
 
 module.exports = route;

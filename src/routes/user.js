@@ -19,13 +19,13 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage: storage });
 
-const adminController = require('../app/controllers/AdminController');
+const UserController = require('../app/controllers/UserController');
 
-route.get('/messenger', adminController.chatMessage);
+// route.get('/messenger', UserController.chatMessage);
 
-route.get('/personal-info', csrfProtection, adminController.personalInfo);
-route.post('/personal-info/update', upload.single('avatar'), csrfProtection, adminController.updateInfo);
+// route.get('/personal-info', csrfProtection, UserController.personalInfo);
+// route.post('/personal-info/update', upload.single('avatar'), csrfProtection, UserController.updateInfo);
 
-route.get('/', adminController.index);
+route.get('/', UserController.index);
 
 module.exports = route;

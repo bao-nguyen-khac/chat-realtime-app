@@ -5,7 +5,11 @@ const Account = new Schema({
     username: { type: String },
     password: { type: String },
     fullname: { type: String },
-    avatar: { type: String }
+    avatar: { type: String },
+    sub_desc: { type: String },
+    main_desc: { type: String },
+    phone: { type: String },
+    address: { type: String }
 });
 
 module.exports = mongoose.model('Account', Account);

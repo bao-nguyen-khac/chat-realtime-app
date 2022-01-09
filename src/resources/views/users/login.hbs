@@ -1,9 +1,8 @@
-<form action="/auth/admin/checkLogin" method="POST" class="form" id="form-1">
+<form action="/auth/user/checkLogin" method="POST" class="form" id="form-1">
     <h3 class="heading">Sign up</h3>
-    <p class="desc">Wellcome to BKU Shop ❤️</p>
+    <p class="desc">Wellcome to Tele-Zalo ❤️</p>
 
     <div class="spacer"></div>
-    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div class="form-group">
         <label for="username" class="form-label">Username</label>
         <input id="username" name="username" type="text" placeholder="Your username" class="form-control">
@@ -24,7 +23,7 @@
     <button class="form-submit">Login</button>
     <div class="register">
         <span>Not register?</span>
-        <span><a href="/auth/admin/register">Create an account</a></span> <br><br>
+        <span><a href="/auth/user/register">Create an account</a></span> <br><br>
         <span><a href="">Go to Home</a></span>
     </div>
 </form>

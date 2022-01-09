@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server)
 
-const adminController = require('./app/controllers/AdminController');
+const userController = require('./app/controllers/UserController');
 
 const db = require('./confic/db/index');
 
@@ -44,13 +44,13 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
 // Create socketio
-io.on("connection", (socket) => {
-    console.log('User connected');
-    socket.on('message-outgoing', data => {
-        adminController.storeMessage(data);
-        io.emit('message-incoming', data);
-    })
-});
+// io.on("connection", (socket) => {
+//     console.log('User connected');
+//     socket.on('message-outgoing', data => {
+//         userController.storeMessage(data);
+//         io.emit('message-incoming', data);
+//     })
+// });
 
 // Routes init
 route(app);

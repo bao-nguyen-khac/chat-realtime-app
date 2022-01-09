@@ -1,8 +1,18 @@
-<form action="/auth/admin/create" method="POST" class="form" id="form-1">
+<form action="/auth/user/create" method="POST" class="form" id="form-1">
     <h3 class="heading">Sign up</h3>
-    <p class="desc">Become a member of BKU Shop ❤️</p>
+    <p class="desc">Become a member of Tele-Zalo ❤️</p>
 
     <div class="spacer"></div>
+    <div class="form-group">
+        <label for="fullname" class="form-label">Full Name</label>
+        <input id="fullname" name="fullname" type="text" placeholder="Your full name" class="form-control">
+        <span class="form-message"></span>
+    </div>
+    <div class="form-group">
+        <label for="phone" class="form-label">Phone number</label>
+        <input id="phone" name="phone" type="text" placeholder="Your phone number" class="form-control">
+        <span class="form-message"></span>
+    </div>
     <div class="form-group">
         <label for="username" class="form-label">Username</label>
         <input id="username" name="username" type="text" placeholder="Your username" class="form-control">
@@ -29,7 +39,7 @@
     <button class="form-submit">Register</button>
     <div class="register">
         <span>Have an account?</span>
-        <span><a href="/auth/admin/login">Sign in now!</a></span>
+        <span><a href="/auth/user/login">Sign in now!</a></span>
     </div>
 </form>
 
@@ -39,6 +49,9 @@
         form: '#form-1',
         errorSelector: '.form-message',
         rules: [
+            Validator.isRequired('#fullname'),
+            Validator.isRequired('#phone'),
+            Validator.minLength('#phone', 10),
             Validator.isRequired('#username'),
             Validator.minLength('#username', 4),
             Validator.isRequired('#password'),
