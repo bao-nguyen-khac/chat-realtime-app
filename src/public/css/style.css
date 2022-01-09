@@ -1,21 +1,51 @@
 .each-avatar {
-display: inline-block;
-border-radius: 50%;
-overflow: hidden;
-width: 22px;
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 17px;
+  position: absolute;
 }
-
+.each-avatar:first-child {
+  bottom: 0;
+  left: 0;
+}
 .each-avatar:not(:first-child) {
-margin-left: -13.2px;
--webkit-mask:radial-gradient(circle 10px at 1px 50%,transparent 99%,#fff 100%);
-        mask:radial-gradient(circle 10px at 1px 50%,transparent 99%,#fff 100%);
+  top: 0;
+  right: 0;
 }
-
 .each-avatar img {
 width: 100%;
 display: block;
 }
+.avatars-group{
+  position: relative;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
 .notify-chat{
-        justify-content: center;
-        margin-bottom: 5px;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.ctext-wrap{
+  position: relative;
+}
+.reaction-icon-block{
+  position: absolute;
+  bottom: -15px;
+  right: 6px;
+  z-index: 3;
+  cursor: pointer;
+  background: #fff;
+  border: 0.5px solid #e1e4ea;
+  border-radius: 50%;
+}
+.reaction-icon{
+  background-image: url(https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png);
+  /* https://i.pinimg.com/originals/86/cd/09/86cd095c09cda5bea306385148adcf47.png */
+  /* https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png */
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: 20px;
 }
