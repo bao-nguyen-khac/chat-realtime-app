@@ -22,8 +22,8 @@ class UserController {
         if (req.query.message) {
             var message = req.query.message;
         }
-        res.render('users/login', {
-            layout: 'users/authentication',
+        res.render('user/login', {
+            layout: 'user/authentication',
             message: message,
         });
     }
@@ -32,8 +32,8 @@ class UserController {
             var message = req.query.message;
             var checkRegister = req.query.checkRegister;
         }
-        res.render('users/register', {
-            layout: 'users/authentication',
+        res.render('user/register', {
+            layout: 'user/authentication',
             message: message,
             checkRegister: checkRegister
         });
