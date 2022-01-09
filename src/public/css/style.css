@@ -36,8 +36,8 @@ display: block;
   right: 6px;
   z-index: 3;
   cursor: pointer;
-  background: #fff;
-  border: 0.5px solid #e1e4ea;
+  
+  border: 0.5px solid rgba(0, 0, 0, 0.205);
   border-radius: 50%;
 }
 .reaction-icon{
@@ -49,3 +49,18 @@ display: block;
   background-repeat: no-repeat;
   background-size: 20px;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+  border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+  background: black; 
+  border-radius: 10px;
+  }
