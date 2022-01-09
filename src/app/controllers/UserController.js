@@ -8,10 +8,10 @@ const { MongooseToObject } = require('../../util/mongoose');
 const verifyToken = require('../../util/verifyToken');
 class UserController {
     index(req, res, next) {
-        // res.render('users/home', {
-        //     layout: 'users/main'
-        // });
-        res.json('home');
+        res.render('user/home', {
+            layout: 'user/main'
+        });
+        
     }
     login(req, res, next) {
         if (req.cookies.token) {

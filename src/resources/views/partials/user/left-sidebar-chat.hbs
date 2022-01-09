@@ -1,0 +1,305 @@
+<div class="chat-leftsidebar">
+
+    <div class="tab-content">
+        <!-- Start Profile tab-pane -->
+        <div class="tab-pane" id="pills-user" role="tabpanel" aria-labelledby="pills-user-tab">
+            <!-- Start profile content -->
+            <div>
+                <div class="user-profile-img">
+                    <img src="https://themesbrand.com/doot/layouts/assets/images/small/img-4.jpg" class="profile-img"
+                        style="height: 160px;" alt="">
+                    <div class="overlay-content">
+                        <div>
+                            <div class="user-chat-nav p-2 ps-3">
+
+                                <div class="d-flex w-100 align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="text-white mb-0">My Profile</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center p-3 p-lg-4 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
+                    <div class="mb-lg-3 mb-2">
+                        <img src="/img/avatar-default.png" class="rounded-circle avatar-lg img-thumbnail"
+                            alt="">
+                    </div>
+
+                    <h5 class="font-size-16 mb-1 text-truncate">Adam Zampa</h5>
+                    <p class="text-muted font-size-14 text-truncate mb-0">Front end Developer</p>
+                </div>
+                <!-- End profile user -->
+
+                <!-- Start user-profile-desc -->
+                <div class="p-4 profile-desc">
+                    <div class="text-muted">
+                        <p class="mb-4">If several languages coalesce, the grammar of the resulting language is
+                            more simple.</p>
+                    </div>
+
+                    <div>
+                        <div class="d-flex py-2">
+                            <div class="flex-shrink-0 me-3">
+                                <i class="far fa-user align-middle text-muted"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0">Adam Zampa</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex py-2">
+                            <div class="flex-shrink-0 me-3">
+                                <i class="far fa-envelope align-middle text-muted"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0">adc@123.com</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex py-2">
+                            <div class="flex-shrink-0 me-3">
+                                <i class="far fa-map-marker-check align-middle text-muted"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0">California, USA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end user-profile-desc -->
+            </div>
+            <!-- End profile content -->
+        </div>
+        <!-- End Profile tab-pane -->
+
+        <!-- Start chats tab-pane -->
+        <div class="tab-pane show active" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
+            <!-- Start chats content -->
+            <div>
+                <div class="px-4 pt-4">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-grow-1">
+                            <h4 class="mb-4">Chats</h4>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <div data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="bottom"
+                                title="Add Contact">
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-soft-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#addContact-exampleModal">
+                                    <i class="fas fa-user-plus"></i>
+                                </button>
+                                <button type="button" class="btn btn-soft-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#addgroup-exampleModal">
+                                    <i class="fas fa-users"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control bg-light border-0 pe-0" id="serachChatUser"
+                                placeholder="Search here.." aria-describedby="searchbtn-addon" autocomplete="off">
+                            <button class="btn btn-light" type="button" id="searchbtn-addon">
+                                <i class='far fa-search align-middle'></i>
+                            </button>
+                        </div>
+                    </form>
+
+                </div> <!-- .p-4 -->
+
+                <div class="chat-room-list">
+                    <!-- Start chat-message-list -->
+                    <h5 class="mb-3 px-4 mt-4 font-size-11 text-muted text-uppercase">Recent</h5>
+
+                    <div class="chat-message-list">
+
+                        <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
+                            <li id="contact-id-1" class="active">
+                                <a href="">
+                                    <div class="d-flex align-items-center">
+                                        <div class="chat-user-img online align-self-center me-2 ms-0">
+                                            <img src="/img/avatar-default.png"
+                                                class="rounded-circle avatar-xs" alt="">
+                                            <span class="user-status"></span>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-truncate mb-0">Bella Cote</p>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </li>
+                            <li id="contact-id-1">
+                                <a href="" class="unread-msg-user">
+                                    <div class="d-flex align-items-center">
+                                        <div class="chat-user-img online align-self-center me-2 ms-0">
+                                            <img src="/img/avatar-default.png"
+                                                class="rounded-circle avatar-xs" alt="">
+                                            <span class="user-status"></span>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-truncate mb-0">Brian Break</p>
+                                        </div>
+                                        <div class="ms-auto">
+                                            <span class="badge badge-soft-dark rounded p-1">18</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li id="contact-id-1">
+                                <a href="">
+                                    <div class="d-flex align-items-center">
+                                        <div class="chat-user-img online align-self-center me-2 ms-0">
+                                            <img src="/img/avatar-default.png"
+                                                class="rounded-circle avatar-xs" alt="">
+                                            <span class="user-status"></span>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-truncate mb-0">Bella Cote</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li id="contact-id-1">
+                                <a href="">
+                                    <div class="d-flex align-items-center">
+                                        <div class="chat-user-img online align-self-center me-2 ms-0">
+                                            <div class="avatars-group">
+                                                <span class="each-avatar">
+                                                    <img src="/img/avatar-default.png">
+                                                </span>
+                                                <span class="each-avatar">
+                                                    <img src="/img/avatar-default.png">
+                                                </span>
+                                            </div>
+                                            <span class="user-status"></span>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-truncate mb-0">Group Nodejs</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End chat-message-list -->
+                </div>
+
+            </div>
+            <!-- Start chats content -->
+
+            <!-- Start add group Modal -->
+
+            <!-- End add group Modal -->
+        </div>
+        <div class="tab-pane" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
+            <!-- Start Settings content -->
+            <div>
+                <div class="user-profile-img">
+                    <img src="https://themesbrand.com/doot/layouts/assets/images/small/img-4.jpg"
+                        class="profile-img profile-foreground-img" style="height: 160px;" alt="">
+                    <div class="overlay-content">
+                        <div>
+                            <div class="user-chat-nav p-3">
+
+                                <div class="d-flex w-100 align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="text-white mb-0">Settings</h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar-xs p-0 rounded-circle profile-photo-edit"
+                                            title="Change Background">
+                                            <input id="profile-foreground-img-file-input" type="file"
+                                                class="profile-foreground-img-file-input">
+                                            <label for="profile-foreground-img-file-input"
+                                                class="profile-photo-edit avatar-xs">
+                                                <span class="avatar-title rounded-circle bg-light text-body">
+                                                    <i class="fas fa-pen-square"></i>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center p-3 p-lg-4 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
+                    <div class="mb-3 profile-user">
+                        <img src="/img/avatar-default.png"
+                            class="rounded-circle avatar-lg img-thumbnail user-profile-image" alt="user-profile-image">
+                        <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
+                            <input id="profile-img-file-input" type="file" class="profile-img-file-input">
+                            <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                <span class="avatar-title rounded-circle bg-light text-body">
+                                    <i class="fas fa-camera"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <h5 class="font-size-16 mb-1 text-truncate"></h5>
+
+                    <div class="dropdown d-inline-block">Active</div>
+
+
+                </div>
+                <!-- End profile user -->
+
+                <!-- Start User profile description -->
+                <div class="user-setting" data-simplebar>
+                    <div id="settingprofile" class="accordion accordion-flush">
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="headerpersonalinfo">
+                                <button class="accordion-button font-size-14 fw-medium" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#personalinfo" aria-expanded="true"
+                                    aria-controls="personalinfo">
+                                    <i class="far fa-user text-muted me-3"></i> Personal Info
+                                </button>
+                            </div>
+                            <div id="personalinfo" class="accordion-collapse collapse show"
+                                aria-labelledby="headerpersonalinfo" data-bs-parent="#settingprofile">
+                                <form action="" method="post">
+                                    <div class="accordion-body">
+                                        <div>
+                                            <p class="text-muted mb-1">Name</p>
+                                            <input type="text" class="form-control" value="Adam Zampa">
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <p class="text-muted mb-1">Email</p>
+                                            <input type="text" class="form-control" value="adc@123.com">
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <p class="text-muted mb-1">Location</p>
+                                            <input type="text" class="form-control" value="California, USA">
+                                        </div>
+                                        <br>
+                                        <div class="float-end">
+                                            <button type="submit" class="btn btn-soft-primary btn-sm">
+                                                Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        <!-- end personal info card -->
+                    </div>
+                    <!-- end profile-setting-accordion -->
+                </div>
+                <!-- End User profile description -->
+            </div>
+            <!-- Start Settings content -->
+        </div>
+    </div>
+    <!-- end tab content -->
+</div>

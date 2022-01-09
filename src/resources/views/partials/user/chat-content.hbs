@@ -1,0 +1,267 @@
+<div class="w-100 overflow-hidden position-relative">
+    <!-- conversation user -->
+    <div id="users-chat" class="position-relative">
+        <div class="p-3 p-lg-4 user-chat-topbar" style="z-index: 4;">
+            <div class="row align-items-center">
+                <div class="col-sm-4 col-8">
+                    <div class="d-flex align-items-center">
+                        <!-- Dấu mũi tên để out ra trên mobie -->
+                        <div class="flex-shrink-0 d-block d-lg-none me-3">
+                            <a href="#" class="user-chat-remove font-size-18 p-1">
+                                <i class="fas fa-chevron-left align-middle"></i>
+                            </a>
+                        </div>
+                        <!-- end -->
+                        <div class="flex-grow-1 overflow-hidden">
+                            <div class="d-flex align-items-center">
+                                <div
+                                    class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
+                                    <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profile-friend">
+                                        <img src="/img/avatar-default.png" class="rounded-circle avatar-sm"
+                                            alt="">
+                                        <span class="user-status"></span>
+                                    </a>
+                                </div>
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <h6 class="text-truncate mb-0 font-size-18"><a
+                                            class="user-profile-show text-reset">Bella Cote</a></h6>
+                                    <p class="text-truncate text-muted mb-0"><small>Online</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-4">
+                    <ul class="list-inline user-chat-nav text-end mb-0">
+                        <li class="list-inline-item">
+                            <div class="dropdown">
+                                <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <div class="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg">
+                                    <div class="search-box p-2">
+                                        <input type="text" class="form-control" placeholder="Search.."
+                                            id="searchChatMessage">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                            <button type="button" class="btn nav-btn" data-bs-toggle="modal"
+                                data-bs-target=".audiocallModal">
+                                <i class="fas fa-phone-volume"></i>
+                            </button>
+                        </li>
+
+                        <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                            <button type="button" class="btn nav-btn" data-bs-toggle="modal"
+                                data-bs-target=".videocallModal">
+                                <i class="far fa-video"></i>
+                            </button>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <button type="button" class="btn nav-btn user-profile-show">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end chat user head -->
+
+        <!-- start chat conversation -->
+
+        <div class="chat-conversation p-3 p-lg-4 " id="chat-conversation" style="overflow: overlay;">
+
+            <ul class="list-unstyled chat-conversation-list" id="users-conversation">
+                <li class="chat-list left" id="1">
+                    <div class="conversation-list">
+                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
+                        </div>
+                        <div class="user-chat-content">
+                            <div class="conversation-name">
+                                <small class="text-muted time">Bella abc</small>
+                            </div>
+                            <div class="ctext-wrap">
+                                <div class="ctext-wrap-content" id="1">
+                                    <p class="mb-0 ctext-content">Good morning 😊</p>
+                                </div>
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon"></div>
+                                </div>
+                            </div>
+                            <div class="conversation-name">
+                                <small class="text-muted time">10:07am</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li class="chat-list left" id="1">
+                    <div class="conversation-list">
+                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
+                        </div>
+                        <div class="user-chat-content">
+                            <div class="conversation-name">
+                                <small class="text-muted time">Bella abc</small>
+                            </div>
+                            <div class="ctext-wrap">
+                                <div class="ctext-wrap-content" id="1">
+                                    <p class="mb-0 ctext-content">Good morning 😊</p>
+                                </div>
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon"></div>
+                                </div>
+                            </div>
+                            <div class="conversation-name">
+                                <small class="text-muted time">10:07am</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li class="chat-list left" id="1">
+                    <div class="conversation-list">
+                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
+                        </div>
+                        <div class="user-chat-content">
+                            <div class="conversation-name">
+                                <small class="text-muted time">Bella abc</small>
+                            </div>
+                            <div class="ctext-wrap">
+                                <div class="ctext-wrap-content" id="1">
+                                    <p class="mb-0 ctext-content">Good morning 😊</p>
+                                </div>
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon"></div>
+                                </div>
+                            </div>
+                            <div class="conversation-name">
+                                <small class="text-muted time">10:07am</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li class="chat-list left" id="1">
+                    <div class="conversation-list">
+                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
+                        </div>
+                        <div class="user-chat-content">
+                            <div class="conversation-name">
+                                <small class="text-muted time">Bella abc</small>
+                            </div>
+                            <div class="ctext-wrap">
+                                <div class="ctext-wrap-content" id="1">
+                                    <p class="mb-0 ctext-content">Good morning 😊</p>
+                                </div>
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon"></div>
+                                </div>
+                            </div>
+                            <div class="conversation-name">
+                                <small class="text-muted time">10:07am</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li class="chat-list left" id="1">
+                    <div class="conversation-list">
+                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
+                        </div>
+                        <div class="user-chat-content">
+                            <div class="conversation-name">
+                                <small class="text-muted time">Bella abc</small>
+                            </div>
+                            <div class="ctext-wrap">
+                                <div class="ctext-wrap-content" id="1">
+                                    <p class="mb-0 ctext-content">Good morning 😊</p>
+                                </div>
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon"></div>
+                                </div>
+                            </div>
+                            <div class="conversation-name">
+                                <small class="text-muted time">10:07am</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li class="chat-list notify-chat"><span>Thong bao ve doan chat</span></li>
+                <li class="chat-list right" id="2">
+                    <div class="conversation-list">
+                        <div class="user-chat-content">
+                            <div class="ctext-wrap">
+                                <div class="ctext-wrap-content" id="2">
+                                    <p class="mb-0 ctext-content">Good morning, How are you? What about
+                                        our next meeting?</p>
+                                </div>
+                            </div>
+                            <div class="conversation-name">
+                                <small class="text-muted time">10:12am</small>
+                                <span class="text-success check-message-icon">
+                                    <i class="fal fa-check"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- end chat conversation end -->
+    </div>
+
+    <!-- conversation group -->
+
+    <!-- start chat input section -->
+    <div class="position-relative">
+        <div class="chat-input-section p-3 p-lg-4">
+            <form id="chatinput-form" enctype="multipart/form-data">
+                <div class="row g-0 align-items-center">
+                    <div class="file_Upload"></div>
+                    <div class="col-auto">
+                        <div class="chat-input-links me-md-2">
+                            <div class="links-list-item" title="More">
+                                <button type="button"
+                                    class="btn btn-link text-decoration-none btn-lg waves-effect collapsed">
+                                    <i class="far fa-ellipsis-h align-middle"></i>
+                                </button>
+                            </div>
+                            <div class="links-list-item" title="Emoji">
+                                <button type="button"
+                                    class="btn btn-link text-decoration-none btn-lg waves-effect emoji-btn">
+                                    <i class="fal fa-smile align-middle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="position-relative">
+                            <input autocomplete="off" type="text" class="form-control form-control-lg chat-input"
+                                autofocus id="chat-input" placeholder="Type your message...">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="chat-input-links ms-2 gap-md-1">
+                            <div class="links-list-item">
+                                <button type="submit" class="btn btn-primary btn-lg chat-send waves-effect waves-light">
+                                    <i class="fal fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- end chat input section -->
+</div>

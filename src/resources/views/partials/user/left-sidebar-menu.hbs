@@ -1,0 +1,58 @@
+<div class="side-menu flex-lg-column">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <a href="/" class="logo logo-dark" style="line-height: 30px ; margin-top: 20px;">
+            <i class="fab fa-telegram" style="font-size: 40px;"></i>
+        </a>
+    </div>
+    <!-- end navbar-brand-box -->
+
+    <!-- Start side-menu nav -->
+    <div class="flex-lg-column my-0 sidemenu-navigation">
+        <ul class="nav nav-pills side-menu-nav" role="tablist">
+            <li class="nav-item d-none d-lg-block" data-bs-toggle="tooltip" data-bs-placement="right"
+                data-bs-trigger="hover" data-bs-container=".sidemenu-navigation" title="Profile">
+                <a class="nav-link" id="pills-user-tab" data-bs-toggle="pill" href="#pills-user" role="tab">
+                    <i class="far fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover"
+                data-bs-container=".sidemenu-navigation" title="Chats">
+                <a class="nav-link active" id="pills-chat-tab" data-bs-toggle="pill" href="#pills-chat" role="tab">
+                    <i class="fal fa-comment-alt-lines"></i>
+                </a>
+            </li>
+            <li class="nav-item d-none d-lg-block" data-bs-toggle="tooltip" data-bs-placement="right"
+                data-bs-container=".sidemenu-navigation" data-bs-trigger="hover" title="Settings">
+                <a class="nav-link" id="pills-setting-tab" data-bs-toggle="pill" href="#pills-setting" role="tab">
+                    <i class="far fa-cog"></i>
+                </a>
+            </li>
+            <li class="nav-item mt-auto">
+                <a class="nav-link light-dark">
+
+                </a>
+            </li>
+            <li class="nav-item dropdown profile-user-dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/avatar-default.png" alt="" class="profile-user rounded-circle">
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item d-flex align-items-center justify-content-between" id="pills-user-tab"
+                        data-bs-toggle="pill" href="#pills-user" role="tab">Profile <i
+                            class="far fa-user text-muted ms-1"></i></a>
+                    <a class="dropdown-item d-flex align-items-center justify-content-between" id="pills-setting-tab"
+                        data-bs-toggle="pill" href="#pills-setting" role="tab">Setting <i
+                            class="far fa-cog text-muted ms-1"></i></a>
+                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Change
+                        Password <i class="far fa-lock text-muted ms-1"></i></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="/auth/user/logout">Log out
+                        <i class="fas fa-sign-out text-muted ms-1"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- end side-menu nav -->
+</div>
