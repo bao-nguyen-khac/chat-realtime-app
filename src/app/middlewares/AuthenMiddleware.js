@@ -13,6 +13,7 @@ module.exports = function AuthenMiddleware(req, res, next) {
                         fullname: account.fullname,
                         avatar: account.avatar,
                     }
+                    res.user_id = checkToken;
                     next();
                 })
         } else {

@@ -6,12 +6,24 @@ const saltRounds = 10;
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 const { MongooseToObject } = require('../../util/mongoose');
 const verifyToken = require('../../util/verifyToken');
+const MessageController = require('./MessageController');
 class UserController {
     index(req, res, next) {
-        res.render('user/home', {
-            layout: 'user/main'
-        });
-        
+        Message.find({
+            'member.user_id': res.user_id
+        },{
+            'messages': 0
+        })
+        .populate('member.user_id')
+        .then(message => {
+            res.render('user/home', {
+                layout: 'user/main',
+                infoMessage: mutipleMongooseToObject(message)
+            })
+        })
+        .catch(err => {
+            return err;
+        })
     }
     login(req, res, next) {
         if (req.cookies.token) {
