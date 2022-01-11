@@ -3,8 +3,7 @@ const route = express.Router();
 const multer = require('multer');
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const csrf = require('csurf');
-const csrfProtection = csrf({ cookie: true })
+
 
 cloudinary.config({
     cloud_name: "be-dev",
@@ -19,13 +18,17 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage: storage });
 
-const UserController = require('../app/controllers/UserController');
 
-// route.get('/messenger', UserController.chatMessage);
+const UpdateInfoController = require('../app/controllers/UpdateInfoController');
 
-// route.get('/personal-info', csrfProtection, UserController.personalInfo);
-// route.post('/personal-info/update', upload.single('avatar'), csrfProtection, UserController.updateInfo);
+route.post('/update-personal-infor', upload.fields([{
+            name: 'avatar',
+            maxCount: 1
+        },{
+            name: 'background_img',
+            maxCount: 1
+        }]), UpdateInfoController.personalInfor);
 
-route.get('/', UserController.index);
+// route.get('/', UserController.index);
 
 module.exports = route;

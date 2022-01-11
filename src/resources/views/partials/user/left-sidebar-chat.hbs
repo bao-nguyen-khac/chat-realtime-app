@@ -6,8 +6,7 @@
             <!-- Start profile content -->
             <div>
                 <div class="user-profile-img">
-                    <img src="https://themesbrand.com/doot/layouts/assets/images/small/img-4.jpg" class="profile-img"
-                        style="height: 160px;" alt="">
+                    <img src="{{userInfo.background_img}}" class="profile-img" style="height: 160px;" alt="">
                     <div class="overlay-content">
                         <div>
                             <div class="user-chat-nav p-2 ps-3">
@@ -24,19 +23,18 @@
 
                 <div class="text-center p-3 p-lg-4 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
                     <div class="mb-lg-3 mb-2">
-                        <img src="/img/avatar-default.png" class="rounded-circle avatar-lg img-thumbnail" alt="">
+                        <img src="{{userInfo.avatar}}" class="rounded-circle avatar-lg img-thumbnail" alt="">
                     </div>
 
-                    <h5 class="font-size-16 mb-1 text-truncate">Adam Zampa</h5>
-                    <p class="text-muted font-size-14 text-truncate mb-0">Front end Developer</p>
+                    <h5 class="font-size-16 mb-1 text-truncate">{{userInfo.fullname}}</h5>
+                    <p class="text-muted font-size-14 text-truncate mb-0">{{userInfo.sub_desc}}</p>
                 </div>
                 <!-- End profile user -->
 
                 <!-- Start user-profile-desc -->
                 <div class="p-4 profile-desc">
                     <div class="text-muted">
-                        <p class="mb-4">If several languages coalesce, the grammar of the resulting language is
-                            more simple.</p>
+                        <p class="mb-4">{{userInfo.main_desc}}</p>
                     </div>
 
                     <div>
@@ -45,16 +43,16 @@
                                 <i class="far fa-user align-middle text-muted"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <p class="mb-0">Adam Zampa</p>
+                                <p class="mb-0">{{userInfo.fullname}}</p>
                             </div>
                         </div>
 
                         <div class="d-flex py-2">
                             <div class="flex-shrink-0 me-3">
-                                <i class="far fa-envelope align-middle text-muted"></i>
+                                <i class="fal fa-phone align-middle text-muted"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <p class="mb-0">adc@123.com</p>
+                                <p class="mb-0">{{userInfo.phone}}</p>
                             </div>
                         </div>
 
@@ -63,7 +61,7 @@
                                 <i class="far fa-map-marker-check align-middle text-muted"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <p class="mb-0">California, USA</p>
+                                <p class="mb-0">{{userInfo.address}}</p>
                             </div>
                         </div>
                     </div>
@@ -99,15 +97,15 @@
                             </div>
                         </div>
                     </div>
-                    <form>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control bg-light border-0 pe-0" id="serachChatUser"
-                                placeholder="Search here.." aria-describedby="searchbtn-addon" autocomplete="off">
-                            <button class="btn btn-light" type="button" id="searchbtn-addon">
-                                <i class='far fa-search align-middle'></i>
-                            </button>
-                        </div>
-                    </form>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control bg-light border-0 pe-0" id="serachChatUser"
+                            placeholder="Search here.." aria-describedby="searchbtn-addon" autocomplete="off">
+                        <button class="btn btn-light" type="button" id="searchbtn-addon">
+                            <i class='far fa-search align-middle'></i>
+                        </button>
+                    </div>
+
 
                 </div> <!-- .p-4 -->
 
@@ -203,86 +201,101 @@
         <div class="tab-pane" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
             <!-- Start Settings content -->
             <div>
-                <div class="user-profile-img">
-                    <img src="https://themesbrand.com/doot/layouts/assets/images/small/img-4.jpg"
-                        class="profile-img profile-foreground-img" style="height: 160px;" alt="">
-                    <div class="overlay-content">
-                        <div>
-                            <div class="user-chat-nav p-3">
+                <form action="/user/update-personal-infor" method="POST" enctype="multipart/form-data">
+                    <div class="user-profile-img">
+                        <img src="{{userInfo.background_img}}" class="profile-img profile-foreground-img"
+                            style="height: 160px;" alt="">
+                        <div class="overlay-content">
+                            <div>
+                                <div class="user-chat-nav p-3">
 
-                                <div class="d-flex w-100 align-items-center">
-                                    <div class="flex-grow-1">
-                                        <h5 class="text-white mb-0">Settings</h5>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <div class="avatar-xs p-0 rounded-circle profile-photo-edit"
-                                            title="Change Background">
-                                            <input id="profile-foreground-img-file-input" type="file"
-                                                class="profile-foreground-img-file-input">
-                                            <label for="profile-foreground-img-file-input"
-                                                class="profile-photo-edit avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-light text-body">
-                                                    <i class="fas fa-pen-square"></i>
-                                                </span>
-                                            </label>
+                                    <div class="d-flex w-100 align-items-center">
+                                        <div class="flex-grow-1">
+                                            <h5 class="text-white mb-0">Settings</h5>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar-xs p-0 rounded-circle profile-photo-edit"
+                                                title="Change Background">
+                                                <input id="profile-foreground-img-file-input" type="file"
+                                                    class="profile-foreground-img-file-input" name="background_img">
+                                                <label for="profile-foreground-img-file-input"
+                                                    class="profile-photo-edit avatar-xs">
+                                                    <span class="avatar-title rounded-circle bg-light text-body">
+                                                        <i class="fas fa-pen-square"></i>
+                                                    </span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="text-center p-3 p-lg-4 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
-                    <div class="mb-3 profile-user">
-                        <img src="/img/avatar-default.png"
-                            class="rounded-circle avatar-lg img-thumbnail user-profile-image" alt="user-profile-image">
-                        <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
-                            <input id="profile-img-file-input" type="file" class="profile-img-file-input">
-                            <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
-                                <span class="avatar-title rounded-circle bg-light text-body">
-                                    <i class="fas fa-camera"></i>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <h5 class="font-size-16 mb-1 text-truncate"></h5>
-
-                    <div class="dropdown d-inline-block">Active</div>
-
-
-                </div>
-                <!-- End profile user -->
-
-                <!-- Start User profile description -->
-                <div class="user-setting" data-simplebar>
-                    <div id="settingprofile" class="accordion accordion-flush">
-                        <div class="accordion-item">
-                            <div class="accordion-header" id="headerpersonalinfo">
-                                <button class="accordion-button font-size-14 fw-medium" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#personalinfo" aria-expanded="true"
-                                    aria-controls="personalinfo">
-                                    <i class="far fa-user text-muted me-3"></i> Personal Info
-                                </button>
+                    <div class="text-center p-3 p-lg-4 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
+                        <div class="mb-3 profile-user">
+                            <img src="{{userInfo.avatar}}"
+                                class="rounded-circle avatar-lg img-thumbnail user-profile-image"
+                                alt="user-profile-image">
+                            <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
+                                <input id="profile-img-file-input" type="file" class="profile-img-file-input"
+                                    name="avatar">
+                                <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                    <span class="avatar-title rounded-circle bg-light text-body">
+                                        <i class="fas fa-camera"></i>
+                                    </span>
+                                </label>
                             </div>
-                            <div id="personalinfo" class="accordion-collapse collapse show"
-                                aria-labelledby="headerpersonalinfo" data-bs-parent="#settingprofile">
-                                <form action="" method="post">
+                        </div>
+
+                        <h5 class="font-size-16 mb-1 text-truncate"></h5>
+
+                        <div class="dropdown d-inline-block">Active</div>
+
+
+                    </div>
+                    <!-- End profile user -->
+
+                    <!-- Start User profile description -->
+                    <div class="user-setting" style="overflow: scroll;">
+                        <div id="settingprofile" class="accordion accordion-flush">
+                            <div class="accordion-item">
+                                <div class="accordion-header" id="headerpersonalinfo">
+                                    <button class="accordion-button font-size-14 fw-medium" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#personalinfo" aria-expanded="true"
+                                        aria-controls="personalinfo">
+                                        <i class="far fa-user text-muted me-3"></i>Update Your Infomation
+                                    </button>
+                                </div>
+                                <div id="personalinfo" class="accordion-collapse collapse show"
+                                    aria-labelledby="headerpersonalinfo" data-bs-parent="#settingprofile">
+
                                     <div class="accordion-body">
                                         <div>
                                             <p class="text-muted mb-1">Name</p>
-                                            <input type="text" class="form-control" value="Adam Zampa">
+                                            <input type="text" class="form-control" name="fullname"
+                                                value="{{userInfo.fullname}}">
                                         </div>
-
+                                        <div>
+                                            <p class="text-muted mb-1">Sub Desc</p>
+                                            <input type="text" class="form-control" name="sub_desc"
+                                                value="{{userInfo.sub_desc}}">
+                                        </div>
+                                        <div>
+                                            <p class="text-muted mb-1">Main Desc</p>
+                                            <textarea class="form-control" name="main_desc" cols="10" 
+                                                rows="4">{{userInfo.main_desc}}</textarea>
+                                        </div>
                                         <div class="mt-4">
-                                            <p class="text-muted mb-1">Email</p>
-                                            <input type="text" class="form-control" value="adc@123.com">
+                                            <p class="text-muted mb-1">Phone</p>
+                                            <input type="text" class="form-control" name="phone"
+                                                value="{{userInfo.phone}}" disabled>
                                         </div>
 
                                         <div class="mt-4">
                                             <p class="text-muted mb-1">Location</p>
-                                            <input type="text" class="form-control" value="California, USA">
+                                            <input type="text" class="form-control" name="address"
+                                                value="{{userInfo.address}}">
                                         </div>
                                         <br>
                                         <div class="float-end">
@@ -291,15 +304,16 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
 
+
+                                </div>
                             </div>
+                            <!-- end personal info card -->
                         </div>
-                        <!-- end personal info card -->
+                        <!-- end profile-setting-accordion -->
                     </div>
-                    <!-- end profile-setting-accordion -->
-                </div>
-                <!-- End User profile description -->
+                    <!-- End User profile description -->
+                </form>
             </div>
             <!-- Start Settings content -->
         </div>

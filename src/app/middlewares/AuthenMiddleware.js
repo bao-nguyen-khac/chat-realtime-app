@@ -12,6 +12,11 @@ module.exports = function AuthenMiddleware(req, res, next) {
                         id: account._id,
                         fullname: account.fullname,
                         avatar: account.avatar,
+                        background_img: account.background_img,
+                        sub_desc: account.sub_desc,
+                        main_desc: account.main_desc,
+                        phone: account.phone,
+                        address: account.address,
                     }
                     res.user_id = checkToken;
                     next();

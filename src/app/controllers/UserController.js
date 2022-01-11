@@ -9,21 +9,22 @@ const verifyToken = require('../../util/verifyToken');
 const MessageController = require('./MessageController');
 class UserController {
     index(req, res, next) {
-        Message.find({
-            'member.user_id': res.user_id
-        },{
-            'messages': 0
-        })
-        .populate('member.user_id')
-        .then(message => {
+        Promise.all([
+            Account.find({_id: res.user_id}), 
+            Message.find({
+                'member.user_id': res.user_id
+            },{
+                'messages': 0
+            })
+            .populate('member.user_id')
+        ])
+        .then(([user,message]) => {
             res.render('user/home', {
                 layout: 'user/main',
-                infoMessage: mutipleMongooseToObject(message)
+                infoMessage: mutipleMongooseToObject(message),
             })
         })
-        .catch(err => {
-            return err;
-        })
+        .catch(next)
     }
     login(req, res, next) {
         if (req.cookies.token) {
@@ -84,6 +85,7 @@ class UserController {
                     req.body.main_desc = '',
                     req.body.address = '',
                     req.body.avatar = '/img/avatar-default.png';
+                    req.body.background_img = '/img/background_default.jpg';
                     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
                         req.body.password = hash;
                         const _account = new Account(req.body);

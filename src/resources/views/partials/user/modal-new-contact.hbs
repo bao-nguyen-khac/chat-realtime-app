@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body p-4">
-                <form>
+                {{!-- <form> --}}
                     <div class="mb-3">
                         <label for="addcontactemail-input" class="form-label">Email</label>
                         <input type="email" class="form-control" id="addcontactemail-input" placeholder="Enter Email">
@@ -24,12 +24,13 @@
                         <textarea class="form-control" id="addcontact-invitemessage-input" rows="3"
                             placeholder="Enter Message"></textarea>
                     </div>
-                </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary">Invite</button>
+                    </div>
+                {{!-- </form> --}}
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Invite</button>
-            </div>
+
         </div>
     </div>
 </div>

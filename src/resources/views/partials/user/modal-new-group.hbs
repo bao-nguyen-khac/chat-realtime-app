@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body p-4">
-                <form>
+                {{!-- <form> --}}
                     <div class="mb-4">
                         <label for="addgroupname-input" class="form-label">Group Name</label>
                         <input type="text" class="form-control" id="addgroupname-input" placeholder="Enter Group Name">
@@ -76,12 +76,13 @@
                         <textarea class="form-control" id="addgroupdescription-input" rows="3"
                             placeholder="Enter Description"></textarea>
                     </div>
-                </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Create Groups</button>
+                    </div>
+                {{!-- </form> --}}
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create Groups</button>
-            </div>
+
         </div>
     </div>
 </div>
