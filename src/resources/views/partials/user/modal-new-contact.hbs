@@ -11,15 +11,16 @@
             <div class="modal-body p-4">
                 <form id="form-1" action="" method="post">
                     <div class="mb-3">
-                        <label for="addcontactphone-input" class="form-label" style="display: block;">Phone number</label>
-                        <input type="search" class="form-control" id="addcontactphone-input" placeholder="Enter phone number" 
-                        style="width: 50%; display: inline-block; margin-right: 10px">
+                        <label for="addcontactphone-input" class="form-label" style="display: block;">Phone
+                            number</label>
+                        <input type="search" class="form-control" id="addcontactphone-input"
+                            placeholder="Enter phone number"
+                            style="width: 50%; display: inline-block; margin-right: 10px">
                         <button type="button" class="btn btn-primary modal-contact-btn-search">Search</button>
                         <span class="form-message" style="display: block; color: #f33a58;"></span>
                     </div>
                     <div class="mb-3" style="min-height: 60px;">
                         <div class="modal-contact-avatar">
-                            {{!-- <span style="color: #f33a58; display: block"> You and he (she) are contacted </span> --}}
                         </div>
                     </div>
                     <div class="mb-0">
@@ -30,7 +31,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Invite</button>
+                        <button type="submit" class="btn btn-primary modal-contact-btn-ivt">Invite</button>
                     </div>
                 </form>
             </div>
@@ -38,18 +39,13 @@
         </div>
     </div>
 </div>
-<script src="/js/authenValidator.js"></script>
 <script>
-    Validator({
-        form: '#form-1',
-        errorSelector: '.form-message',
-        rules: [
-            Validator.isRequired('#addcontactphone-input'),
-        ],
-    })
-    
+    var notFound = false;
+    var checkPhone = false;
+    var checkSearch = false;
     var btnSearch = document.querySelector('.modal-contact-btn-search');
     var modalUser = document.querySelector('.modal-contact-avatar');
+    var formContact = document.querySelector('#form-1');
     btnSearch.addEventListener('click', () => {
         var searchValue = document.querySelector('#addcontactphone-input').value;
         $.ajax({
@@ -59,14 +55,26 @@
                 phone: searchValue,
             },
             success: function (data) {
-                if(data === 'Not found'){
+                    document.querySelector('.form-message').innerHTML = '';
+                    notFound = true;
+                    checkPhone = false;
+                    checkSearch = true;
+                if (data === 'Not found') {
                     var output = `<span style="color: #f33a58;"> This phone number is not activated on this app </span>`;
                     modalUser.innerHTML = output;
-                }else if(data.contacted){
+                } else if (data.contacted == 1) {
+                    document.querySelector('.form-message').innerHTML = '';
+                    notFound = false;
+                    checkPhone = false;
+                    checkSearch = true;
                     var output = `<img src="${data.user.avatar}" alt="" class="rounded-circle avatar-sm">
                     <span style="margin-left: 10px;">${data.user.fullname} </span> <span>(contacted)</span>`;
                     modalUser.innerHTML = output;
-                }else {
+                } else {
+                    document.querySelector('.form-message').innerHTML = '';
+                    notFound = false;
+                    checkPhone = true;
+                    checkSearch = true;
                     var output = `<img src="${data.user.avatar}" alt="" class="rounded-circle avatar-sm">
                     <span style="margin-left: 10px;">${data.user.fullname} </span> <span>(not contacted yet)</span>`;
                     modalUser.innerHTML = output;
@@ -74,4 +82,20 @@
             },
         })
     })
+    formContact.onsubmit = (e) => {
+        e.preventDefault();
+        if (!checkSearch) {
+            e.preventDefault();
+            document.querySelector('.form-message').innerHTML = 'You must search to find user';
+        } else {
+            if (!checkPhone) {
+                e.preventDefault();
+                if (notFound) {
+                    document.querySelector('.form-message').innerHTML = '';
+                } else {
+                    document.querySelector('.form-message').innerHTML = 'You and he (she) are contacted';
+                }
+            }
+        }
+    }
 </script>

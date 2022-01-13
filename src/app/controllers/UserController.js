@@ -107,7 +107,7 @@ class UserController {
         Account.findOne({ phone: phone })
             .then(user => {
                 if (user) {
-                    Message.find({
+                    Message.findOne({
                         type: 'single',
                         member: {
                             $all: [
@@ -118,7 +118,6 @@ class UserController {
                     })
                         .then(result => {
                             if (result) {
-                                
                                 res.send({
                                     contacted: 1,
                                     user: user
