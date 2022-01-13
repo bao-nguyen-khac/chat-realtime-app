@@ -10,21 +10,21 @@ const MessageController = require('./MessageController');
 class UserController {
     index(req, res, next) {
         Promise.all([
-            Account.find({_id: res.user_id}), 
+            Account.find({ _id: res.user_id }),
             Message.find({
                 'member.user_id': res.user_id
-            },{
+            }, {
                 'messages': 0
             })
-            .populate('member.user_id')
+                .populate('member.user_id')
         ])
-        .then(([user,message]) => {
-            res.render('user/home', {
-                layout: 'user/main',
-                infoMessage: mutipleMongooseToObject(message),
+            .then(([user, message]) => {
+                res.render('user/home', {
+                    layout: 'user/main',
+                    infoMessage: mutipleMongooseToObject(message),
+                })
             })
-        })
-        .catch(next)
+            .catch(next)
     }
     login(req, res, next) {
         if (req.cookies.token) {
@@ -82,9 +82,9 @@ class UserController {
                     res.redirect('/auth/user/register?message=username%20or%20phone%20number%20is%20exit!!&checkRegister=error');
                 } else {
                     req.body.sub_desc = '',
-                    req.body.main_desc = '',
-                    req.body.address = '',
-                    req.body.avatar = '/img/avatar-default.png';
+                        req.body.main_desc = '',
+                        req.body.address = '',
+                        req.body.avatar = '/img/avatar-default.png';
                     req.body.background_img = '/img/background_default.jpg';
                     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
                         req.body.password = hash;
@@ -100,6 +100,42 @@ class UserController {
     logout(req, res, next) {
         res.clearCookie('token');
         res.redirect('/auth/users/login');
+    }
+    seachUser(req, res, next) {
+        var phone = req.body.phone;
+
+        Account.findOne({ phone: phone })
+            .then(user => {
+                if (user) {
+                    Message.find({
+                        type: 'single',
+                        member: {
+                            $all: [
+                                {'$elemMatch': {user_id: res.user_id.toString()}},
+                                {'$elemMatch': {user_id: user._id.toString()}},
+                            ]
+                        }
+                    })
+                        .then(result => {
+                            if (result) {
+                                
+                                res.send({
+                                    contacted: 1,
+                                    user: user
+                                });
+                            } else {
+                                res.send({
+                                    contacted: 0,
+                                    user: user
+                                });
+                            }
+                        })
+                        .catch(next)
+                } else {
+                    res.send('Not found');
+                }
+            })
+            .catch(next)
     }
     // chatMessage(req, res, next) {
     //     Promise.all([AdminMessage.find({}).limit(1).sort({ _id: 'desc' }), AdminMessage.find({})])

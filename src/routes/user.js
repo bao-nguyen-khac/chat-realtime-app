@@ -20,14 +20,18 @@ const upload = multer({ storage: storage });
 
 
 const UpdateInfoController = require('../app/controllers/UpdateInfoController');
+const UserController = require('../app/controllers/UserController');
 
-route.post('/update-personal-infor', upload.fields([{
-            name: 'avatar',
-            maxCount: 1
-        },{
-            name: 'background_img',
-            maxCount: 1
-        }]), UpdateInfoController.personalInfor);
+route.post('/update-personal-infor', upload.fields([
+    {
+        name: 'avatar',
+        maxCount: 1
+    }, {
+        name: 'background_img',
+        maxCount: 1
+    }]), UpdateInfoController.personalInfor);
+
+route.post('/search-contact', UserController.seachUser);
 
 // route.get('/', UserController.index);
 
