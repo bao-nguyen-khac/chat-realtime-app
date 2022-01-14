@@ -9,16 +9,14 @@ const verifyToken = require('../../util/verifyToken');
 const MessageController = require('./MessageController');
 class UserController {
     index(req, res, next) {
-        Promise.all([
-            Account.find({ _id: res.user_id }),
-            Message.find({
-                'member.user_id': res.user_id
+        Message
+            .find({
+                'member': res.user_id
             }, {
                 'messages': 0
             })
-                .populate('member.user_id')
-        ])
-            .then(([user, message]) => {
+            .populate('member')
+            .then(message => {
                 res.render('user/home', {
                     layout: 'user/main',
                     infoMessage: mutipleMongooseToObject(message),
@@ -111,8 +109,8 @@ class UserController {
                         type: 'single',
                         member: {
                             $all: [
-                                {'$elemMatch': {user_id: res.user_id.toString()}},
-                                {'$elemMatch': {user_id: user._id.toString()}},
+                                { '$elemMatch': { user_id: res.user_id.toString() } },
+                                { '$elemMatch': { user_id: user._id.toString() } },
                             ]
                         }
                     })

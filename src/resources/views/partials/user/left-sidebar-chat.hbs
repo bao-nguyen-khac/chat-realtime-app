@@ -118,17 +118,17 @@
                         <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                             {{#each infoMessage}}
                             {{#each this.member}}
-                            {{#if (compareID this.user_id._id ../../userInfo.id)}}
+                            {{#if (compareID this._id ../../userInfo.id)}}
                             {{else}}
                             <li id="contact-id-1" class="chat-element-user active">
                                 <a style="cursor: pointer;">
                                     <div class="d-flex align-items-center">
                                         <div class="chat-user-img online align-self-center me-2 ms-0">
-                                            <img src="{{this.user_id.avatar}}" class="rounded-circle avatar-xs" alt="">
+                                            <img src="{{this.avatar}}" class="rounded-circle avatar-xs" alt="">
                                             <span class="user-status"></span>
                                         </div>
                                         <div class="overflow-hidden">
-                                            <p class="text-truncate mb-0">{{this.user_id.fullname}}</p>
+                                            <p class="text-truncate mb-0">{{this.fullname}}</p>
                                         </div>
 
                                     </div>

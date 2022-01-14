@@ -14,12 +14,7 @@ const Message = new Schema({
         like: [],
         user_read: [],
     }],
-    member: [{
-        user_id: {
-            type: String,
-            ref: 'Account',
-        }
-    }],
+    member: [{ type: Schema.Types.ObjectId, ref: 'Account' }]
 });
 
 module.exports = mongoose.model('Message', Message);
