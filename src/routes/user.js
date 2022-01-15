@@ -21,6 +21,7 @@ const upload = multer({ storage: storage });
 
 const UpdateInfoController = require('../app/controllers/UpdateInfoController');
 const UserController = require('../app/controllers/UserController');
+const MessageController = require('../app/controllers/MessageController');
 
 route.post('/update-personal-infor', upload.fields([
     {
@@ -33,6 +34,7 @@ route.post('/update-personal-infor', upload.fields([
 
 route.post('/search-contact', UserController.seachUser);
 
+route.post('/new-contact', MessageController.newMessage);
 // route.get('/', UserController.index);
 
 module.exports = route;

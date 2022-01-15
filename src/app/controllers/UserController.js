@@ -10,12 +10,9 @@ const MessageController = require('./MessageController');
 class UserController {
     index(req, res, next) {
         Message
-            .find({
-                'member': res.user_id
-            }, {
-                'messages': 0
-            })
+            .find({ 'member': res.user_id }, { 'messages': 0 })
             .populate('member')
+            .sort({ createdAt: -1 })
             .then(message => {
                 res.render('user/home', {
                     layout: 'user/main',
@@ -108,10 +105,7 @@ class UserController {
                     Message.findOne({
                         type: 'single',
                         member: {
-                            $all: [
-                                { '$elemMatch': { user_id: res.user_id.toString() } },
-                                { '$elemMatch': { user_id: user._id.toString() } },
-                            ]
+                            $all: [res.user_id, user._id]
                         }
                     })
                         .then(result => {

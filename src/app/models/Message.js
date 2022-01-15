@@ -10,11 +10,13 @@ const Message = new Schema({
             ref: 'Account',
         },
         content: { type: String },
-        time: { type: String },
-        like: [],
-        user_read: [],
+        time: { type: Date, default: Date.now },
+        like: { type: Array, default: [] },
+        user_read: { type: Array, default: [] },
     }],
     member: [{ type: Schema.Types.ObjectId, ref: 'Account' }]
+},{
+    timestamps: true,
 });
 
 module.exports = mongoose.model('Message', Message);

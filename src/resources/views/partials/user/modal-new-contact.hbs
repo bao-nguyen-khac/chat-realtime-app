@@ -9,12 +9,12 @@
                 </button>
             </div>
             <div class="modal-body p-4">
-                <form id="form-1" action="" method="post">
+                <form id="form-1" action="/user/new-contact" method="post">
                     <div class="mb-3">
                         <label for="addcontactphone-input" class="form-label" style="display: block;">Phone
                             number</label>
                         <input type="search" class="form-control" id="addcontactphone-input"
-                            placeholder="Enter phone number"
+                            placeholder="Enter phone number" name="phone"
                             style="width: 50%; display: inline-block; margin-right: 10px">
                         <button type="button" class="btn btn-primary modal-contact-btn-search">Search</button>
                         <span class="form-message" style="display: block; color: #f33a58;"></span>
@@ -26,7 +26,7 @@
                     <div class="mb-0">
                         <label for="addcontact-invitemessage-input" class="form-label">Invatation
                             Message</label>
-                        <textarea class="form-control" id="addcontact-invitemessage-input" rows="3"
+                        <textarea class="form-control" name="message" id="addcontact-invitemessage-input" rows="3"
                             placeholder="Enter Message"></textarea>
                     </div>
                     <div class="modal-footer">
@@ -83,7 +83,6 @@
         })
     })
     formContact.onsubmit = (e) => {
-        e.preventDefault();
         if (!checkSearch) {
             e.preventDefault();
             document.querySelector('.form-message').innerHTML = 'You must search to find user';
