@@ -35,6 +35,8 @@ route.post('/update-personal-infor', upload.fields([
 route.post('/search-contact', UserController.seachUser);
 
 route.post('/new-contact', MessageController.newMessage);
+
+route.get('/get-infor', UserController.personalInfo);
 // route.get('/', UserController.index);
 
 module.exports = route;

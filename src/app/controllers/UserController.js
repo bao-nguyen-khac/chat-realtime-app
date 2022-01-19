@@ -149,18 +149,14 @@ class UserController {
     //         time: data.time
     //     })
     // }
-    // personalInfo(req, res, next) {
-    //     const id = verifyToken(req.signedCookies.token);
-    //     Account.findOne({ _id: id })
-    //         .then(user => {
-    //             res.render('admin/personal-info', {
-    //                 layout: 'admin/main',
-    //                 user: MongooseToObject(user),
-    //                 csrfToken: req.csrfToken()
-    //             })
-    //         })
-    //         .catch(next)
-    // }
+    personalInfo(req, res, next) {
+        const user_id = req.query.id;
+        Account.findOne({ _id: user_id })
+            .then(user => {
+                res.send(user);
+            })
+            .catch(next)
+    }
     // updateInfo(req, res, next) {
     //     const id = verifyToken(req.signedCookies.token);
     //     if (req.file) {

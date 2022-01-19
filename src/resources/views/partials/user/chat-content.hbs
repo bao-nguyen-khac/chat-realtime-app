@@ -264,7 +264,13 @@
                     </div>
                 </li> --}}
             </ul>
-
+            <input type="hidden" class="passDataUserID" value="{{userInfo.id}}">
+            {{#each message.member}}
+            {{#if (compareID this._id ../userInfo.id)}}
+            {{else}}
+            <input type="hidden" class="passDataReceiverID" value="{{this._id}}">
+            {{/if}}
+            {{/each}}
         </div>
 
         <!-- end chat conversation end -->
@@ -275,7 +281,7 @@
     <!-- start chat input section -->
     <div class="position-relative">
         <div class="chat-input-section p-3 p-lg-4">
-            {{!-- <form id="chatinput-form"> --}}
+            <form id="chatinput-form">
                 <div class="row g-0 align-items-center">
                     <div class="file_Upload"></div>
                     <div class="col-auto">
@@ -310,8 +316,7 @@
                         </div>
                     </div>
                 </div>
-                {{!--
-            </form> --}}
+            </form>
         </div>
     </div>
     <!-- end chat input section -->

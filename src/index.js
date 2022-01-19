@@ -14,6 +14,8 @@ const io = new Server(server)
 
 const userController = require('./app/controllers/UserController');
 
+const { addUser, removeUser, getUser } = require('./util/userSocket');
+
 const db = require('./confic/db/index');
 
 const hbs = handlebars.create({
@@ -44,13 +46,27 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
 // Create socketio
-// io.on("connection", (socket) => {
-//     console.log('User connected');
-//     socket.on('message-outgoing', data => {
-//         userController.storeMessage(data);
-//         io.emit('message-incoming', data);
-//     })
-// });
+io.on("connection", (socket) => {
+    console.log('User connected');
+    socket.on("join", (userId) => {
+        addUser(userId, socket.id);
+    });
+
+    socket.on('sendMessage', (data) => {
+        // userController.storeMessage(data);
+        const user = getUser(data.receiverId);
+        io.to(user?.socketId).emit("getMessage", {
+            senderId: data.senderId,
+            message: data.message,
+            time: data.time
+        });
+    })
+
+    socket.on("disconnect", () => {
+        console.log("user disconnected");
+        removeUser(socket.id);
+    })
+});
 
 // Routes init
 route(app);
