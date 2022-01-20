@@ -54,9 +54,17 @@ io.on("connection", (socket) => {
 
     socket.on('sendMessage', (data) => {
         // userController.storeMessage(data);
-        const user = getUser(data.receiverId);
-        io.to(user?.socketId).emit("getMessage", {
+        const receiverUser = getUser(data.receiverId);
+        const senderUser = getUser(data.senderId);
+        io.to(receiverUser?.socketId).emit("getMessage", {
             senderId: data.senderId,
+            receiverId: data.receiverId,
+            message: data.message,
+            time: data.time
+        });
+        io.to(senderUser?.socketId).emit("getMessage", {
+            senderId: data.senderId,
+            receiverId: data.receiverId,
             message: data.message,
             time: data.time
         });

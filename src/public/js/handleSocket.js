@@ -4,6 +4,14 @@ const receiverId = document.querySelector('.passDataReceiverID').value;
 const chatForm = document.querySelector('#chatinput-form');
 const messageInput = document.querySelector('#chat-input');
 const userConvensation = document.querySelector('#users-conversation');
+
+
+const autoscroll = () => {
+    // New message element
+    var listElementMessNew = document.querySelectorAll('.user-chat-content');
+    listElementMessNew[listElementMessNew.length - 1].scrollIntoView();
+}
+// autoscroll();
 chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const message = messageInput.value;
@@ -22,15 +30,15 @@ chatForm.addEventListener('submit', (e) => {
 })
 
 socket.on('getMessage', (data) => {
-    var elementLeftChat = document.querySelector(`#contact-id-${data.senderId}`)
     var eleParentLeftChat = $('#favourite-users');
-    eleParentLeftChat.prepend(elementLeftChat);
+    var messageHtml = '';
     if (receiverId == data.senderId) {
+        var elementLeftChat = document.querySelector(`#contact-id-${data.senderId}`);
+        eleParentLeftChat.prepend(elementLeftChat);
         $.ajax({
             url: `/user/get-infor?id=${data.senderId}`,
             method: "GET",
             success: function (user) {
-                var messageHtml = '';
                 messageHtml = `
                 <li class="chat-list left">
                     <div class="conversation-list">
@@ -57,9 +65,34 @@ socket.on('getMessage', (data) => {
                 </li>
                 `;
                 userConvensation.innerHTML += messageHtml;
+                autoscroll();
             },
         })
+    } else {
+        var elementLeftChat = document.querySelector(`#contact-id-${data.receiverId}`);
+        eleParentLeftChat.prepend(elementLeftChat);
+        messageHtml = `
+        <li class="chat-list right">
+            <div class="conversation-list">
+                <div class="user-chat-content">
+                    <div class="ctext-wrap">
+                        <div class="ctext-wrap-content" id="2">
+                            <p class="mb-0 ctext-content">${data.message}</p>
+                        </div>
+                    </div>
+                    <div class="conversation-name">
+                        <small class="text-muted time">${data.time}</small>
+                        <span class="text-success check-message-icon">
+                            <i class="fal fa-check"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </li>`
+        userConvensation.innerHTML += messageHtml;
+        autoscroll();
     }
+    
 })
 
 socket.emit('join', user_id);
