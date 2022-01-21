@@ -4,7 +4,7 @@ const receiverId = document.querySelector('.passDataReceiverID').value;
 const chatForm = document.querySelector('#chatinput-form');
 const messageInput = document.querySelector('#chat-input');
 const userConvensation = document.querySelector('#users-conversation');
-
+const reactionIcon = document.querySelectorAll('.reaction-icon');
 
 const autoscroll = () => {
     // New message element
@@ -16,10 +16,9 @@ chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const message = messageInput.value;
     var today = new Date();
-    var date = today.getDate() + '-' + (today.getMonth() + 1);
-    var minutes = today.getMinutes() > 9 ? today.getMinutes() : '0' + today.getMinutes();
-    var time = today.getHours() + ":" + minutes;
-    var dateTime = time + ' | ' + date;
+    var hour = moment(today).format("HH:mm");
+    var date = moment(today).format("DD/MM");
+    var dateTime = hour + ' | ' + date;
     socket.emit('sendMessage', {
         senderId: user_id,
         receiverId: receiverId,
@@ -79,6 +78,9 @@ socket.on('getMessage', (data) => {
                         <div class="ctext-wrap-content" id="2">
                             <p class="mb-0 ctext-content">${data.message}</p>
                         </div>
+                        <div class="reaction-icon-block">
+                            <div class="reaction-icon"></div>
+                        </div>
                     </div>
                     <div class="conversation-name">
                         <small class="text-muted time">${data.time}</small>
@@ -93,6 +95,33 @@ socket.on('getMessage', (data) => {
         autoscroll();
     }
     
+})
+
+
+reactionIcon.forEach(ele => {
+    ele.addEventListener('click', (e) => {
+        chat_id = e.target.dataset.chatId;
+        socket.emit('sendReactionChat', {
+            senderId: user_id,
+            receiverId: receiverId,
+            chat_id: chat_id,
+        })
+        if(e.target.style.backgroundImage == '' || e.target.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")'){
+            e.target.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')"
+        }else{
+            e.target.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png')"
+        }
+    })
+})
+
+socket.on('getReactionChat', (data) => {
+    var chatElement = document.querySelector(`div[data-chat-id="${data.chat_id}"]`)
+    console.log(chatElement);
+    if(chatElement.style.backgroundImage == '' || chatElement.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")'){
+        chatElement.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')";
+    }else{
+        chatElement.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png')";
+    }
 })
 
 socket.emit('join', user_id);

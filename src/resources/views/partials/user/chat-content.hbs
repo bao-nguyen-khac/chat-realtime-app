@@ -85,12 +85,15 @@
             <ul class="list-unstyled chat-conversation-list" id="users-conversation">
                 {{#each message.messages}}
                 {{#if (compareID this.user_id._id ../userInfo.id)}}
-                <li class="chat-list right" id="2">
+                <li class="chat-list right">
                     <div class="conversation-list">
                         <div class="user-chat-content">
                             <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="2">
+                                <div class="ctext-wrap-content">
                                     <p class="mb-0 ctext-content">{{this.content}}</p>
+                                </div>
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon-disable" data-chat-id="{{this._id}}"></div>
                                 </div>
                             </div>
                             <div class="conversation-name">
@@ -103,7 +106,7 @@
                     </div>
                 </li>
                 {{else}}
-                <li class="chat-list left" id="1">
+                <li class="chat-list left">
                     <div class="conversation-list">
                         <div class="chat-avatar"><img src="{{this.user_id.avatar}}" alt="">
                         </div>
@@ -112,11 +115,11 @@
                                 <small class="text-muted time">{{this.user_id.fullname}}</small>
                             </div>
                             <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="1">
+                                <div class="ctext-wrap-content">
                                     <p class="mb-0 ctext-content">{{this.content}}</p>
                                 </div>
                                 <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
+                                    <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
                                 </div>
                             </div>
                             <div class="conversation-name">
@@ -129,163 +132,6 @@
                 {{/if}}
                 {{/each}}
 
-                <li class="chat-list left" id="1">
-                    <div class="conversation-list">
-                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
-                        </div>
-                        <div class="user-chat-content">
-                            <div class="conversation-name">
-                                <small class="text-muted time">Bella abc</small>
-                            </div>
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="1">
-                                    <p class="mb-0 ctext-content">Good morning 😊</p>
-                                </div>
-                                <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
-                                </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">10:07am</small>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="chat-list left" id="1">
-                    <div class="conversation-list">
-                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
-                        </div>
-                        <div class="user-chat-content">
-                            <div class="conversation-name">
-                                <small class="text-muted time">Bella abc</small>
-                            </div>
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="1">
-                                    <p class="mb-0 ctext-content">Good morning 😊</p>
-                                </div>
-                                <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
-                                </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">10:07am</small>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="chat-list left" id="1">
-                    <div class="conversation-list">
-                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
-                        </div>
-                        <div class="user-chat-content">
-                            <div class="conversation-name">
-                                <small class="text-muted time">Bella abc</small>
-                            </div>
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="1">
-                                    <p class="mb-0 ctext-content">Good morning 😊</p>
-                                </div>
-                                <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
-                                </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">10:07am</small>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="chat-list left" id="1">
-                    <div class="conversation-list">
-                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
-                        </div>
-                        <div class="user-chat-content">
-                            <div class="conversation-name">
-                                <small class="text-muted time">Bella abc</small>
-                            </div>
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="1">
-                                    <p class="mb-0 ctext-content">Good morning 😊</p>
-                                </div>
-                                <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
-                                </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">10:07am</small>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="chat-list left" id="1">
-                    <div class="conversation-list">
-                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
-                        </div>
-                        <div class="user-chat-content">
-                            <div class="conversation-name">
-                                <small class="text-muted time">Bella abc</small>
-                            </div>
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="1">
-                                    <p class="mb-0 ctext-content">Good morning 😊</p>
-                                </div>
-                                <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
-                                </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">10:07am</small>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="chat-list notify-chat"><span>Thong bao ve doan chat</span></li>
-                <li class="chat-list right" id="2">
-                    <div class="conversation-list">
-                        <div class="user-chat-content">
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="2">
-                                    <p class="mb-0 ctext-content">Good morning, How are you? What about
-                                        our next meeting?</p>
-                                </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">10:12am</small>
-                                <span class="text-success check-message-icon">
-                                    <i class="fal fa-check"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="chat-list left" id="1">
-                    <div class="conversation-list">
-                        <div class="chat-avatar"><img src="/img/avatar-default.png" alt="">
-                        </div>
-                        <div class="user-chat-content">
-                            <div class="conversation-name">
-                                <small class="text-muted time">Bella abc</small>
-                            </div>
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" id="1">
-                                    <p class="mb-0 ctext-content">Good morning 😊</p>
-                                </div>
-                                <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
-                                </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">10:07am</small>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
             </ul>
             <input type="hidden" class="passDataUserID" value="{{userInfo.id}}">
             {{#each message.member}}

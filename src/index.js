@@ -70,6 +70,16 @@ io.on("connection", (socket) => {
         });
     })
 
+    socket.on('sendReactionChat', (data) => {
+        const receiverUser = getUser(data.receiverId);
+        const senderUser = getUser(data.senderId);
+        io.to(receiverUser?.socketId).emit("getReactionChat", {
+            senderId: data.senderId,
+            receiverId: data.receiverId,
+            chat_id: data.chat_id
+        });
+    })
+
     socket.on("disconnect", () => {
         console.log("user disconnected");
         removeUser(socket.id);
