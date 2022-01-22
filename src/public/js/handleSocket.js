@@ -1,10 +1,10 @@
 const socket = io();
 const user_id = document.querySelector('.passDataUserID').value;
 const receiverId = document.querySelector('.passDataReceiverID').value;
+const messageId = document.querySelector('.passDataMessID').value;
 const chatForm = document.querySelector('#chatinput-form');
 const messageInput = document.querySelector('#chat-input');
 const userConvensation = document.querySelector('#users-conversation');
-const reactionIcon = document.querySelectorAll('.reaction-icon');
 
 const autoscroll = () => {
     // New message element
@@ -23,6 +23,7 @@ chatForm.addEventListener('submit', (e) => {
         senderId: user_id,
         receiverId: receiverId,
         message: message,
+        messId: messageId,
         time: dateTime,
     })
     messageInput.value = '';
@@ -52,7 +53,7 @@ socket.on('getMessage', (data) => {
                                     <p class="mb-0 ctext-content">${data.message}</p>
                                 </div>
                                 <div class="reaction-icon-block">
-                                    <div class="reaction-icon"></div>
+                                    <div class="reaction-icon" data-chat-id="${data.chatId}"></div>
                                 </div>
                             </div>
                             <div class="conversation-name">
@@ -65,6 +66,7 @@ socket.on('getMessage', (data) => {
                 `;
                 userConvensation.innerHTML += messageHtml;
                 autoscroll();
+                addEventReactChat();
             },
         })
     } else {
@@ -79,7 +81,7 @@ socket.on('getMessage', (data) => {
                             <p class="mb-0 ctext-content">${data.message}</p>
                         </div>
                         <div class="reaction-icon-block">
-                            <div class="reaction-icon"></div>
+                            <div class="reaction-icon" data-chat-id="${data.chatId}"></div>
                         </div>
                     </div>
                     <div class="conversation-name">
@@ -93,33 +95,37 @@ socket.on('getMessage', (data) => {
         </li>`
         userConvensation.innerHTML += messageHtml;
         autoscroll();
+        addEventReactChat();
     }
-    
+
 })
 
-
-reactionIcon.forEach(ele => {
-    ele.addEventListener('click', (e) => {
-        chat_id = e.target.dataset.chatId;
-        socket.emit('sendReactionChat', {
-            senderId: user_id,
-            receiverId: receiverId,
-            chat_id: chat_id,
+const addEventReactChat = () => {
+    var reactionIcon = document.querySelectorAll('.reaction-icon')
+    reactionIcon.forEach(ele => {
+        ele.addEventListener('click', (e) => {
+            chat_id = e.target.dataset.chatId;
+            socket.emit('sendReactionChat', {
+                senderId: user_id,
+                receiverId: receiverId,
+                chat_id: chat_id,
+            })
+            if (e.target.style.backgroundImage == '' || e.target.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")') {
+                e.target.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')"
+            } else {
+                e.target.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png')"
+            }
         })
-        if(e.target.style.backgroundImage == '' || e.target.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")'){
-            e.target.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')"
-        }else{
-            e.target.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png')"
-        }
     })
-})
+}
+addEventReactChat();
 
 socket.on('getReactionChat', (data) => {
     var chatElement = document.querySelector(`div[data-chat-id="${data.chat_id}"]`)
     console.log(chatElement);
-    if(chatElement.style.backgroundImage == '' || chatElement.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")'){
+    if (chatElement.style.backgroundImage == '' || chatElement.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")') {
         chatElement.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')";
-    }else{
+    } else {
         chatElement.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png')";
     }
 })

@@ -12,7 +12,7 @@ class UserController {
         Message
             .find({ 'member': res.user_id }, { 'messages': 0 })
             .populate('member')
-            .sort({ createdAt: -1 })
+            .sort({ updateAt: 1 })
             .then(message => {
                 res.render('user/home', {
                     layout: 'user/main',

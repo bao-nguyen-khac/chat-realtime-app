@@ -13,6 +13,7 @@ const { Server } = require('socket.io');
 const io = new Server(server)
 
 const userController = require('./app/controllers/UserController');
+const MessageController = require('./app/controllers/MessageController');
 
 const { addUser, removeUser, getUser } = require('./util/userSocket');
 
@@ -52,20 +53,22 @@ io.on("connection", (socket) => {
         addUser(userId, socket.id);
     });
 
-    socket.on('sendMessage', (data) => {
-        // userController.storeMessage(data);
+    socket.on('sendMessage', async (data) => {
+        const chatId = await MessageController.storeChatAndGetId(data);
         const receiverUser = getUser(data.receiverId);
         const senderUser = getUser(data.senderId);
         io.to(receiverUser?.socketId).emit("getMessage", {
             senderId: data.senderId,
             receiverId: data.receiverId,
             message: data.message,
+            chatId: chatId,
             time: data.time
         });
         io.to(senderUser?.socketId).emit("getMessage", {
             senderId: data.senderId,
             receiverId: data.receiverId,
             message: data.message,
+            chatId: chatId,
             time: data.time
         });
     })

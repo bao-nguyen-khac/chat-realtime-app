@@ -27,7 +27,7 @@ class MessageController {
         Promise.all([
             Message.find({ 'member': res.user_id }, { 'messages': 0 })
                 .populate('member')
-                .sort({ createdAt: -1 }),
+                .sort({ updateAt: -1 }),
             Message.findOne({ _id: mess_id, 'member': res.user_id })
                 .populate('member')
                 .populate('messages.user_id')
@@ -42,6 +42,18 @@ class MessageController {
             })
             .catch(next)
 
+    }
+    async storeChatAndGetId(data) {
+        await Message.updateOne({ _id: data.messId }, {
+            $push: {
+                messages: [{
+                    user_id: data.senderId,
+                    content: data.message
+                }]
+            }
+        })
+        const message = await Message.findOne({_id : data.messId});
+        return message.messages[message.messages.length - 1]._id;
     }
 }
 
