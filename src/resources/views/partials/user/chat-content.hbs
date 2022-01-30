@@ -83,7 +83,7 @@
         <div class="chat-conversation p-3 p-lg-4 " id="chat-conversation" style="overflow: overlay;">
 
             <ul class="list-unstyled chat-conversation-list" id="users-conversation">
-                {{#each message.messages}}
+                {{#each chats}}
                 {{#if (compareID this.user_id._id ../userInfo.id)}}
                 <li class="chat-list right">
                     <div class="conversation-list">

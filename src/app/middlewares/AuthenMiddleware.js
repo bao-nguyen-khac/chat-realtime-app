@@ -18,7 +18,7 @@ module.exports = function AuthenMiddleware(req, res, next) {
                         phone: account.phone,
                         address: account.address,
                     }
-                    res.user_id = checkToken;
+                    req.user_id = checkToken;
                     next();
                 })
         } else {

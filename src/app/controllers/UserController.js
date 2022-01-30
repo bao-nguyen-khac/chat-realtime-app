@@ -8,18 +8,16 @@ const { MongooseToObject } = require('../../util/mongoose');
 const verifyToken = require('../../util/verifyToken');
 const MessageController = require('./MessageController');
 class UserController {
-    index(req, res, next) {
-        Message
-            .find({ 'member': res.user_id }, { 'messages': 0 })
-            .populate('member')
-            .sort({ updateAt: 1 })
-            .then(message => {
-                res.render('user/home', {
-                    layout: 'user/main',
-                    infoMessage: mutipleMongooseToObject(message),
-                })
+    async index(req, res, next) {
+        try {
+            const messages = await MessageController.getAllMessage(req, res, next);
+            res.render('user/home', {
+                layout: 'user/main',
+                infoMessage: mutipleMongooseToObject(messages),
             })
-            .catch(next)
+        } catch (err) {
+            next(err);
+        }
     }
     login(req, res, next) {
         if (req.cookies.token) {
@@ -46,145 +44,89 @@ class UserController {
             checkRegister: checkRegister
         });
     }
-    checkLogin(req, res, next) {
-        Account.findOne({
-            username: req.body.username,
-        })
-            .then(account => {
-                if (account) {
-                    bcrypt.compare(req.body.password, account.password, function (err, result) {
-                        if (result) {
-                            var token = jwt.sign({ _id: account._id }, process.env.JWT_SECRECT);
-                            res.cookie('token', token, {
-                                signed: true,
-                                expires: new Date(Date.now() + 8 * 3600000)
-                            });
-                            res.redirect('/');
-                        } else {
-                            res.redirect('/auth/user/login?message=Invalid%20username%20or%20password');
-                        }
-                    });
-                } else {
-                    res.redirect('/auth/user/login?message=Invalid%20username%20or%20password');
-                }
-            })
-            .catch(next)
+    async checkLogin(req, res, next) {
+        try {
+            const account = await Account.findOne({ username: req.body.username });
+            if (account) {
+                bcrypt.compare(req.body.password, account.password, function (err, result) {
+                    if (result) {
+                        var token = jwt.sign({ _id: account._id }, process.env.JWT_SECRECT);
+                        res.cookie('token', token, {
+                            signed: true,
+                            expires: new Date(Date.now() + 8 * 3600000)
+                        });
+                        res.redirect('/');
+                    } else {
+                        res.redirect('/auth/user/login?message=Invalid%20username%20or%20password');
+                    }
+                });
+            } else {
+                res.redirect('/auth/user/login?message=Invalid%20username%20or%20password');
+            }
+        } catch (error) {
+            next(error);
+        }
     }
-    storeAccount(req, res, next) {
-        Account.findOne({ username: req.body.username, phone: req.body.phone })
-            .then(account => {
-                if (account) {
-                    res.redirect('/auth/user/register?message=username%20or%20phone%20number%20is%20exit!!&checkRegister=error');
-                } else {
-                    req.body.sub_desc = '',
-                        req.body.main_desc = '',
-                        req.body.address = '',
-                        req.body.avatar = '/img/avatar-default.png';
-                    req.body.background_img = '/img/background_default.jpg';
-                    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-                        req.body.password = hash;
-                        const _account = new Account(req.body);
-                        _account.save()
-                            .then(() => res.redirect('/auth/user/register?message=Register%20Successfull!!&checkRegister=susccess'))
-                            .catch(next)
-                    });
-                }
-            })
-            .catch(next)
+    async storeAccount(req, res, next) {
+        try {
+            const account = await Account.findOne({ username: req.body.username, phone: req.body.phone });
+            if (account) {
+                res.redirect('/auth/user/register?message=username%20or%20phone%20number%20is%20exit!!&checkRegister=error');
+            } else {
+                req.body.sub_desc = '';
+                req.body.main_desc = '';
+                req.body.address = '';
+                req.body.avatar = '/img/avatar-default.png';
+                req.body.background_img = '/img/background_default.jpg';
+                bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
+                    req.body.password = hash;
+                    const _account = await new Account(req.body);
+                    await _account.save();
+                    res.redirect('/auth/user/register?message=Register%20Successfull!!&checkRegister=susccess');
+                });
+            }
+        } catch (error) {
+            next(error);
+        }
     }
     logout(req, res, next) {
         res.clearCookie('token');
         res.redirect('/auth/users/login');
     }
-    seachUser(req, res, next) {
-        var phone = req.body.phone;
-
-        Account.findOne({ phone: phone })
-            .then(user => {
-                if (user) {
-                    Message.findOne({
-                        type: 'single',
-                        member: {
-                            $all: [res.user_id, user._id]
-                        }
-                    })
-                        .then(result => {
-                            if (result) {
-                                res.send({
-                                    contacted: 1,
-                                    user: user
-                                });
-                            } else {
-                                res.send({
-                                    contacted: 0,
-                                    user: user
-                                });
-                            }
-                        })
-                        .catch(next)
+    async seachUser(req, res, next) {
+        try {
+            var phone = req.body.phone;
+            const user = await Account.findOne({ phone: phone });
+            if (user) {
+                const result = await Message.findOne({
+                    type: 'single',
+                    member: {
+                        $all: [req.user_id, user._id]
+                    }
+                })
+                if (result) {
+                    res.send({
+                        contacted: 1,
+                        user: user
+                    });
                 } else {
-                    res.send('Not found');
+                    res.send({
+                        contacted: 0,
+                        user: user
+                    });
                 }
-            })
-            .catch(next)
+            } else {
+                res.send('Not found');
+            }
+        } catch (error) {
+            next(error);
+        }
     }
-    // chatMessage(req, res, next) {
-    //     Promise.all([AdminMessage.find({}).limit(1).sort({ _id: 'desc' }), AdminMessage.find({})])
-    //         .then(([messageLast, messages]) => {
-    //             res.render('admin/chat-message', {
-    //                 layout: 'admin/chat',
-    //                 title: 'Box chat admin',
-    //                 messageLast: mutipleMongooseToObject(messageLast),
-    //                 messages: mutipleMongooseToObject(messages)
-    //             });
-    //         })
-    //         .catch(next);
-    // }
-    // storeMessage(data) {
-    //     AdminMessage.create({
-    //         id_user: data.id_user,
-    //         name: data.name,
-    //         message: data.message,
-    //         avatar: data.avatar,
-    //         time: data.time
-    //     })
-    // }
-    personalInfo(req, res, next) {
+    async personalInfo(req, res, next) {
         const user_id = req.query.id;
-        Account.findOne({ _id: user_id })
-            .then(user => {
-                res.send(user);
-            })
-            .catch(next)
+        const user = await Account.findOne({ _id: user_id })
+        res.send(user);
     }
-    // updateInfo(req, res, next) {
-    //     const id = verifyToken(req.signedCookies.token);
-    //     if (req.file) {
-    //         req.body.avatar = req.file.path;
-    //         Account.updateOne({ _id: id }, {
-    //             fullname: req.body.fullname,
-    //             avatar: req.body.avatar
-    //         })
-    //             .then(() => {
-    //                 AdminMessage.updateMany({id_user: id}, {
-    //                     avatar: req.body.avatar
-    //                 })
-    //                 .then(() => res.redirect('/admin/personal-info'))
-    //                 .catch(next)
-    //             })
-    //             .catch(next);
-    //     }
-    //     Account.updateOne({ _id: id }, {
-    //         fullname: req.body.fullname
-    //     })
-    //         .then(() => res.redirect('back'))
-    //         .catch(next);
-    // }
-    // pageNotFound(res) {
-    //     res.render('admin/page-not-found', {
-    //         layout: 'admin/main'
-    //     });
-    // }
 }
 
 module.exports = new UserController();

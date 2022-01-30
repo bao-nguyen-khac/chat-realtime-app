@@ -14,6 +14,7 @@ const io = new Server(server)
 
 const userController = require('./app/controllers/UserController');
 const MessageController = require('./app/controllers/MessageController');
+const ChatController = require('./app/controllers/ChatController');
 
 const { addUser, removeUser, getUser } = require('./util/userSocket');
 
@@ -54,7 +55,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on('sendMessage', async (data) => {
-        const chatId = await MessageController.storeChatAndGetId(data);
+        const chatId = await ChatController.storeChatAndGetId(data);
         const receiverUser = getUser(data.receiverId);
         const senderUser = getUser(data.senderId);
         io.to(receiverUser?.socketId).emit("getMessage", {

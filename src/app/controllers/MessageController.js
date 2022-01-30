@@ -1,59 +1,70 @@
 const Message = require('../models/Message');
 const Account = require('../models/Account');
+const Chat = require('../models/Chat');
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 const { MongooseToObject } = require('../../util/mongoose');
 class MessageController {
-    newMessage(req, res, next) {
-        Account.findOne({ phone: req.body.phone })
-            .then(user => {
-                if (user) {
-                    Message.create({
+    async getAllMessage(req, res, next) {
+        try {
+            const messages = await Message
+                .find({ 'member': req.user_id })
+                .populate('member')
+                .sort({ 'updatedAt': -1 });
+            return messages;
+        } catch (error) {
+            next(error)
+        }
+    }
+    async newMessage(req, res, next) {
+        try {
+            const user = await Account
+                .findOne({ phone: req.body.phone });
+            if (user) {
+                const message = await Message
+                    .create({
                         name: 'default',
                         type: 'single',
-                        member: [res.user_id, user._id],
-                        messages: [{
-                            user_id: res.user_id,
-                            content: req.body.message,
-                        }]
+                        member: [req.user_id, user._id]
+                    });
+                await Chat
+                    .create({
+                        messageId: message._id,
+                        user_id: req.user_id,
+                        content: req.body.message,
+                        type: 'text'
                     })
-                        .then(() => res.redirect('/'))
-                        .catch(next)
-                }
-            })
-            .catch(next)
-    }
-    getMessage(req, res, next) {
-        const mess_id = req.query.id;
-        Promise.all([
-            Message.find({ 'member': res.user_id }, { 'messages': 0 })
-                .populate('member')
-                .sort({ updateAt: -1 }),
-            Message.findOne({ _id: mess_id, 'member': res.user_id })
-                .populate('member')
-                .populate('messages.user_id')
-        ])
-            .then(([infoMessage, message]) => {
-                res.render('user/home', {
-                    layout: 'user/message',
-                    message: MongooseToObject(message),
-                    infoMessage: mutipleMongooseToObject(infoMessage),
-                    messActiveID: message._id
-                })
-            })
-            .catch(next)
-
-    }
-    async storeChatAndGetId(data) {
-        await Message.updateOne({ _id: data.messId }, {
-            $push: {
-                messages: [{
-                    user_id: data.senderId,
-                    content: data.message
-                }]
+                res.redirect('/')
             }
-        })
-        const message = await Message.findOne({_id : data.messId});
-        return message.messages[message.messages.length - 1]._id;
+        } catch (error) {
+            next(error);
+        }
+    }
+    async getMessage(req, res, next) {
+        try {
+            const mess_id = req.query.id;
+            const infoMessage = await await Message
+                .find({ 'member': req.user_id })
+                .populate('member')
+                .sort({ 'updatedAt': -1 });
+            const message = await Message
+                .findOne({ _id: mess_id, 'member': req.user_id })
+                .populate('member');
+            let chats;
+            if (message) {
+                chats = await Chat
+                    .find({ messageId: mess_id })
+                    .populate('user_id');
+            }
+            res.render('user/home', {
+                layout: 'user/message',
+                message: MongooseToObject(message),
+                chats: mutipleMongooseToObject(chats),
+                infoMessage: mutipleMongooseToObject(infoMessage),
+                messActiveID: chats._id
+            })
+        } catch (error) {
+            next(error);
+        }
     }
 }
 
