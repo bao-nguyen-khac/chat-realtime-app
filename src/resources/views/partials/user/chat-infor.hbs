@@ -1,40 +1,142 @@
 <div class="user-profile-sidebar">
+    {{#if (isSame message.type "single")}}
+    {{#each message.member}}
+    {{#if (compareID this._id ../userInfo.id)}}
+    {{else}}
     <div class="p-3 border-bottom">
         <div class="user-profile-img">
-            <img src="/img/avatar-default.png" class="profile-img rounded" alt="">
+            <img src="{{this.avatar}}" class="profile-img rounded" alt="">
             <div class="overlay-content rounded">
                 <div class="user-chat-nav p-2">
                     <div class="d-flex w-100">
                         <div class="flex-grow-1">
-                            <button type="button" class="btn nav-btn text-white user-profile-show d-none d-lg-block btn-close-user-info">
+                            <button type="button"
+                                class="btn nav-btn text-white user-profile-show d-none d-lg-block btn-close-user-info">
                                 <i class="far fa-times"></i>
                             </button>
-                            <button type="button" class="btn nav-btn text-white user-profile-show d-block d-lg-none icon-close-user-info">
+                            <button type="button"
+                                class="btn nav-btn text-white user-profile-show d-block d-lg-none icon-close-user-info">
                                 <i class="far fa-arrow-left"></i>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="mt-auto p-3">
-                    <h5 class="user-name mb-1 text-truncate">Bella Cote</h5>
+                    <h5 class="user-name mb-1 text-truncate">{{this.fullname}}</h5>
                     <p class="font-size-14 text-truncate mb-0"><i
                             class="bx bxs-circle font-size-10 text-success me-1 ms-0"></i> Online</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    {{/each}}
+    <div class="p-4 user-profile-desc" style="overflow: overlay;">
+        <form>
+            <div class="accordion-body">
+                <div>
+                    <p class="text-muted mb-1">Nick Name</p>
+                    <input type="text" name="name-message" class="form-control" value="{{message.name}}">
+                </div>
+
+                <br>
+                <div class="float-end">
+                    <button class="btn btn-soft-primary btn-sm">
+                        Update NickName
+                    </button>
+                </div>
+            </div>
+        </form>
+        <hr class="my-4">
+        <div>
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <h5 class="font-size-11 text-muted text-uppercase">Media</h5>
+                </div>
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-size-12 d-block mb-2">Show all</a>
+                </div>
+            </div>
+            <div class="profile-media-img">
+                <div class="media-img-list">
+                    <a href="#">
+                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                    </a>
+                </div>
+                <div class="media-img-list">
+                    <a href="#">
+                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                    </a>
+                </div>
+                <div class="media-img-list">
+                    <a href="#">
+                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                    </a>
+                </div>
+                <div class="media-img-list">
+                    <a href="#">
+                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                        <div class="bg-overlay">+ 15</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="text-center border-bottom">
+            <div class="row">
+                <div class="col-sm col-4">
+                    <div class="mb-4">
+                        <button type="button" class="btn avatar-sm p-0">
+                            <span class="avatar-title rounded bg-light text-body">
+                                <i class="far fa-minus-circle"></i>
+                            </span>
+                        </button>
+                        <h5 class="font-size-11 text-uppercase text-muted mt-2">Block</h5>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    {{else}}
+    <div class="p-3 border-bottom">
+        <div class="user-profile-img">
+            <img src="{{message.avatar}}" class="profile-img rounded" alt="">
+            <div class="overlay-content rounded">
+                <div class="user-chat-nav p-2">
+                    <div class="d-flex w-100">
+                        <div class="flex-grow-1">
+                            <button type="button"
+                                class="btn nav-btn text-white user-profile-show d-none d-lg-block btn-close-user-info">
+                                <i class="far fa-times"></i>
+                            </button>
+                            <button type="button"
+                                class="btn nav-btn text-white user-profile-show d-block d-lg-none icon-close-user-info">
+                                <i class="far fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-auto p-3">
+                    <h5 class="user-name mb-1 text-truncate">{{message.name}}</h5>
+                    <p class="font-size-14 text-truncate mb-0"><i
+                            class="bx bxs-circle font-size-10 text-success me-1 ms-0"></i> Online</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="p-4 user-profile-desc" style="overflow: overlay;">
-        {{!-- <form > --}}
+        <form>
             <div class="accordion-body">
                 <div>
                     <p class="text-muted mb-1">Name Group</p>
-                    <input type="text" class="form-control" value="Adam Zampa">
+                    <input type="text" class="form-control" value="{{message.name}}">
                 </div>
 
                 <div class="mt-4">
                     <p class="text-muted mb-1">Description</p>
-                    <textarea class="form-control" cols="10"
-                        rows="2">If several languages coalesce, the grammar of the resulting.</textarea>
+                    <textarea class="form-control" cols="10" rows="2">{{message.desc}}</textarea>
                 </div>
 
                 <div class="mt-4">
@@ -43,12 +145,13 @@
                 </div>
                 <br>
                 <div class="float-end">
-                    <button  class="btn btn-soft-primary btn-sm">
+                    <button class="btn btn-soft-primary btn-sm">
                         UPDATE
                     </button>
                 </div>
             </div>
-        {{!-- </form> --}}
+
+        </form>
         <hr class="my-4">
         <div class="text-center border-bottom">
             <div class="row">
@@ -65,6 +168,6 @@
             </div>
         </div>
     </div>
-
+    {{/if}}
 
 </div>

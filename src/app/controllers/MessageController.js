@@ -22,7 +22,7 @@ class MessageController {
             if (user) {
                 const message = await Message
                     .create({
-                        name: 'default',
+                        name: user.fullname,
                         type: 'single',
                         member: [req.user_id, user._id]
                     });
@@ -59,8 +59,7 @@ class MessageController {
                 layout: 'user/message',
                 message: MongooseToObject(message),
                 chats: mutipleMongooseToObject(chats),
-                infoMessage: mutipleMongooseToObject(infoMessage),
-                messActiveID: chats._id
+                infoMessage: mutipleMongooseToObject(infoMessage)
             })
         } catch (error) {
             next(error);

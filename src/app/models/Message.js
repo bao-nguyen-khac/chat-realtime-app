@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const Message = new Schema({
     name: { type: String },
     type: { type: String },
-    member: [{ type: String, ref: 'Account' }]
+    member: [{ type: String, ref: 'Account' }],
+    desc: { type: String, default: '' },
+    avatar: { type: String, default: '' }
 }, {
     timestamps: true
 });
