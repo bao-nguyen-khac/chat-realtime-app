@@ -74,9 +74,10 @@ io.on("connection", (socket) => {
         });
     })
 
-    socket.on('sendReactionChat', (data) => {
+    socket.on('sendReactionChat', async (data) => {
         const receiverUser = getUser(data.receiverId);
         const senderUser = getUser(data.senderId);
+        await ChatController.addReactionChat(data);
         io.to(receiverUser?.socketId).emit("getReactionChat", {
             senderId: data.senderId,
             receiverId: data.receiverId,

@@ -17,5 +17,8 @@ module.exports = {
         var hour = moment(time).format("HH:mm");
         var date = moment(time).format("DD/MM");
         return hour + ' | ' + date;
+    },
+    isEmptyArr: (arr) => {
+        return arr.length === 0;
     }
 };

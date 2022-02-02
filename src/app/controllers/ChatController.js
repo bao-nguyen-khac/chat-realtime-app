@@ -20,6 +20,29 @@ class ChatController {
             next(error);
         }
     }
+    async addReactionChat(data) {
+        try {
+            const chat = await Chat
+                .findOne({ _id: data.chat_id })
+            if (chat.like.includes(data.senderId)) {
+                await Chat
+                    .updateOne({ _id: data.chat_id }, {
+                        $pull: {
+                            like: data.senderId
+                        }
+                    })
+            } else {
+                await Chat
+                    .updateOne({ _id: data.chat_id }, {
+                        $addToSet: {
+                            like: data.senderId
+                        }
+                    })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 module.exports = new ChatController();

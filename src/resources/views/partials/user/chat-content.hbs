@@ -92,9 +92,17 @@
                                 <div class="ctext-wrap-content">
                                     <p class="mb-0 ctext-content">{{this.content}}</p>
                                 </div>
+                                {{#if (isEmptyArr this.like)}}
                                 <div class="reaction-icon-block">
-                                    <div class="reaction-icon-disable" data-chat-id="{{this._id}}"></div>
+                                    <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
                                 </div>
+                                {{else}}
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon" data-chat-id="{{this._id}}"
+                                        style='background-image: url("https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png");'>
+                                    </div>
+                                </div>
+                                {{/if}}
                             </div>
                             <div class="conversation-name">
                                 <small class="text-muted time">{{convertTime this.time}}</small>
@@ -118,9 +126,17 @@
                                 <div class="ctext-wrap-content">
                                     <p class="mb-0 ctext-content">{{this.content}}</p>
                                 </div>
+                                {{#if (isEmptyArr this.like)}}
                                 <div class="reaction-icon-block">
                                     <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
                                 </div>
+                                {{else}}
+                                <div class="reaction-icon-block">
+                                    <div class="reaction-icon" data-chat-id="{{this._id}}"
+                                        style='background-image: url("https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png");'>
+                                    </div>
+                                </div>
+                                {{/if}}
                             </div>
                             <div class="conversation-name">
                                 <small class="text-muted time">{{convertTime this.time}}</small>
