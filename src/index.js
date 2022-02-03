@@ -16,7 +16,7 @@ const userController = require('./app/controllers/UserController');
 const MessageController = require('./app/controllers/MessageController');
 const ChatController = require('./app/controllers/ChatController');
 
-const { addUser, removeUser, getUser } = require('./util/userSocket');
+const { addUser, removeUser, getUser, getUserBySocketId, getStatusUsers } = require('./util/userSocket');
 
 const db = require('./confic/db/index');
 
@@ -50,8 +50,15 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 // Create socketio
 io.on("connection", (socket) => {
     console.log('User connected');
-    socket.on("join", (userId) => {
-        addUser(userId, socket.id);
+    socket.on("join", data => {
+        addUser(data.userId, socket.id);
+        const senderUser = getUser(data.userId);
+        const userOnline = getStatusUsers(data.allContact);
+        io.to(senderUser?.socketId).emit("sendUserOnline", userOnline);
+        data.allContact.forEach(element => {
+            const friendUser = getUser(element);
+            io.to(friendUser?.socketId).emit("sendMeOnline", data.userId);
+        });
     });
 
     socket.on('sendMessage', async (data) => {
@@ -87,7 +94,9 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         console.log("user disconnected");
+        const user = getUserBySocketId(socket.id);
         removeUser(socket.id);
+        io.emit("userOff", user);
     })
 });
 

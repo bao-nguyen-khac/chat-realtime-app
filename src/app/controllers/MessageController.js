@@ -65,6 +65,23 @@ class MessageController {
             next(error);
         }
     }
+    async getAllContact(req, res, next) {
+        try {
+            let listMessage = await Message
+                .find({ 'member': req.user_id })
+            let allContact = [];
+            listMessage.forEach(e => {
+                e.member.forEach(e1 => {
+                    if (e1 != req.user_id) {
+                        allContact.push(e1);
+                    }
+                })
+            })
+            res.send(allContact);
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 module.exports = new MessageController();
