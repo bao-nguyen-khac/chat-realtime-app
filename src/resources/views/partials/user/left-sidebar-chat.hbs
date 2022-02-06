@@ -90,8 +90,8 @@
                                     data-bs-target="#addContact-exampleModal">
                                     <i class="fas fa-user-plus"></i>
                                 </button>
-                                <button type="button" class="btn btn-soft-primary btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#addgroup-exampleModal">
+                                <button type="button" class="btn btn-soft-primary btn-sm btn-new-group"
+                                    data-bs-toggle="modal" data-bs-target="#addgroup-exampleModal">
                                     <i class="fas fa-users"></i>
                                 </button>
                             </div>
@@ -117,10 +117,12 @@
 
                         <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                             {{#each infoMessage}}
+                            {{#if (isSame this.type 'single')}}
                             {{#each this.member}}
                             {{#if (compareID this._id ../../userInfo.id)}}
                             {{else}}
-                            <li id="contact-id-{{this._id}}" class="chat-element-user {{areMessageActive ../this._id ../../message._id}}">
+                            <li id="contact-id-{{this._id}}"
+                                class="chat-element-user {{areMessageActive ../this._id ../../message._id}}">
                                 <a href="/message?id={{../this._id}}">
                                     <div class="d-flex align-items-center">
                                         <div class="chat-user-img online align-self-center me-2 ms-0">
@@ -136,61 +138,41 @@
                             </li>
                             {{/if}}
                             {{/each}}
-                            {{/each}}
-                            {{!-- <li id="contact-id-1" class="chat-element-user">
-                                <a style="cursor: pointer;" class="unread-msg-user">
+                            {{else}}
+                            <li id="group-id-{{this._id}}"
+                                class="chat-element-user {{areMessageActive this._id ../message._id}}">
+                                <a href="/message?id={{this._id}}" style="cursor: pointer;">
                                     <div class="d-flex align-items-center">
                                         <div class="chat-user-img online align-self-center me-2 ms-0">
-                                            <img src="/img/avatar-default.png" class="rounded-circle avatar-xs" alt="">
-                                            <span class="user-status"></span>
-                                        </div>
-                                        <div class="overflow-hidden">
-                                            <p class="text-truncate mb-0">Brian Break</p>
-                                        </div>
-                                        <div class="ms-auto">
-                                            <span class="badge badge-soft-dark rounded p-1">18</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li id="contact-id-1" class="chat-element-user">
-                                <a style="cursor: pointer;">
-                                    <div class="d-flex align-items-center">
-                                        <div class="chat-user-img online align-self-center me-2 ms-0">
-                                            <img src="/img/avatar-default.png" class="rounded-circle avatar-xs" alt="">
-                                            <span class="user-status"></span>
-                                        </div>
-                                        <div class="overflow-hidden">
-                                            <p class="text-truncate mb-0">Bella Cote</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li id="contact-id-1" class="chat-element-user">
-                                <a style="cursor: pointer;">
-                                    <div class="d-flex align-items-center">
-                                        <div class="chat-user-img online align-self-center me-2 ms-0">
-                                            <div class="avatars-group">
-                                                <span class="each-avatar">
-                                                    <img src="/img/avatar-default.png">
+                                            {{#if (isSame this.avatar 'None')}}
+                                            <div class="avatars-group-sm">
+                                                {{#each this.member}}
+                                                {{#if (compareID this._id ../../userInfo.id)}}
+                                                {{else}}
+                                                <span class="each-avatar size-avatar-sm">
+                                                    <img src="{{this.avatar}}">
                                                 </span>
-                                                <span class="each-avatar">
-                                                    <img src="/img/avatar-default.png">
-                                                </span>
+                                                {{/if}}
+                                                {{/each}}
                                             </div>
+                                            {{else}}
+                                            <img src="{{this.avatar}}" class="rounded-circle avatar-xs" alt="">
+                                            {{/if}}
                                             <span class="user-status"></span>
                                         </div>
                                         <div class="overflow-hidden">
-                                            <p class="text-truncate mb-0">Group Nodejs</p>
+                                            <p class="text-truncate mb-0">{{this.name}}</p>
                                         </div>
                                     </div>
                                 </a>
-                            </li> --}}
+                            </li>
+                            {{/if}}
+                            {{/each}}
                         </ul>
                     </div>
                     <!-- End chat-message-list -->
                 </div>
-
+                <input type="hidden" class="passDataUserIdSub" value="{{userInfo.id}}">
             </div>
             <!-- Start chats content -->
 

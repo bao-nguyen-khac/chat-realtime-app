@@ -2,8 +2,15 @@
   display: inline-block;
   border-radius: 50%;
   overflow: hidden;
-  width: 17px;
   position: absolute;
+}
+.size-avatar-sm {
+  width: 17px;
+  height: 17px;
+}
+.size-avatar-lg {
+  width: 22px;
+  height: 22px;
 }
 .each-avatar:first-child {
   bottom: 0;
@@ -15,12 +22,18 @@
 }
 .each-avatar img {
 width: 100%;
+height: 100%;
 display: block;
 }
-.avatars-group{
+.avatars-group-sm{
   position: relative;
   width: 1.8rem;
   height: 1.8rem;
+}
+.avatars-group-lg{
+  position: relative;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .notify-chat{

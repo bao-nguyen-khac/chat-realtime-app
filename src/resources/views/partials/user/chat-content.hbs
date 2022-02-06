@@ -12,6 +12,7 @@
                             </a>
                         </div>
                         <!-- end -->
+                        {{#if (isSame message.type 'single')}}
                         {{#each message.member}}
                         {{#if (compareID this._id ../userInfo.id)}}
                         {{else}}
@@ -27,12 +28,45 @@
                                 <div class="flex-grow-1 overflow-hidden">
                                     <h6 class="text-truncate mb-0 font-size-18"><a
                                             class="user-profile-show text-reset">{{this.fullname}}</a></h6>
-                                    <p class="text-truncate text-muted mb-0"><small class="status-user-text">Offline</small></p>
+                                    <p class="text-truncate text-muted mb-0"><small
+                                            class="status-user-text">Offline</small></p>
                                 </div>
                             </div>
                         </div>
                         {{/if}}
                         {{/each}}
+                        {{else}}
+                        <div class="flex-grow-1 overflow-hidden">
+                            <div class="d-flex align-items-center">
+                                <div
+                                    class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
+                                    <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profile-friend">
+                                        {{#if (isSame message.avatar 'None')}}
+                                        <div class="avatars-group-lg">
+                                            {{#each message.member}}
+                                            {{#if (compareID this._id ../userInfo.id)}}
+                                            {{else}}
+                                            <span class="each-avatar size-avatar-lg">
+                                                <img src="{{this.avatar}}">
+                                            </span>
+                                            {{/if}}
+                                            {{/each}}
+                                        </div>
+                                        {{else}}
+                                        <img src="{{message.avatar}}" class="rounded-circle avatar-xs" alt="">
+                                        {{/if}}
+                                        <span class="user-status"></span>
+                                    </a>
+                                </div>
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <h6 class="text-truncate mb-0 font-size-18"><a
+                                            class="user-profile-show text-reset">{{message.name}}</a></h6>
+                                    <p class="text-truncate text-muted mb-0"><small
+                                            class="status-user-text">Offline</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
                 <div class="col-sm-8 col-4">

@@ -39,10 +39,30 @@ class MessageController {
             next(error);
         }
     }
+    async newGroupMessage(req, res, next) {
+        try {
+            var member = req.body.list_ids_group;
+            var newMember = [];
+            newMember.push(req.user_id);
+            member.forEach(e => {
+                newMember.push(e);
+            })
+            await Message.create({
+                name: req.body.group_name,
+                type: 'group',
+                member: newMember,
+                desc: req.body.group_desc,
+                avatar: 'None',
+            })
+            res.redirect('/')
+        } catch (error) {
+            next(error)
+        }
+    }
     async getMessage(req, res, next) {
         try {
             const mess_id = req.query.id;
-            const infoMessage = await await Message
+            const infoMessage = await Message
                 .find({ 'member': req.user_id })
                 .populate('member')
                 .sort({ 'updatedAt': -1 });
@@ -78,6 +98,31 @@ class MessageController {
                 })
             })
             res.send(allContact);
+        } catch (error) {
+            next(error)
+        }
+    }
+    async getAllContactSort(req, res, next) {
+        try {
+            let listMessage = await Message
+                .find({ 'member': req.user_id })
+                .populate('member')
+            let allContactName = [];
+            let allContact = [];
+            let result = [];
+            listMessage.forEach(e => {
+                e.member.forEach(e1 => {
+                    if (e1._id != req.user_id) {
+                        allContactName.push(e1.fullname);
+                        allContact.push({fullname: e1.fullname, id: e1._id});
+                    }
+                })
+            })
+            allContactName.sort();
+            allContactName.forEach(e => {
+                result.push(allContact.find(e1 => e1.fullname === e))
+            })
+            res.send(result);
         } catch (error) {
             next(error)
         }

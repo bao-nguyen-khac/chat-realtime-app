@@ -24,7 +24,6 @@ $.ajax({
 })
 
 socket.on('sendUserOnline', data => {
-    console.log(data);
     data.forEach(e => {
         var elementLeftChat = document.querySelector(`#contact-id-${e}`);
         elementLeftChat.querySelector(".user-status").style.backgroundColor = "#06d6a0";
@@ -154,7 +153,6 @@ addEventReactChat();
 
 socket.on('getReactionChat', (data) => {
     var chatElement = document.querySelector(`div[data-chat-id="${data.chat_id}"]`)
-    console.log(chatElement);
     if (chatElement.style.backgroundImage == '' || chatElement.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")') {
         chatElement.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')";
     } else {

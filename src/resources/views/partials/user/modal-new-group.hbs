@@ -9,10 +9,10 @@
                 </button>
             </div>
             <div class="modal-body p-4">
-                {{!-- <form> --}}
+                <form action="/message/new-group" method="post">
                     <div class="mb-4">
                         <label for="addgroupname-input" class="form-label">Group Name</label>
-                        <input type="text" class="form-control" id="addgroupname-input" placeholder="Enter Group Name">
+                        <input type="text" class="form-control" id="addgroupname-input" name="group_name" placeholder="Enter Group Name">
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Group Members</label>
@@ -30,41 +30,7 @@
                                     <h5 class="font-size-15 mb-0">Contacts</h5>
                                 </div>
                                 <div class="card-body p-2">
-                                    <div data-simplebar style="max-height: 150px;">
-                                        <div>
-                                            <div class="contact-list-title">
-                                                A
-                                            </div>
-
-                                            <ul class="list-unstyled contact-list">
-                                                <li>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="memberCheck1" checked>
-                                                        <label class="form-check-label" for="memberCheck1">Albert
-                                                            Rodarte</label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div>
-                                            <div class="contact-list-title">
-                                                C
-                                            </div>
-
-                                            <ul class="list-unstyled contact-list">
-                                                <li>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="memberCheck3">
-                                                        <label class="form-check-label" for="memberCheck3">Craig
-                                                            Smiley</label>
-                                                    </div>
-                                                </li>
-
-                                            </ul>
-                                        </div>
+                                    <div style="max-height: 150px;" class="contacts-modal-group">
                                     </div>
                                 </div>
 
@@ -73,16 +39,58 @@
                     </div>
                     <div class="mb-3">
                         <label for="addgroupdescription-input" class="form-label">Description</label>
-                        <textarea class="form-control" id="addgroupdescription-input" rows="3"
+                        <textarea class="form-control" id="addgroupdescription-input" rows="3" name="group_desc"
                             placeholder="Enter Description"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary">Create Groups</button>
+                        <button class="btn btn-primary" type="submit">Create Groups</button>
                     </div>
-                {{!-- </form> --}}
+                </form>
             </div>
 
         </div>
     </div>
 </div>
+{{!--
+<script src="/js/newGroup.js"></script> --}}
+<script>
+    const btnNewGroup = document.querySelector('.btn-new-group');
+    btnNewGroup.addEventListener('click', () => {
+        $.ajax({
+            url: "/message/get-all-contact-sort",
+            method: "GET",
+            success: function (data) {
+                let output = '<ul class="list-unstyled contact-list">';
+                let arrChar = [];
+                data.forEach(e => {
+                    if (!arrChar.some(a => a === e.fullname[0])) {
+                        arrChar.push(e.fullname[0]);
+                        output += `
+                            <div class="contact-list-title">
+                                ${e.fullname[0]}
+                            </div>
+                            <li>
+                                <div class="form-check">
+                                    <input type="checkbox" name="list_ids_group" value="${e.id}" class="form-check-input">
+                                    <label class="form-check-label">${e.fullname}</label>
+                                </div>
+                            </li>
+                        `;
+                    } else {
+                        output += `
+                            <li>
+                                <div class="form-check">
+                                    <input type="checkbox" name="list_ids_group" value="${e.id}" class="form-check-input">
+                                    <label class="form-check-label">${e.fullname}</label>
+                                </div>
+                            </li>
+                        `;
+                    }
+                })
+                output += '</ul>';
+                document.querySelector('.contacts-modal-group').innerHTML = output;
+            }
+        })
+    })
+</script>

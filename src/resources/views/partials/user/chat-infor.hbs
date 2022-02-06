@@ -99,7 +99,11 @@
     {{else}}
     <div class="p-3 border-bottom">
         <div class="user-profile-img">
+            {{#if (isSame message.avatar 'None')}}
+            <img src="/img/background_default.jpg" class="profile-img rounded" alt="">
+            {{else}}
             <img src="{{message.avatar}}" class="profile-img rounded" alt="">
+            {{/if}}
             <div class="overlay-content rounded">
                 <div class="user-chat-nav p-2">
                     <div class="d-flex w-100">
@@ -117,8 +121,6 @@
                 </div>
                 <div class="mt-auto p-3">
                     <h5 class="user-name mb-1 text-truncate">{{message.name}}</h5>
-                    <p class="font-size-14 text-truncate mb-0"><i
-                            class="bx bxs-circle font-size-10 text-success me-1 ms-0"></i> Online</p>
                 </div>
 
             </div>
@@ -150,6 +152,29 @@
             </div>
 
         </form>
+        <hr class="my-4">
+        <div>
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <h5 class="font-size-11 text-muted text-uppercase">Media</h5>
+                </div>
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-size-12 d-block mb-2">Show all</a>
+                </div>
+            </div>
+            <div class="profile-media-img">
+                <div class="media-img-list">
+                    <a href="#">
+                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                    </a>
+                </div>
+                <div class="media-img-list">
+                    <a href="#">
+                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
         <hr class="my-4">
         <div class="text-center border-bottom">
             <div class="row">
