@@ -131,14 +131,15 @@
                                 </div>
                                 {{#if (isEmptyArr this.like)}}
                                 <div class="reaction-icon-block">
-                                    <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
+                                    <div class="reaction-icon-disable" data-chat-id="{{this._id}}"></div>
                                 </div>
                                 {{else}}
                                 <div class="reaction-icon-block">
-                                    <div class="reaction-icon" data-chat-id="{{this._id}}"
+                                    <div class="reaction-icon-disable" data-chat-id="{{this._id}}"
                                         style='background-image: url("https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png");'>
                                     </div>
                                 </div>
+                                <div class="total-reactions">1</div>
                                 {{/if}}
                             </div>
                             <div class="conversation-name">
@@ -166,12 +167,14 @@
                                 {{#if (isEmptyArr this.like)}}
                                 <div class="reaction-icon-block">
                                     <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
+                                    <div class="total-reactions"></div>
                                 </div>
                                 {{else}}
                                 <div class="reaction-icon-block">
                                     <div class="reaction-icon" data-chat-id="{{this._id}}"
                                         style='background-image: url("https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png");'>
                                     </div>
+                                    <div class="total-reactions">1</div>
                                 </div>
                                 {{/if}}
                             </div>

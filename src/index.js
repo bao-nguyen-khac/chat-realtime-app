@@ -97,13 +97,22 @@ io.on("connection", (socket) => {
         })
     })
 
-    socket.on('sendReactionChat', async (data) => {
+    socket.on('sendReactionChatSingle', async (data) => {
         const receiverUser = getUser(data.receiverId);
         const senderUser = getUser(data.senderId);
         await ChatController.addReactionChat(data);
-        io.to(receiverUser?.socketId).emit("getReactionChat", {
+        io.to(receiverUser?.socketId).to(senderUser?.socketId).emit("getReactionChatSingle", {
             senderId: data.senderId,
             receiverId: data.receiverId,
+            chat_id: data.chat_id
+        });
+    })
+
+    socket.on('sendReactionChatGroup', async (data) => {
+        // await ChatController.addReactionChat(data);
+        io.to(data.messId).emit("getReactionChatGroup", {
+            senderId: data.senderId,
+            messId: data.messId,
             chat_id: data.chat_id
         });
     })
