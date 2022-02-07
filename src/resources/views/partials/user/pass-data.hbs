@@ -1,0 +1,10 @@
+<input type="hidden" class="passUserID" value="{{userInfo.id}}">
+<input type="hidden" class="passMessID" value="{{message._id}}">
+<input type="hidden" class="passMessType" value="{{message.type}}">
+{{#if (isSame message.type 'single')}}
+{{#each message.member}}
+{{#if (notSameId this._id ../userInfo.id)}}
+<input type="hidden" class="passReceiverID" value="{{this._id}}">
+{{/if}}
+{{/each}}
+{{/if}}

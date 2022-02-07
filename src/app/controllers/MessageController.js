@@ -90,12 +90,17 @@ class MessageController {
             let listMessage = await Message
                 .find({ 'member': req.user_id })
             let allContact = [];
-            listMessage.forEach(e => {
-                e.member.forEach(e1 => {
-                    if (e1 != req.user_id) {
-                        allContact.push(e1);
-                    }
-                })
+            listMessage.forEach(message => {
+                if (message.type == 'single') {
+                    message.member.forEach(memId => {
+                        if (memId != req.user_id) {
+                            allContact.push({ type: message.type, userId: memId });
+                        }
+                    })
+                } else {
+                    let userIdsGroup = message.member.filter(memId => memId != req.user_id)
+                    allContact.push({ type: message.type, userIds: userIdsGroup, messageId: message._id })
+                }
             })
             res.send(allContact);
         } catch (error) {
@@ -110,13 +115,15 @@ class MessageController {
             let allContactName = [];
             let allContact = [];
             let result = [];
-            listMessage.forEach(e => {
-                e.member.forEach(e1 => {
-                    if (e1._id != req.user_id) {
-                        allContactName.push(e1.fullname);
-                        allContact.push({fullname: e1.fullname, id: e1._id});
-                    }
-                })
+            listMessage.forEach(message => {
+                if (message.type == 'single') {
+                    message.member.forEach(mem => {
+                        if (mem._id != req.user_id) {
+                            allContactName.push(mem.fullname);
+                            allContact.push({ fullname: mem.fullname, id: mem._id });
+                        }
+                    })
+                }
             })
             allContactName.sort();
             allContactName.forEach(e => {

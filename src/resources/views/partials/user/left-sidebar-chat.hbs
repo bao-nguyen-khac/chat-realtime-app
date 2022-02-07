@@ -118,9 +118,9 @@
                         <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                             {{#each infoMessage}}
                             {{#if (isSame this.type 'single')}}
+                            {{!-- Single mess --}}
                             {{#each this.member}}
-                            {{#if (compareID this._id ../../userInfo.id)}}
-                            {{else}}
+                            {{#if (notSameId this._id ../../userInfo.id)}}
                             <li id="contact-id-{{this._id}}"
                                 class="chat-element-user {{areMessageActive ../this._id ../../message._id}}">
                                 <a href="/message?id={{../this._id}}">
@@ -138,6 +138,7 @@
                             </li>
                             {{/if}}
                             {{/each}}
+                            {{!-- Group mess --}}
                             {{else}}
                             <li id="group-id-{{this._id}}"
                                 class="chat-element-user {{areMessageActive this._id ../message._id}}">
@@ -167,6 +168,7 @@
                                 </a>
                             </li>
                             {{/if}}
+
                             {{/each}}
                         </ul>
                     </div>

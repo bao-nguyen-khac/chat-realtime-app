@@ -1,8 +1,8 @@
 <div class="user-profile-sidebar">
     {{#if (isSame message.type "single")}}
+    {{!-- Single message --}}
     {{#each message.member}}
-    {{#if (compareID this._id ../userInfo.id)}}
-    {{else}}
+    {{#if (notSameId this._id ../userInfo.id)}}
     <div class="p-3 border-bottom">
         <div class="user-profile-img">
             <img src="{{this.avatar}}" class="profile-img rounded" alt="">
@@ -24,12 +24,12 @@
                 <div class="mt-auto p-3">
                     <h5 class="user-name mb-1 text-truncate">{{this.fullname}}</h5>
                 </div>
-
             </div>
         </div>
     </div>
     {{/if}}
     {{/each}}
+
     <div class="p-4 user-profile-desc" style="overflow: overlay;">
         <form>
             <div class="accordion-body">
@@ -96,6 +96,7 @@
             </div>
         </div>
     </div>
+    {{!-- Group message --}}
     {{else}}
     <div class="p-3 border-bottom">
         <div class="user-profile-img">

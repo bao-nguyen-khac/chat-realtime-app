@@ -13,6 +13,10 @@ class ChatController {
                     content: data.message,
                     type: 'text',
                 });
+            await Message
+                .updateOne({_id: data.messId}, {
+                    updatedAt: Date.now()
+                })
             const chats = await Chat
                 .find({ messageId: data.messId });
             return chats[chats.length - 1]._id;

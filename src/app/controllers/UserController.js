@@ -11,10 +11,7 @@ class UserController {
     async index(req, res, next) {
         try {
             const messages = await MessageController.getAllMessage(req, res, next);
-            res.render('user/home', {
-                layout: 'user/main',
-                infoMessage: mutipleMongooseToObject(messages),
-            })
+            res.redirect('/message?id=' + messages[0]._id)
         } catch (err) {
             next(err);
         }

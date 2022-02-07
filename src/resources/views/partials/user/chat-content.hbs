@@ -13,9 +13,10 @@
                         </div>
                         <!-- end -->
                         {{#if (isSame message.type 'single')}}
+                        
+                        <!-- In head mess for single message -->
                         {{#each message.member}}
-                        {{#if (compareID this._id ../userInfo.id)}}
-                        {{else}}
+                        {{#if (notSameId this._id ../userInfo.id)}}
                         <div class="flex-grow-1 overflow-hidden">
                             <div class="d-flex align-items-center">
                                 <div
@@ -35,6 +36,8 @@
                         </div>
                         {{/if}}
                         {{/each}}
+
+                        <!-- In head mess for group message -->
                         {{else}}
                         <div class="flex-grow-1 overflow-hidden">
                             <div class="d-flex align-items-center">
@@ -183,14 +186,7 @@
                 {{/each}}
 
             </ul>
-            <input type="hidden" class="passDataUserID" value="{{userInfo.id}}">
-            <input type="hidden" class="passDataMessID" value="{{message._id}}">
-            {{#each message.member}}
-            {{#if (compareID this._id ../userInfo.id)}}
-            {{else}}
-            <input type="hidden" class="passDataReceiverID" value="{{this._id}}">
-            {{/if}}
-            {{/each}}
+
         </div>
 
         <!-- end chat conversation end -->

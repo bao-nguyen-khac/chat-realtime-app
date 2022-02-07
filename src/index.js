@@ -56,29 +56,35 @@ io.on("connection", (socket) => {
         const userOnline = getStatusUsers(data.allContact);
         io.to(senderUser?.socketId).emit("sendUserOnline", userOnline);
         data.allContact.forEach(element => {
-            const friendUser = getUser(element);
-            io.to(friendUser?.socketId).emit("sendMeOnline", data.userId);
+            if(element.type == 'single'){
+                const friendUser = getUser(element.userId);
+                io.to(friendUser?.socketId).emit("sendMeOnline", data.userId);
+            }else{
+                socket.join(element.messageId);
+            }
         });
     });
 
-    socket.on('sendMessage', async (data) => {
+    socket.on('sendMessageSingle', async (data) => {
         const chatId = await ChatController.storeChatAndGetId(data);
         const receiverUser = getUser(data.receiverId);
         const senderUser = getUser(data.senderId);
-        io.to(receiverUser?.socketId).emit("getMessage", {
+        io.to(receiverUser?.socketId).to(senderUser?.socketId).emit("getMessageSingle", {
             senderId: data.senderId,
             receiverId: data.receiverId,
             message: data.message,
             chatId: chatId,
             time: data.time
         });
-        io.to(senderUser?.socketId).emit("getMessage", {
+    })
+
+    socket.on('sendMessageGroup', async (data) => {
+        io.to(data.messId).emit('getMessageGroup', {
             senderId: data.senderId,
-            receiverId: data.receiverId,
             message: data.message,
-            chatId: chatId,
+            messId: data.messId,
             time: data.time
-        });
+        })
     })
 
     socket.on('sendReactionChat', async (data) => {

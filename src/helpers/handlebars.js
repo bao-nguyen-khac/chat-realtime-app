@@ -7,6 +7,9 @@ module.exports = {
     compareID: (string, objectID) => {
         return string.equals(objectID)
     },
+    notSameId: (string, objectID) => {
+        return !string.equals(objectID)
+    },
     areMessageActive: (a, b) => {
         if (a.equals(b)) {
             return 'active';
