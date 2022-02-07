@@ -10,7 +10,7 @@ const userConvensation = document.querySelector('#users-conversation');
 const autoscroll = () => {
     // New message element
     var listElementMessNew = document.querySelectorAll('.user-chat-content');
-    if(listElementMessNew.length != 0){
+    if (listElementMessNew.length != 0) {
         listElementMessNew[listElementMessNew.length - 1].scrollIntoView();
     }
 }
@@ -28,21 +28,39 @@ $.ajax({
 
 socket.on('sendUserOnline', data => {
     data.forEach(e => {
-        var elementLeftChat = document.querySelector(`#contact-id-${e.userId}`);
-        elementLeftChat.querySelector(".user-status").style.backgroundColor = "#06d6a0";
-        if (receiverId == e.userId) {
-            document.querySelector("#users-chat").querySelector(".user-status").style.backgroundColor = "#06d6a0";
-            document.querySelector(".status-user-text").innerHTML = "Online";
+        if (e.type == 'single') {
+            var elementLeftChat = document.querySelector(`#contact-id-${e.userId}`);
+            elementLeftChat.querySelector(".user-status").style.backgroundColor = "#06d6a0";
+            if (receiverId == e.userId) {
+                document.querySelector("#users-chat").querySelector(".user-status").style.backgroundColor = "#06d6a0";
+                document.querySelector(".status-user-text").innerHTML = "Online";
+            }
+        } else {
+            var elementLeftChat = document.querySelector(`#group-id-${e.messageId}`);
+            elementLeftChat.querySelector(".user-status").style.backgroundColor = "#06d6a0";
+            if (messageId == e.messageId) {
+                document.querySelector("#users-chat").querySelector(".user-status").style.backgroundColor = "#06d6a0";
+                document.querySelector(".status-user-text").innerHTML = "Online";
+            }
         }
     })
 })
 
 socket.on('sendMeOnline', data => {
-    var elementLeftChat = document.querySelector(`#contact-id-${data}`);
-    elementLeftChat.querySelector(".user-status").style.backgroundColor = "#06d6a0";
-    if (receiverId == data) {
-        document.querySelector("#users-chat").querySelector(".user-status").style.backgroundColor = "#06d6a0"
-        document.querySelector(".status-user-text").innerHTML = "Online";
+    if (data.type == 'single') {
+        var elementLeftChat = document.querySelector(`#contact-id-${data.userId}`);
+        elementLeftChat.querySelector(".user-status").style.backgroundColor = "#06d6a0";
+        if (receiverId == data.userId) {
+            document.querySelector("#users-chat").querySelector(".user-status").style.backgroundColor = "#06d6a0"
+            document.querySelector(".status-user-text").innerHTML = "Online";
+        }
+    } else if(data.senderId != user_id) {
+        var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);
+        elementLeftChat.querySelector(".user-status").style.backgroundColor = "#06d6a0";
+        if (messageId == data.messId) {
+            document.querySelector("#users-chat").querySelector(".user-status").style.backgroundColor = "#06d6a0";
+            document.querySelector(".status-user-text").innerHTML = "Online";
+        }
     }
 })
 
@@ -53,7 +71,7 @@ chatForm.addEventListener('submit', (e) => {
     var hour = moment(today).format("HH:mm");
     var date = moment(today).format("DD/MM");
     var dateTime = hour + ' | ' + date;
-    if(messageType == 'single'){
+    if (messageType == 'single') {
         socket.emit('sendMessageSingle', {
             senderId: user_id,
             receiverId: receiverId,
@@ -61,7 +79,7 @@ chatForm.addEventListener('submit', (e) => {
             messId: messageId,
             time: dateTime,
         })
-    }else{
+    } else {
         socket.emit('sendMessageGroup', {
             senderId: user_id,
             message: message,
@@ -183,7 +201,7 @@ socket.on('getMessageGroup', (data) => {
                 addEventReactChat();
             },
         })
-    } else if (user_id == data.senderId && messageId == data.messId){
+    } else if (user_id == data.senderId && messageId == data.messId) {
         messageHtml = `
         <li class="chat-list right">
             <div class="conversation-list">

@@ -24,12 +24,12 @@ module.exports = {
                     result.push(element)
                 }
             }else{
-                element.userIds.forEach(userId => {
+                for(var userId of element.userIds){
                     if(users.find((user) => user.userId === userId)){
                         result.push(element)
-                        return;
+                        break;
                     }
-                })
+                }
             }
         })
         return result;

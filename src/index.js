@@ -58,9 +58,17 @@ io.on("connection", (socket) => {
         data.allContact.forEach(element => {
             if(element.type == 'single'){
                 const friendUser = getUser(element.userId);
-                io.to(friendUser?.socketId).emit("sendMeOnline", data.userId);
+                io.to(friendUser?.socketId).emit("sendMeOnline", {
+                    type: element.type,
+                    userId: data.userId
+                });
             }else{
                 socket.join(element.messageId);
+                io.to(element.messageId).emit("sendMeOnline", {
+                    type: element.type,
+                    senderId: data.userId,
+                    messId: element.messageId
+                });
             }
         });
     });
@@ -79,10 +87,12 @@ io.on("connection", (socket) => {
     })
 
     socket.on('sendMessageGroup', async (data) => {
+        const chatId = await ChatController.storeChatAndGetId(data);
         io.to(data.messId).emit('getMessageGroup', {
             senderId: data.senderId,
             message: data.message,
             messId: data.messId,
+            chatId: chatId,
             time: data.time
         })
     })
