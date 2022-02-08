@@ -13,7 +13,7 @@
                         </div>
                         <!-- end -->
                         {{#if (isSame message.type 'single')}}
-                        
+
                         <!-- In head mess for single message -->
                         {{#each message.member}}
                         {{#if (notSameId this._id ../userInfo.id)}}
@@ -129,18 +129,20 @@
                                 <div class="ctext-wrap-content">
                                     <p class="mb-0 ctext-content">{{this.content}}</p>
                                 </div>
-                                {{#if (isEmptyArr this.like)}}
                                 <div class="reaction-icon-block">
+                                    {{#if (isEmptyArr this.like)}}
                                     <div class="reaction-icon-disable" data-chat-id="{{this._id}}"></div>
-                                </div>
-                                {{else}}
-                                <div class="reaction-icon-block">
+                                    {{else}}
                                     <div class="reaction-icon-disable" data-chat-id="{{this._id}}"
-                                        style='background-image: url("https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png");'>
+                                        style='background-image: url("/img/like.png");'>
                                     </div>
+                                    {{/if}}
+                                    {{#if (isSame this.totalLike 0)}}
+                                    <div class="total-reactions"></div>
+                                    {{else}}
+                                    <div class="total-reactions">{{this.totalLike}}</div>
+                                    {{/if}}
                                 </div>
-                                <div class="total-reactions">1</div>
-                                {{/if}}
                             </div>
                             <div class="conversation-name">
                                 <small class="text-muted time">{{convertTime this.time}}</small>
@@ -164,19 +166,20 @@
                                 <div class="ctext-wrap-content">
                                     <p class="mb-0 ctext-content">{{this.content}}</p>
                                 </div>
-                                {{#if (isEmptyArr this.like)}}
                                 <div class="reaction-icon-block">
+                                    {{#if (isEmptyArr this.like)}}
                                     <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
-                                    <div class="total-reactions"></div>
-                                </div>
-                                {{else}}
-                                <div class="reaction-icon-block">
+                                    {{else}}
                                     <div class="reaction-icon" data-chat-id="{{this._id}}"
-                                        style='background-image: url("https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png");'>
+                                        style='background-image: url("/img/like.png");'>
                                     </div>
-                                    <div class="total-reactions">1</div>
+                                    {{/if}}
+                                    {{#if (isSame this.totalLike 0)}}
+                                    <div class="total-reactions"></div>
+                                    {{else}}
+                                    <div class="total-reactions">{{this.totalLike}}</div>
+                                    {{/if}}
                                 </div>
-                                {{/if}}
                             </div>
                             <div class="conversation-name">
                                 <small class="text-muted time">{{convertTime this.time}}</small>

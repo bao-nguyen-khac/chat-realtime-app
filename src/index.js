@@ -100,20 +100,22 @@ io.on("connection", (socket) => {
     socket.on('sendReactionChatSingle', async (data) => {
         const receiverUser = getUser(data.receiverId);
         const senderUser = getUser(data.senderId);
-        await ChatController.addReactionChat(data);
+        const totalReactions = await ChatController.addReactionChat(data);
         io.to(receiverUser?.socketId).to(senderUser?.socketId).emit("getReactionChatSingle", {
             senderId: data.senderId,
             receiverId: data.receiverId,
-            chat_id: data.chat_id
+            chat_id: data.chat_id,
+            totalReactions: totalReactions
         });
     })
 
     socket.on('sendReactionChatGroup', async (data) => {
-        // await ChatController.addReactionChat(data);
+        const totalReactions = await ChatController.addReactionChat(data);
         io.to(data.messId).emit("getReactionChatGroup", {
             senderId: data.senderId,
             messId: data.messId,
-            chat_id: data.chat_id
+            chat_id: data.chat_id,
+            totalReactions: totalReactions
         });
     })
 

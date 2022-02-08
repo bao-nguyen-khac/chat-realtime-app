@@ -255,27 +255,25 @@ addEventReactChat();
 
 socket.on('getReactionChatSingle', (data) => {
     var chatElement = document.querySelector(`div[data-chat-id="${data.chat_id}"]`)
-    if (chatElement.style.backgroundImage == '' || chatElement.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")') {
-        chatElement.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')";
-    } else {
-        chatElement.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png')";
+    var totalReactions = chatElement.parentNode.querySelector('.total-reactions')
+    if(data.totalReactions == 0){
+        chatElement.style.backgroundImage = "url('/img/like-default.png')";
+        totalReactions.innerHTML = ''
+    }else{
+        chatElement.style.backgroundImage = "url('like.png')";
+        totalReactions.innerHTML = data.totalReactions
     }
-    
 })
 
 socket.on('getReactionChatGroup', (data) => {
     var chatElement = document.querySelector(`div[data-chat-id="${data.chat_id}"]`)
-    if (chatElement.style.backgroundImage == '' || chatElement.style.backgroundImage == 'url("https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png")') {
-        chatElement.style.backgroundImage = "url('https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png')";
-    } else {
-        chatElement.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png')";
-    }
-    var totalReactions = chatElement.parentNode.querySelector('total-reactions').innerHTML;
-    if(totalReactions == ''){
-        chatElement.parentNode.parentNode.querySelector('total-reactions').innerHTML = '1'
+    var totalReactions = chatElement.parentNode.querySelector('.total-reactions')
+    if(data.totalReactions == 0){
+        chatElement.style.backgroundImage = "url('/img/like-default.png')";
+        totalReactions.innerHTML = ''
     }else{
-        totalReactions = parseInt(totalReactions) + 1
-        chatElement.parentNode.parentNode.querySelector('total-reactions').innerHTML = totalReactions
+        chatElement.style.backgroundImage = "url('/img/like.png')";
+        totalReactions.innerHTML = data.totalReactions
     }
 })
 

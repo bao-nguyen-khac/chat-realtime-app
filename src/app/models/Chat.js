@@ -10,6 +10,7 @@ const Chat = new Schema({
     type: { type: String },
     content: { type: String },
     like: { type: Array, default: [] },
+    totalLike: { type: Number, default: 0 },
     user_read: { type: Array, default: [] },
 }, {
     timestamps: true,

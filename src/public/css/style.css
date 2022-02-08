@@ -54,16 +54,14 @@ display: block;
   border-radius: 50%;
 }
 .reaction-icon{
-  background-image: url(https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png);
-  /* https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png */
+  background-image: url(/img/like-default.png);
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
   background-size: 20px;
 }
 .reaction-icon-disable{
-  background-image: url(https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png);
-  /* https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png */
+  background-image: url(/img/like-default.png);
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;

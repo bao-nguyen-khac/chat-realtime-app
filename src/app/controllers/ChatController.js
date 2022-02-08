@@ -33,16 +33,25 @@ class ChatController {
                     .updateOne({ _id: data.chat_id }, {
                         $pull: {
                             like: data.senderId
-                        }
+                        },
+                        $inc: {
+                            totalLike: -1
+                        } 
                     })
             } else {
                 await Chat
                     .updateOne({ _id: data.chat_id }, {
                         $addToSet: {
                             like: data.senderId
-                        }
+                        },
+                        $inc: {
+                            totalLike: 1
+                        } 
                     })
             }
+            const newChat = await Chat
+                .findOne({ _id: data.chat_id })
+            return newChat.totalLike;
         } catch (error) {
             console.log(error);
         }
