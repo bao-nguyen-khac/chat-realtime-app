@@ -67,9 +67,6 @@ display: block;
   background-repeat: no-repeat;
   background-size: 20px;
 }
-.total-reactions{
-
-}
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
@@ -88,7 +85,17 @@ display: block;
 .user-profile-sidebar{
   animation: modalIN ease 0.5s;
 }
-
+.each-member-group{
+  display: flex;
+  align-items: center;
+}
+.name-meber-group{
+  margin-left: 10px;
+  display: inline-block;
+}
+.name-meber-group span{
+  display: block;
+}
 @keyframes modalIN{
   from{
       opacity: 0;

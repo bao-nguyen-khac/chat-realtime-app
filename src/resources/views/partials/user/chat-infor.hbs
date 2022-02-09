@@ -1,96 +1,98 @@
 <div class="user-profile-sidebar">
     {{#if (isSame message.type "single")}}
     {{!-- Single message --}}
-    {{#each message.member}}
-    {{#if (notSameId this._id ../userInfo.id)}}
-    <div class="p-3 border-bottom">
-        <div class="user-profile-img">
-            <img src="{{this.avatar}}" class="profile-img rounded" alt="">
-            <div class="overlay-content rounded">
-                <div class="user-chat-nav p-2">
-                    <div class="d-flex w-100">
-                        <div class="flex-grow-1">
-                            <button type="button"
-                                class="btn nav-btn text-white user-profile-show d-none d-lg-block btn-close-user-info">
-                                <i class="far fa-times"></i>
-                            </button>
-                            <button type="button"
-                                class="btn nav-btn text-white user-profile-show d-block d-lg-none icon-close-user-info">
-                                <i class="far fa-arrow-left"></i>
-                            </button>
+    <div>
+        {{#each message.member}}
+        {{#if (notSameId this._id ../userInfo.id)}}
+        <div class="p-3 border-bottom">
+            <div class="user-profile-img">
+                <img src="{{this.avatar}}" class="profile-img rounded" alt="">
+                <div class="overlay-content rounded">
+                    <div class="user-chat-nav p-2">
+                        <div class="d-flex w-100">
+                            <div class="flex-grow-1">
+                                <button type="button"
+                                    class="btn nav-btn text-white user-profile-show d-none d-lg-block btn-close-user-info">
+                                    <i class="far fa-times"></i>
+                                </button>
+                                <button type="button"
+                                    class="btn nav-btn text-white user-profile-show d-block d-lg-none icon-close-user-info">
+                                    <i class="far fa-arrow-left"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="mt-auto p-3">
-                    <h5 class="user-name mb-1 text-truncate">{{this.fullname}}</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{/if}}
-    {{/each}}
-
-    <div class="p-4 user-profile-desc" style="overflow: overlay;">
-        <form>
-            <div class="accordion-body">
-                <div>
-                    <p class="text-muted mb-1">Nick Name</p>
-                    <input type="text" name="name-message" class="form-control" value="{{message.name}}">
-                </div>
-
-                <br>
-                <div class="float-end">
-                    <button class="btn btn-soft-primary btn-sm">
-                        Update NickName
-                    </button>
-                </div>
-            </div>
-        </form>
-        <hr class="my-4">
-        <div>
-            <div class="d-flex">
-                <div class="flex-grow-1">
-                    <h5 class="font-size-11 text-muted text-uppercase">Media</h5>
-                </div>
-                <div class="flex-shrink-0">
-                    <a href="#" class="font-size-12 d-block mb-2">Show all</a>
-                </div>
-            </div>
-            <div class="profile-media-img">
-                <div class="media-img-list">
-                    <a href="#">
-                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
-                    </a>
-                </div>
-                <div class="media-img-list">
-                    <a href="#">
-                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
-                    </a>
-                </div>
-                <div class="media-img-list">
-                    <a href="#">
-                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
-                    </a>
-                </div>
-                <div class="media-img-list">
-                    <a href="#">
-                        <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
-                        <div class="bg-overlay">+ 15</div>
-                    </a>
+                    <div class="mt-auto p-3">
+                        <h5 class="user-name mb-1 text-truncate">{{this.fullname}}</h5>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr class="my-4">
-        <div class="text-center border-bottom">
-            <div class="row">
-                <div class="col-sm col-4">
-                    <div class="mb-4">
-                        <button type="button" class="btn avatar-sm p-0">
-                            <span class="avatar-title rounded bg-light text-body">
-                                <i class="far fa-minus-circle"></i>
-                            </span>
+        {{/if}}
+        {{/each}}
+
+        <div class="p-4 user-profile-desc" style="overflow: overlay;">
+            <form>
+                <div class="accordion-body">
+                    <div>
+                        <p class="text-muted mb-1">Nick Name</p>
+                        <input type="text" name="name-message" class="form-control" value="{{message.name}}">
+                    </div>
+
+                    <br>
+                    <div class="float-end">
+                        <button class="btn btn-soft-primary btn-sm">
+                            Update NickName
                         </button>
-                        <h5 class="font-size-11 text-uppercase text-muted mt-2">Block</h5>
+                    </div>
+                </div>
+            </form>
+            <hr class="my-4">
+            <div>
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <h5 class="font-size-11 text-muted text-uppercase">Media</h5>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <a href="#" class="font-size-12 d-block mb-2">Show all</a>
+                    </div>
+                </div>
+                <div class="profile-media-img">
+                    <div class="media-img-list">
+                        <a href="#">
+                            <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="media-img-list">
+                        <a href="#">
+                            <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="media-img-list">
+                        <a href="#">
+                            <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="media-img-list">
+                        <a href="#">
+                            <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                            <div class="bg-overlay">+ 15</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center border-bottom">
+                <div class="row">
+                    <div class="col-sm col-4">
+                        <div class="mb-4">
+                            <button type="button" class="btn avatar-sm p-0">
+                                <span class="avatar-title rounded bg-light text-body">
+                                    <i class="far fa-minus-circle"></i>
+                                </span>
+                            </button>
+                            <h5 class="font-size-11 text-uppercase text-muted mt-2">Block</h5>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,63 +100,92 @@
     </div>
     {{!-- Group message --}}
     {{else}}
-    <div class="p-3 border-bottom">
-        <div class="user-profile-img">
-            {{#if (isSame message.avatar 'None')}}
-            <img src="/img/background_default.jpg" class="profile-img rounded" alt="">
-            {{else}}
-            <img src="{{message.avatar}}" class="profile-img rounded" alt="">
-            {{/if}}
-            <div class="overlay-content rounded">
-                <div class="user-chat-nav p-2">
-                    <div class="d-flex w-100">
-                        <div class="flex-grow-1">
-                            <button type="button"
-                                class="btn nav-btn text-white user-profile-show d-none d-lg-block btn-close-user-info">
-                                <i class="far fa-times"></i>
+    <div>
+        <div class="p-3 border-bottom">
+            <div class="user-profile-img">
+                {{#if (isSame message.avatar 'None')}}
+                <img src="/img/background_default.jpg" class="profile-img rounded" alt="">
+                {{else}}
+                <img src="{{message.avatar}}" class="profile-img rounded" alt="">
+                {{/if}}
+                <div class="overlay-content rounded">
+                    <div class="user-chat-nav p-2">
+                        <div class="d-flex w-100">
+                            <div class="flex-grow-1">
+                                <button type="button"
+                                    class="btn nav-btn text-white user-profile-show d-none d-lg-block btn-close-user-info">
+                                    <i class="far fa-times"></i>
+                                </button>
+                                <button type="button"
+                                    class="btn nav-btn text-white user-profile-show d-block d-lg-none icon-close-user-info">
+                                    <i class="far fa-arrow-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto p-3">
+                        <h5 class="user-name mb-1 text-truncate">{{message.name}}</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="p-4 user-profile-desc" style="overflow: scroll;">
+            <div class="text-center border-bottom">
+                <div class="row">
+                    <div class="col-sm col-4">
+                        <div class="mb-4">
+                            <button type="button" class="btn avatar-sm p-0" data-bs-toggle="modal"
+                                data-bs-target="#modal-chat-customize">
+                                <span class="avatar-title rounded bg-light text-body">
+                                    <i class="far fa-edit"></i>
+                                </span>
                             </button>
-                            <button type="button"
-                                class="btn nav-btn text-white user-profile-show d-block d-lg-none icon-close-user-info">
-                                <i class="far fa-arrow-left"></i>
+                            <h5 class="font-size-11 text-uppercase text-muted mt-2">Customize</h5>
+                        </div>
+                    </div>
+                    <div class="col-sm col-4">
+                        <div class="mb-4">
+                            <button type="button" class="btn avatar-sm p-0 favourite-btn" data-bs-toggle="modal"
+                                data-bs-target="#modal-chat-member">
+                                <span class="avatar-title rounded bg-light text-body">
+                                    <i class="fas fa-users-cog"></i>
+                                </span>
                             </button>
+                            <h5 class="font-size-11 text-uppercase text-muted mt-2">Members</h5>
+                        </div>
+                    </div>
+                    <div class="col-sm col-4">
+                        <div class="mb-4">
+                            <button type="button" class="btn avatar-sm p-0" data-bs-toggle="modal"
+                                data-bs-target=".audiocallModal">
+                                <span class="avatar-title rounded bg-light text-body">
+                                    <i class="fal fa-bell-slash"></i>
+                                </span>
+                            </button>
+                            <h5 class="font-size-11 text-uppercase text-muted mt-2">Notification</h5>
+                        </div>
+                    </div>
+                    <div class="col-sm col-4">
+                        <div class="mb-4">
+                            <button type="button" class="btn avatar-sm p-0" data-bs-toggle="modal"
+                                data-bs-target=".videocallModal">
+                                <span class="avatar-title rounded bg-light text-body">
+                                    <i class="fal fa-sign-out"></i>
+                                </span>
+                            </button>
+                            <h5 class="font-size-11 text-uppercase text-muted mt-2">Out group</h5>
                         </div>
                     </div>
                 </div>
-                <div class="mt-auto p-3">
-                    <h5 class="user-name mb-1 text-truncate">{{message.name}}</h5>
-                </div>
-
             </div>
-        </div>
-    </div>
-    <div class="p-4 user-profile-desc" style="overflow: overlay;">
-        <form>
-            <div class="accordion-body">
-                <div>
-                    <p class="text-muted mb-1">Name Group</p>
-                    <input type="text" class="form-control" value="{{message.name}}">
-                </div>
-
-                <div class="mt-4">
-                    <p class="text-muted mb-1">Description</p>
-                    <textarea class="form-control" cols="10" rows="2">{{message.desc}}</textarea>
-                </div>
-
-                <div class="mt-4">
-                    <p class="text-muted mb-1">Change avatar group</p>
-                    <input type="file" class="form-control">
-                </div>
-                <br>
-                <div class="float-end">
-                    <button class="btn btn-soft-primary btn-sm">
-                        UPDATE
-                    </button>
-                </div>
+            <div class="text-muted pt-4">
+                <h5 class="font-size-11 text-uppercase">Description :</h5>
+                <p class="mb-4">{{message.desc}}</p>
             </div>
 
-        </form>
-        <hr class="my-4">
-        <div>
+            <hr class="my-4">
+
             <div class="d-flex">
                 <div class="flex-grow-1">
                     <h5 class="font-size-11 text-muted text-uppercase">Media</h5>
@@ -175,22 +206,123 @@
                     </a>
                 </div>
             </div>
-        </div>
-        <hr class="my-4">
-        <div class="text-center border-bottom">
-            <div class="row">
-                <div class="col-sm col-4">
-                    <div class="mb-4">
-                        <button type="button" class="btn avatar-sm p-0">
-                            <span class="avatar-title rounded bg-light text-body">
-                                <i class="fal fa-sign-out"></i>
-                            </span>
-                        </button>
-                        <h5 class="font-size-11 text-uppercase text-muted mt-2">Out group</h5>
+
+            <hr class="my-4">
+
+            <div>
+                <h5 class="font-size-11 text-muted text-uppercase mb-3">Attached Files</h5>
+            </div>
+            <div class="card p-2 border mb-2">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 avatar-xs ms-1 me-3">
+                        <div class="avatar-title bg-soft-primary text-primary rounded-circle">
+                            <i class="far fa-file-alt"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h5 class="font-size-14 text-truncate mb-1">design-phase-1-approved.pdf</h5>
+                        <p class="text-muted font-size-13 mb-0">12.5 MB</p>
+                    </div>
+
+                    <div class="flex-shrink-0 ms-3">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <a href="#" class="text-muted px-1">
+                                    <i class="far fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-2 border mb-2">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 avatar-xs ms-1 me-3">
+                        <div class="avatar-title bg-soft-primary text-primary rounded-circle">
+                            <i class="far fa-file-alt"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h5 class="font-size-14 text-truncate mb-1">Image-1.jpg</h5>
+                        <p class="text-muted font-size-13 mb-0">4.2 MB</p>
+                    </div>
+                    <div class="flex-shrink-0 ms-3">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <a href="#" class="text-muted px-1">
+                                    <i class="far fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{!-- <div class="p-4 user-profile-desc" style="overflow: overlay;">
+            <form>
+                <div class="accordion-body">
+                    <div>
+                        <p class="text-muted mb-1">Name Group</p>
+                        <input type="text" class="form-control" value="{{message.name}}">
+                    </div>
+
+                    <div class="mt-4">
+                        <p class="text-muted mb-1">Description</p>
+                        <textarea class="form-control" cols="10" rows="2">{{message.desc}}</textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <p class="text-muted mb-1">Change avatar group</p>
+                        <input type="file" class="form-control">
+                    </div>
+                    <br>
+                    <div class="float-end">
+                        <button class="btn btn-soft-primary btn-sm">
+                            UPDATE
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+            <hr class="my-4">
+            <div>
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <h5 class="font-size-11 text-muted text-uppercase">Media</h5>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <a href="#" class="font-size-12 d-block mb-2">Show all</a>
+                    </div>
+                </div>
+                <div class="profile-media-img">
+                    <div class="media-img-list">
+                        <a href="#">
+                            <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="media-img-list">
+                        <a href="#">
+                            <img src="/img/background_default.jpg" alt="media img" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center border-bottom">
+                <div class="row">
+                    <div class="col-sm col-4">
+                        <div class="mb-4">
+                            <button type="button" class="btn avatar-sm p-0">
+                                <span class="avatar-title rounded bg-light text-body">
+                                    <i class="fal fa-sign-out"></i>
+                                </span>
+                            </button>
+                            <h5 class="font-size-11 text-uppercase text-muted mt-2">Out group</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
     </div>
     {{/if}}
 
