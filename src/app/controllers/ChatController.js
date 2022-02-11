@@ -12,9 +12,10 @@ class ChatController {
                     user_id: data.senderId,
                     content: data.message,
                     type: 'text',
+                    user_read: [data.senderId]
                 });
             await Message
-                .updateOne({_id: data.messId}, {
+                .updateOne({ _id: data.messId }, {
                     updatedAt: Date.now()
                 })
             const chats = await Chat
@@ -36,7 +37,7 @@ class ChatController {
                         },
                         $inc: {
                             totalLike: -1
-                        } 
+                        }
                     })
             } else {
                 await Chat
@@ -46,7 +47,7 @@ class ChatController {
                         },
                         $inc: {
                             totalLike: 1
-                        } 
+                        }
                     })
             }
             const newChat = await Chat
@@ -54,6 +55,18 @@ class ChatController {
             return newChat.totalLike;
         } catch (error) {
             console.log(error);
+        }
+    }
+    async addUserReadChat(req, res, next) {
+        try {
+            await Chat
+                .updateOne({ _id: req.body.chatId }, {
+                    $addToSet: {
+                        user_read: req.body.userId
+                    },
+                })
+        } catch (error) {
+            next(error)
         }
     }
 }

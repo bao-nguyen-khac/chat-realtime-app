@@ -130,7 +130,11 @@ socket.on('getMessageSingle', (data) => {
                 addEventReactChat();
             },
         })
-    } else {
+        $.post("/message/read-chat", {
+            chatId: chatId,
+            userId: data.receiverId
+        })
+    } else if (user_id == data.senderId) {
         var elementLeftChat = document.querySelector(`#contact-id-${data.receiverId}`);
         eleParentLeftChat.prepend(elementLeftChat);
         messageHtml = `
@@ -157,16 +161,22 @@ socket.on('getMessageSingle', (data) => {
         userConvensation.innerHTML += messageHtml;
         autoscroll();
         addEventReactChat();
+    } else {
+        var elementLeftChat = document.querySelector(`#contact-id-${data.senderId}`);
+        elementLeftChat.querySelector('a').classList.add("unread-msg-user");
+        var numUnRead = elementLeftChat.querySelector('.badge').innerHTML;
+        numUnRead = numUnRead ? parseInt(numUnRead) + 1 : 1;
+        elementLeftChat.querySelector('.badge').innerHTML = numUnRead;
+        eleParentLeftChat.prepend(elementLeftChat);
     }
-
 })
 
 socket.on('getMessageGroup', (data) => {
     var eleParentLeftChat = $('#favourite-users');
     var messageHtml = '';
     var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);
-    eleParentLeftChat.prepend(elementLeftChat);
     if (user_id != data.senderId && messageId == data.messId) {
+        eleParentLeftChat.prepend(elementLeftChat);
         $.ajax({
             url: `/user/get-infor?id=${data.senderId}`,
             method: "GET",
@@ -202,6 +212,7 @@ socket.on('getMessageGroup', (data) => {
             },
         })
     } else if (user_id == data.senderId && messageId == data.messId) {
+        eleParentLeftChat.prepend(elementLeftChat);
         messageHtml = `
         <li class="chat-list right">
             <div class="conversation-list">
@@ -226,6 +237,12 @@ socket.on('getMessageGroup', (data) => {
         userConvensation.innerHTML += messageHtml;
         autoscroll();
         addEventReactChat();
+    } else {
+        elementLeftChat.querySelector('a').classList.add("unread-msg-user");
+        var numUnRead = elementLeftChat.querySelector('.badge').innerHTML;
+        numUnRead = numUnRead ? parseInt(numUnRead) + 1 : 1;
+        elementLeftChat.querySelector('.badge').innerHTML = numUnRead;
+        eleParentLeftChat.prepend(elementLeftChat);
     }
 
 })
@@ -256,10 +273,10 @@ addEventReactChat();
 socket.on('getReactionChatSingle', (data) => {
     var chatElement = document.querySelector(`div[data-chat-id="${data.chat_id}"]`)
     var totalReactions = chatElement.parentNode.querySelector('.total-reactions')
-    if(data.totalReactions == 0){
+    if (data.totalReactions == 0) {
         chatElement.style.backgroundImage = "url('/img/like-default.png')";
         totalReactions.innerHTML = ''
-    }else{
+    } else {
         chatElement.style.backgroundImage = "url('like.png')";
         totalReactions.innerHTML = data.totalReactions
     }
@@ -268,10 +285,10 @@ socket.on('getReactionChatSingle', (data) => {
 socket.on('getReactionChatGroup', (data) => {
     var chatElement = document.querySelector(`div[data-chat-id="${data.chat_id}"]`)
     var totalReactions = chatElement.parentNode.querySelector('.total-reactions')
-    if(data.totalReactions == 0){
+    if (data.totalReactions == 0) {
         chatElement.style.backgroundImage = "url('/img/like-default.png')";
         totalReactions.innerHTML = ''
-    }else{
+    } else {
         chatElement.style.backgroundImage = "url('/img/like.png')";
         totalReactions.innerHTML = data.totalReactions
     }

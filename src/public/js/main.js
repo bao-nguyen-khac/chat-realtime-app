@@ -6,7 +6,7 @@ var btnCloseResponsive = document.querySelector('.btn-close-responsive');
 var listElementChat = document.querySelectorAll('.chat-element-user');
 var listElementMess = document.querySelectorAll('.user-chat-content');
 
-btnInfo.addEventListener('click', () => {
+btnInfo?.addEventListener('click', () => {
     if(userInfo.classList.contains('d-block')){
         userInfo.classList.remove('d-block')
     }else{

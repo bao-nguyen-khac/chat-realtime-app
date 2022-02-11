@@ -56,13 +56,13 @@ io.on("connection", (socket) => {
         const userOnline = getStatusUsers(data.allContact);
         io.to(senderUser?.socketId).emit("sendUserOnline", userOnline);
         data.allContact.forEach(element => {
-            if(element.type == 'single'){
+            if (element.type == 'single') {
                 const friendUser = getUser(element.userId);
                 io.to(friendUser?.socketId).emit("sendMeOnline", {
                     type: element.type,
                     userId: data.userId
                 });
-            }else{
+            } else {
                 socket.join(element.messageId);
                 io.to(element.messageId).emit("sendMeOnline", {
                     type: element.type,
