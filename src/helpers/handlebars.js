@@ -16,6 +16,18 @@ module.exports = {
         }
         return '';
     },
+    areMessageRead: (a, b) => {
+        if (a !== b) {
+            return 'unread-msg-user';
+        }
+        return '';
+    },
+    numMessageRead: (a, b) => {
+        if (a == b) {
+            return '';
+        }
+        return a
+    },
     convertTime: (time) => {
         var hour = moment(time).format("HH:mm");
         var date = moment(time).format("DD/MM");

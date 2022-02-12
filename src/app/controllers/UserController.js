@@ -13,7 +13,7 @@ class UserController {
             const messages = await MessageController.getAllMessage(req, res, next);
             res.render('user/home', {
                 layout: 'user/main',
-                infoMessage: mutipleMongooseToObject(messages),
+                infoMessage: messages,
             })
         } catch (err) {
             next(err);

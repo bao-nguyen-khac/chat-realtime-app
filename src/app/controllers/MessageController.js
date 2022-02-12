@@ -6,10 +6,16 @@ const { MongooseToObject } = require('../../util/mongoose');
 class MessageController {
     async getAllMessage(req, res, next) {
         try {
-            const messages = await Message
+            var messages = await Message
                 .find({ 'member': req.user_id })
                 .populate('member')
                 .sort({ 'updatedAt': -1 });
+            messages = mutipleMongooseToObject(messages)
+            for (var mess of messages) {
+                mess.numUnRead = await Chat
+                    .find({ messageId: mess._id, user_read: { $nin: req.user_id } })
+                    .count()
+            }
             return messages;
         } catch (error) {
             next(error)
@@ -62,24 +68,36 @@ class MessageController {
     async getMessage(req, res, next) {
         try {
             const mess_id = req.query.id;
-            const infoMessage = await Message
-                .find({ 'member': req.user_id })
-                .populate('member')
-                .sort({ 'updatedAt': -1 });
             const message = await Message
                 .findOne({ _id: mess_id, 'member': req.user_id })
                 .populate('member');
             let chats;
             if (message) {
+                await Chat
+                    .updateMany({ messageId: mess_id }, {
+                        $addToSet: {
+                            user_read: req.user_id
+                        },
+                    })
                 chats = await Chat
                     .find({ messageId: mess_id })
                     .populate('user_id');
+            }
+            var infoMessage = await Message
+                .find({ 'member': req.user_id })
+                .populate('member')
+                .sort({ 'updatedAt': -1 });
+            infoMessage = mutipleMongooseToObject(infoMessage)
+            for (var mess of infoMessage) {
+                mess.numUnRead = await Chat
+                    .find({ messageId: mess._id, user_read: { $nin: req.user_id } })
+                    .count()
             }
             res.render('user/home', {
                 layout: 'user/message',
                 message: MongooseToObject(message),
                 chats: mutipleMongooseToObject(chats),
-                infoMessage: mutipleMongooseToObject(infoMessage)
+                infoMessage: infoMessage
             })
         } catch (error) {
             next(error);

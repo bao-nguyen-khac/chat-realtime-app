@@ -211,6 +211,10 @@ socket.on('getMessageGroup', (data) => {
                 addEventReactChat();
             },
         })
+        $.post("/message/read-chat", {
+            chatId: chatId,
+            userId: user_id
+        })
     } else if (user_id == data.senderId && messageId == data.messId) {
         eleParentLeftChat.prepend(elementLeftChat);
         messageHtml = `
@@ -277,7 +281,7 @@ socket.on('getReactionChatSingle', (data) => {
         chatElement.style.backgroundImage = "url('/img/like-default.png')";
         totalReactions.innerHTML = ''
     } else {
-        chatElement.style.backgroundImage = "url('like.png')";
+        chatElement.style.backgroundImage = "url('/img/like.png')";
         totalReactions.innerHTML = data.totalReactions
     }
 })
