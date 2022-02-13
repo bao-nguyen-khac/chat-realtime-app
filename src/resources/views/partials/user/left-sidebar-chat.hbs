@@ -143,7 +143,7 @@
                             {{else}}
                             <li id="group-id-{{this._id}}"
                                 class="chat-element-user {{areMessageActive this._id ../message._id}}">
-                                <a href="/message?id={{this._id}}" style="cursor: pointer;">
+                                <a href="/message?id={{this._id}}" class="{{areMessageRead this.numUnRead 0}}">
                                     <div class="d-flex align-items-center">
                                         <div class="chat-user-img online align-self-center me-2 ms-0">
                                             {{#if (isSame this.avatar 'None')}}
@@ -165,7 +165,7 @@
                                         <div class="overflow-hidden">
                                             <p class="text-truncate mb-0">{{this.name}}</p>
                                         </div>
-                                        <div class="ms-auto"><span class="badge badge-soft-dark rounded p-1"></span>
+                                        <div class="ms-auto"><span class="badge badge-soft-dark rounded p-1">{{numMessageRead this.numUnRead 0}}</span>
                                         </div>
                                     </div>
                                 </a>

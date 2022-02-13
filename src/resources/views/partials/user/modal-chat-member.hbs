@@ -4,54 +4,37 @@
         <div class="modal-content modal-header-colored shadow-lg border-0">
             <div class="modal-header">
                 <h5 class="modal-title text-white font-size-16" id="addgroup-exampleModalLabel">
-                    Broup Member</h5>
+                    Group Member</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body p-4">
-                <form id="form-1" method="post">
-                    <div class="mb-3">
-                        <label class="form-label" style="display: block;">Add new
-                            member</label>
-                        <input type="text" class="form-control" 
-                            placeholder="Enter phone number" name="phone"
-                            style="width: 50%; display: inline-block; margin-right: 10px">
-                        <button type="button" class="btn btn-primary modal-contact-btn-search">Add</button>
-                        <span class="form-message" style="display: block; color: #f33a58;"></span>
+                <div class="card border">
+                    <div class="card-header">
+                        <h5 class="font-size-15 mb-0">Members</h5>
                     </div>
-                    <div class="card border">
-                        <div class="card-header">
-                            <h5 class="font-size-15 mb-0">Contacts</h5>
-                        </div>
-                        <div class="card-body p-2">
-                            <div style="max-height: 300px; overflow: scroll;" class="contacts-modal-group">
-                                <ul class="list-unstyled contact-list">
-                                    <li>
-                                        <div class="each-member-group">
-                                            <img src="/img/avatar-default.png" alt="" class="rounded-circle avatar-sm">
-                                            <div class="name-meber-group">
-                                                <span style="font-size: 16px;">Brian break</span> 
-                                                <span style="font-size: 13px;">0123456789</span>
-                                            </div>
+                    <div class="card-body p-2">
+                        <div style="max-height: 300px; overflow: scroll;" class="contacts-modal-group">
+                            <ul class="list-unstyled contact-list">
+                                {{#each message.member}}
+                                <li>
+                                    <div class="each-member-group">
+                                        <img src="{{this.avatar}}" alt="" class="rounded-circle avatar-sm">
+                                        <div class="name-meber-group">
+                                            <span style="font-size: 16px;">{{this.fullname}}</span>
+                                            <span style="font-size: 13px;">{{this.phone}}</span>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="each-member-group">
-                                            <img src="/img/avatar-default.png" alt="" class="rounded-circle avatar-sm">
-                                            <div class="name-meber-group">
-                                                <span style="font-size: 16px;">Brian break</span> 
-                                                <span style="font-size: 13px;">0123456789</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ul>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+
             </div>
         </div>
     </div>

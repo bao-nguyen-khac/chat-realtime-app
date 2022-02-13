@@ -96,6 +96,11 @@ display: block;
 .name-meber-group span{
   display: block;
 }
+
+.chat-list li .unread-msg-user{
+  color: #2e89ff !important;
+  font-weight: 600;
+}
 @keyframes modalIN{
   from{
       opacity: 0;

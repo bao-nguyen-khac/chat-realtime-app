@@ -131,7 +131,7 @@ socket.on('getMessageSingle', (data) => {
             },
         })
         $.post("/message/read-chat", {
-            chatId: chatId,
+            chatId: data.chatId,
             userId: data.receiverId
         })
     } else if (user_id == data.senderId) {
@@ -212,7 +212,7 @@ socket.on('getMessageGroup', (data) => {
             },
         })
         $.post("/message/read-chat", {
-            chatId: chatId,
+            chatId: data.chatId,
             userId: user_id
         })
     } else if (user_id == data.senderId && messageId == data.messId) {

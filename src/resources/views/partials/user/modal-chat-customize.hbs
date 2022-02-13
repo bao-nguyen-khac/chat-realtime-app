@@ -9,29 +9,31 @@
                 </button>
             </div>
             <div class="modal-body p-4">
-                <form>
+                <form action="message/group-update-info?messId={{message._id}}" method="post"
+                    enctype="multipart/form-data">
                     <div class="accordion-body">
                         <div>
                             <p class="text-muted mb-1">Name Group</p>
-                            <input type="text" class="form-control" value="{{message.name}}">
+                            <input type="text" name="groupName" class="form-control" value="{{message.name}}">
                         </div>
 
                         <div class="mt-4">
                             <p class="text-muted mb-1">Description</p>
-                            <textarea class="form-control" cols="10" rows="3">{{message.desc}}</textarea>
+                            <textarea class="form-control" name="groupDesc" cols="10"
+                                rows="3">{{message.desc}}</textarea>
                         </div>
 
                         <div class="mt-4">
                             <p class="text-muted mb-1">Change avatar group</p>
-                            <input type="file" class="form-control">
+                            <input type="file" name="groupAva" class="form-control">
                         </div>
                         <br>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Update</button>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Update</button>
-                </div>
             </div>
         </div>
     </div>

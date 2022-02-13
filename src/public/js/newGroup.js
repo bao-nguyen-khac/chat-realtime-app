@@ -13,23 +13,16 @@ btnNewGroup.addEventListener('click', () => {
                             <div class="contact-list-title">
                                 ${e.fullname[0]}
                             </div>
-                            <li>
-                                <div class="form-check">
-                                    <input type="checkbox" name="list_ids_group" value="${e.id}" class="form-check-input">
-                                    <label class="form-check-label">${e.fullname}</label>
-                                </div>
-                            </li>
-                        `;
-                } else {
-                    output += `
-                            <li>
-                                <div class="form-check">
-                                    <input type="checkbox" name="list_ids_group" value="${e.id}" class="form-check-input">
-                                    <label class="form-check-label">${e.fullname}</label>
-                                </div>
-                            </li>
                         `;
                 }
+                output += `
+                        <li>
+                            <div class="form-check">
+                                <input id="memberCheck${e.id}" type="checkbox" name="list_ids_group" value="${e.id}" class="form-check-input">
+                                <label for="memberCheck${e.id}" class="form-check-label">${e.fullname}</label>
+                            </div>
+                        </li>
+                    `;
             })
             output += '</ul>';
             document.querySelector('.contacts-modal-group').innerHTML = output;
