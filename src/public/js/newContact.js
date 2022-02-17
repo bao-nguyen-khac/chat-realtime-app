@@ -55,7 +55,10 @@ formContact.onsubmit = (e) => {
         } else {
             var receiverIdNewContact = document.querySelector('.passReceiverIdNewContact')?.value;
             var message = document.querySelector('#addcontact-invitemessage-input').value;
-            var dateTime = newDate();
+            var today = new Date();
+            var hour = moment(today).format("HH:mm");
+            var date = moment(today).format("DD/MM");
+            var dateTime = hour + ' | ' + date;
             var phone = document.querySelector('#addcontactphone-input').value;
             $.ajax({
                 url: "/user/new-contact",
@@ -66,8 +69,8 @@ formContact.onsubmit = (e) => {
                 },
                 success: function (data) {
                     if (data) {
-                        for(member of data.member){
-                            if(member._id == user_id){
+                        for (member of data.member) {
+                            if (member._id == user_id) {
                                 socket.emit('sendNewContact', {
                                     senderId: user_id,
                                     fullname: member.fullname,
@@ -77,6 +80,7 @@ formContact.onsubmit = (e) => {
                                     messId: data._id,
                                     time: dateTime,
                                 })
+                                location.reload();
                             }
                         }
                     }
@@ -86,7 +90,6 @@ formContact.onsubmit = (e) => {
     }
 }
 socket.on('getNewContact', (data) => {
-    console.log(data)
     var eleParentLeftChat = $('#favourite-users');
     var elementLeftChat = `
     <li id="contact-id-${data.senderId}"

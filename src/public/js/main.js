@@ -31,10 +31,3 @@ listElementChat.forEach(element => {
     })
 });
 
-const newDate = () => {
-    var today = new Date();
-    var hour = moment(today).format("HH:mm");
-    var date = moment(today).format("DD/MM");
-    var dateTime = hour + ' | ' + date;
-    return dateTime;
-}
