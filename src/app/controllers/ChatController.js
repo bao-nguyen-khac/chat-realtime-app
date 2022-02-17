@@ -11,7 +11,7 @@ class ChatController {
                     messageId: data.messId,
                     user_id: data.senderId,
                     content: data.message,
-                    type: 'text',
+                    type: data.type,
                     user_read: [data.senderId]
                 });
             await Message

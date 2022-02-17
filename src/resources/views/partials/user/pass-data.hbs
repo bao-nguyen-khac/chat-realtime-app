@@ -1,6 +1,7 @@
 <input type="hidden" class="passUserID" value="{{userInfo.id}}">
 <input type="hidden" class="passMessID" value="{{message._id}}">
 <input type="hidden" class="passMessType" value="{{message.type}}">
+<input type="hidden" class="passNameUser" value="{{userInfo.fullname}}">
 {{#if (isSame message.type 'single')}}
 
 {{#each message.member}}

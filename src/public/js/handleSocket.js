@@ -3,6 +3,7 @@ const user_id = document.querySelector('.passUserID').value;
 const receiverId = document.querySelector('.passReceiverID')?.value;
 const messageId = document.querySelector('.passMessID').value;
 const messageType = document.querySelector('.passMessType').value;
+const fullname = document.querySelector('.passNameUser').value;
 const chatForm = document.querySelector('#chatinput-form');
 const messageInput = document.querySelector('#chat-input');
 const userConvensation = document.querySelector('#users-conversation');
@@ -248,7 +249,6 @@ socket.on('getMessageGroup', (data) => {
         elementLeftChat.querySelector('.badge').innerHTML = numUnRead;
         eleParentLeftChat.prepend(elementLeftChat);
     }
-
 })
 
 const addEventReactChat = () => {
@@ -295,6 +295,39 @@ socket.on('getReactionChatGroup', (data) => {
     } else {
         chatElement.style.backgroundImage = "url('/img/like.png')";
         totalReactions.innerHTML = data.totalReactions
+    }
+})
+
+var formChatCustomize = document.querySelector('.form-chat-customize');
+formChatCustomize.onsubmit = (e) => {
+    socket.emit('sendNotifyChat', {
+        senderId: user_id,
+        senderName: fullname,
+        messId: messageId,
+        message: 'has updated the group\'s information'
+    })
+}
+socket.on('getNotifyChat', data => {
+    var eleParentLeftChat = $('#favourite-users');
+    var messageHtml = '';
+    var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);
+    if (user_id != data.senderId && messageId == data.messId) {
+        eleParentLeftChat.prepend(elementLeftChat);
+        messageHtml = `
+        <li class="chat-list notify-chat">
+            <span>${data.senderName} ${data.message}</span>
+        </li>`;
+        userConvensation.innerHTML += messageHtml;
+        $.post("/message/read-chat", {
+            chatId: data.chatId,
+            userId: user_id
+        })
+    } else {
+        elementLeftChat.querySelector('a').classList.add("unread-msg-user");
+        var numUnRead = elementLeftChat.querySelector('.badge').innerHTML;
+        numUnRead = numUnRead ? parseInt(numUnRead) + 1 : 1;
+        elementLeftChat.querySelector('.badge').innerHTML = numUnRead;
+        eleParentLeftChat.prepend(elementLeftChat);
     }
 })
 
