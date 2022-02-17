@@ -37,9 +37,12 @@ class MessageController {
                         messageId: message._id,
                         user_id: req.user_id,
                         content: req.body.message,
-                        type: 'text'
+                        type: 'text',
+                        user_read: [req.user_id]
                     })
-                res.redirect('/')
+                const newMess = await Message
+                    .find({}).populate('member').sort({ 'updatedAt': -1 }).limit(1)
+                res.send(newMess[0])
             }
         } catch (error) {
             next(error);

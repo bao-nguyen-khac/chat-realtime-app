@@ -42,8 +42,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js"></script>
-    {{!--
-    <script src="/js/subHandleSocket.js"></script> --}}
     <script>
         const socket = io();
         const user_id = document.querySelector('.passUserID').value;
@@ -105,6 +103,7 @@
             elementLeftChat.querySelector(".user-status").style.backgroundColor = "#495057";
         })
     </script>
+    <script src="/js/newContact.js"></script>
 </body>
 
 </html>

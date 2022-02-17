@@ -73,6 +73,19 @@ io.on("connection", (socket) => {
         });
     });
 
+    socket.on('sendNewContact', async (data) => {
+        const receiverUser = getUser(data.receiverId);
+        io.to(receiverUser?.socketId).emit("getNewContact", {
+            senderId: data.senderId,
+            fullname: data.fullname,
+            avatar: data.avatar,
+            receiverId: data.receiverId,
+            message: data.message,
+            messId: data.messId,
+            time: data.time
+        });
+    })
+
     socket.on('sendMessageSingle', async (data) => {
         const chatId = await ChatController.storeChatAndGetId(data);
         const receiverUser = getUser(data.receiverId);
