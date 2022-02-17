@@ -3,7 +3,7 @@ var checkPhone = false;
 var checkSearch = false;
 var btnSearch = document.querySelector('.modal-contact-btn-search');
 var modalUser = document.querySelector('.modal-contact-avatar');
-var formContact = document.querySelector('#form-1');
+var formContact = document.querySelector('.form-new-contact');
 btnSearch.addEventListener('click', () => {
     var searchValue = document.querySelector('#addcontactphone-input').value;
     $.ajax({

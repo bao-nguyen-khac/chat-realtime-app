@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body p-4">
-                <form action="/message/new-group" method="post">
+                <form class="form-new-group">
                     <div class="mb-4">
                         <label for="addgroupname-input" class="form-label">Group Name</label>
                         <input type="text" class="form-control" id="addgroupname-input" name="group_name" placeholder="Enter Group Name">
@@ -42,6 +42,7 @@
                         <textarea class="form-control" id="addgroupdescription-input" rows="3" name="group_desc"
                             placeholder="Enter Description"></textarea>
                     </div>
+                    <span class="notify-member-invalid"></span>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
                         <button class="btn btn-primary" type="submit">Create Groups</button>

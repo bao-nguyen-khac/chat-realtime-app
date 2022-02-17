@@ -86,6 +86,20 @@ io.on("connection", (socket) => {
         });
     })
 
+    socket.on('sendNewGroup', async (data) => {
+        data.memberIdAndAva.forEach(e => {
+            if (e.id != data.senderId) {
+                var receiverUser = getUser(e.id);
+                io.to(receiverUser?.socketId).emit("getNewGroup", {
+                    senderId: data.senderId,
+                    nameGroup: data.nameGroup,
+                    messId: data.messId,
+                    memberIdAndAva: data.memberIdAndAva
+                });
+            }
+        })
+    })
+
     socket.on('sendMessageSingle', async (data) => {
         data.type = 'text'
         const chatId = await ChatController.storeChatAndGetId(data);

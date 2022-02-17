@@ -101,6 +101,12 @@ display: block;
   color: #2e89ff !important;
   font-weight: 600;
 }
+.notify-member-invalid {
+  text-align: center;
+  display: block;
+  color: #f33a58;
+  margin-bottom: 4px;
+}
 @keyframes modalIN{
   from{
       opacity: 0;
