@@ -157,6 +157,24 @@ class MessageController {
             next(error)
         }
     }
+    async addMemberGroup(req, res, next) {
+        try {
+            if (typeof(req.body.list_member_add) == 'string'){
+                req.body.list_member_add = [req.body.list_member_add]
+            }
+            await Message
+                .updateOne({ _id: req.query.messId }, {
+                    $addToSet: {
+                        member: {
+                            $each: req.body.list_member_add
+                        }
+                    }
+                })
+            res.redirect('back');
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 module.exports = new MessageController();

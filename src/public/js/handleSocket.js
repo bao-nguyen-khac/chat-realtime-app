@@ -300,14 +300,15 @@ socket.on('getReactionChatGroup', (data) => {
 
 var formChatCustomize = document.querySelector('.form-chat-customize');
 formChatCustomize.onsubmit = (e) => {
-    socket.emit('sendNotifyChat', {
+    socket.emit('sendNotifyChatCustom', {
         senderId: user_id,
         senderName: fullname,
         messId: messageId,
-        message: 'has updated the group\'s information'
+        message: 'updated the group\'s information'
     })
 }
-socket.on('getNotifyChat', data => {
+
+socket.on('getNotifyChatCustom', data => {
     var eleParentLeftChat = $('#favourite-users');
     var messageHtml = '';
     var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);
@@ -316,6 +317,52 @@ socket.on('getNotifyChat', data => {
         messageHtml = `
         <li class="chat-list notify-chat">
             <span>${data.senderName} ${data.message}</span>
+        </li>`;
+        userConvensation.innerHTML += messageHtml;
+        $.post("/message/read-chat", {
+            chatId: data.chatId,
+            userId: user_id
+        })
+    } else {
+        elementLeftChat.querySelector('a').classList.add("unread-msg-user");
+        var numUnRead = elementLeftChat.querySelector('.badge').innerHTML;
+        numUnRead = numUnRead ? parseInt(numUnRead) + 1 : 1;
+        elementLeftChat.querySelector('.badge').innerHTML = numUnRead;
+        eleParentLeftChat.prepend(elementLeftChat);
+    }
+})
+
+var formChatAddMem = document.querySelector('.form-chat-add-member');
+formChatAddMem.onsubmit = (e) => {
+    var nodeListAddMember = document.querySelectorAll('input[name="list_member_add"]:checked');
+    var numberAddMem = nodeListAddMember.length;
+    if (numberAddMem < 1) {
+        e.preventDefault()
+        document.querySelector('.notify-add-mem-isvalid').innerHTML = 'Must choose at least one member'
+    } else {
+        nodeListAddMember.forEach(e => {
+            var memberName = e.parentNode.querySelector('label').innerHTML
+            socket.emit('sendNotifyChatAddMem', {
+                senderId: user_id,
+                senderName: fullname,
+                memberId: e.value,
+                memberName: memberName,
+                message: `${memberName}`,
+                messId: messageId
+            })
+        })
+    }
+}
+
+socket.on('getNotifyChatAddMem', data => {
+    var eleParentLeftChat = $('#favourite-users');
+    var messageHtml = '';
+    var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);
+    if (user_id != data.senderId && messageId == data.messId) {
+        eleParentLeftChat.prepend(elementLeftChat);
+        messageHtml = `
+        <li class="chat-list notify-chat">
+            <span>${data.senderName} has added ${data.memberName} to group</span>
         </li>`;
         userConvensation.innerHTML += messageHtml;
         $.post("/message/read-chat", {

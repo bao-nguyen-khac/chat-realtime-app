@@ -148,15 +148,29 @@ io.on("connection", (socket) => {
         });
     })
 
-    socket.on('sendNotifyChat', async (data) => {
+    socket.on('sendNotifyChatCustom', async (data) => {
         data.type = 'notify'
         const chatId = await ChatController.storeChatAndGetId(data);
-        io.to(data.messId).emit("getNotifyChat", {
+        io.to(data.messId).emit("getNotifyChatCustom", {
             senderId: data.senderId,
             senderName: data.senderName,
             messId: data.messId,
             chatId: chatId,
             message: data.message
+        });
+    })
+
+    socket.on('sendNotifyChatAddMem', async (data) => {
+        data.type = 'addmember'
+        const chatId = await ChatController.storeChatAndGetId(data);
+        io.to(data.messId).emit("getNotifyChatAddMem", {
+            senderId: data.senderId,
+            senderName: data.senderName,
+            memberId: data.memberId,
+            memberName: data.memberName,
+            message: data.message,
+            chatId: chatId,
+            messId: data.messId,
         });
     })
 

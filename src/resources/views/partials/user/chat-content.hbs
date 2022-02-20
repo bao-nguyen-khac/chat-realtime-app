@@ -154,9 +154,15 @@
                         </div>
                     </div>
                 </li>
-                {{else}}
+                {{/if}}
+                {{#if (isSame this.type 'notify')}}
                 <li class="chat-list notify-chat">
                     <span>You {{this.content}}</span>
+                </li>
+                {{/if}}
+                {{#if (isSame this.type 'addmember')}}
+                <li class="chat-list notify-chat">
+                    <span>You added {{this.content}} to group</span>
                 </li>
                 {{/if}}
                 {{else}}
@@ -195,9 +201,15 @@
                         </div>
                     </div>
                 </li>
-                {{else}}
+                {{/if}}
+                {{#if (isSame this.type 'notify')}}
                 <li class="chat-list notify-chat">
                     <span>{{this.user_id.fullname}} {{this.content}}</span>
+                </li>
+                {{/if}}
+                {{#if (isSame this.type 'addmember')}}
+                <li class="chat-list notify-chat">
+                    <span>{{this.user_id.fullname}} has added {{this.content}} to group</span>
                 </li>
                 {{/if}}
                 {{/if}}
