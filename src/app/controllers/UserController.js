@@ -15,8 +15,8 @@ class UserController {
                 layout: 'user/main',
                 infoMessage: messages,
             })
-        } catch (err) {
-            next(err);
+        } catch (error) {
+            next(error);
         }
     }
     login(req, res, next) {
@@ -123,9 +123,13 @@ class UserController {
         }
     }
     async personalInfo(req, res, next) {
-        const user_id = req.query.id;
-        const user = await Account.findOne({ _id: user_id })
-        res.send(user);
+        try {
+            const user_id = req.query.id;
+            const user = await Account.findOne({ _id: user_id })
+            res.send(user);
+        } catch (error) {
+            next(error)
+        }
     }
 }
 

@@ -148,10 +148,10 @@ io.on("connection", (socket) => {
         });
     })
 
-    socket.on('sendNotifyChatCustom', async (data) => {
+    socket.on('sendNotifyChatCustomAndOut', async (data) => {
         data.type = 'notify'
         const chatId = await ChatController.storeChatAndGetId(data);
-        io.to(data.messId).emit("getNotifyChatCustom", {
+        io.to(data.messId).emit("getNotifyChatCustomAndOut", {
             senderId: data.senderId,
             senderName: data.senderName,
             messId: data.messId,

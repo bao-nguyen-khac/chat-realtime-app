@@ -53,6 +53,26 @@ socket.on('getMessageGroup', (data) => {
     eleParentLeftChat.prepend(elementLeftChat);
 })
 
+socket.on('getNotifyChatCustomAndOut', data => {
+    var eleParentLeftChat = $('#favourite-users');
+    var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);
+    elementLeftChat.querySelector('a').classList.add("unread-msg-user");
+    var numUnRead = elementLeftChat.querySelector('.badge').innerHTML;
+    numUnRead = numUnRead ? parseInt(numUnRead) + 1 : 1;
+    elementLeftChat.querySelector('.badge').innerHTML = numUnRead;
+    eleParentLeftChat.prepend(elementLeftChat);
+})
+
+socket.on('getNotifyChatAddMem', data => {
+    var eleParentLeftChat = $('#favourite-users');
+    var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);
+    elementLeftChat.querySelector('a').classList.add("unread-msg-user");
+    var numUnRead = elementLeftChat.querySelector('.badge').innerHTML;
+    numUnRead = numUnRead ? parseInt(numUnRead) + 1 : 1;
+    elementLeftChat.querySelector('.badge').innerHTML = numUnRead;
+    eleParentLeftChat.prepend(elementLeftChat);
+})
+
 socket.on('userOff', user => {
     var elementLeftChat = document.querySelector(`#contact-id-${user.userId}`);
     elementLeftChat.querySelector(".user-status").style.backgroundColor = "#495057";

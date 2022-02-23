@@ -19,13 +19,13 @@ module.exports = {
     getStatusUsers: (listUser) => {
         var result = [];
         listUser.forEach(element => {
-            if(element.type == 'single'){
+            if (element.type == 'single') {
                 if (users.find((user) => user.userId === element.userId)) {
                     result.push(element)
                 }
-            }else{
-                for(var userId of element.userIds){
-                    if(users.find((user) => user.userId === userId)){
+            } else {
+                for (var userId of element.userIds) {
+                    if (users.find((user) => user.userId === userId)) {
                         result.push(element)
                         break;
                     }

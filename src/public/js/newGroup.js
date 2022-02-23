@@ -49,7 +49,7 @@ formNewGroup.onsubmit = (e) => {
             },
             success: function (data) {
                 if (data) {
-                    var arrMemIdAndAva = data.member.map(e => ({id: e._id, avatar: e.avatar}))
+                    var arrMemIdAndAva = data.member.map(e => ({ id: e._id, avatar: e.avatar }))
                     socket.emit('sendNewGroup', {
                         senderId: user_id,
                         nameGroup: data.name,
@@ -60,7 +60,7 @@ formNewGroup.onsubmit = (e) => {
                 }
             }
         })
-    }else{
+    } else {
         document.querySelector('.notify-member-invalid').innerHTML = 'Group member must be greater than 2'
     }
 }
@@ -75,7 +75,7 @@ socket.on('getNewGroup', (data) => {
                 <div class="chat-user-img online align-self-center me-2 ms-0">
                     <div class="avatars-group-sm">`;
     data.memberIdAndAva.forEach(e => {
-        if(e.id != user_id){
+        if (e.id != user_id) {
             elementLeftChat += `<span class="each-avatar size-avatar-sm">
                 <img src="${e.avatar}">
             </span>`

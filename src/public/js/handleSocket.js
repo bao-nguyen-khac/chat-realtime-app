@@ -300,7 +300,7 @@ socket.on('getReactionChatGroup', (data) => {
 
 var formChatCustomize = document.querySelector('.form-chat-customize');
 formChatCustomize.onsubmit = (e) => {
-    socket.emit('sendNotifyChatCustom', {
+    socket.emit('sendNotifyChatCustomAndOut', {
         senderId: user_id,
         senderName: fullname,
         messId: messageId,
@@ -308,7 +308,17 @@ formChatCustomize.onsubmit = (e) => {
     })
 }
 
-socket.on('getNotifyChatCustom', data => {
+var formOutGroup = document.querySelector('.form-out-group')
+formOutGroup.onsubmit = () => {
+    socket.emit('sendNotifyChatCustomAndOut', {
+        senderId: user_id,
+        senderName: fullname,
+        messId: messageId,
+        message: 'outed of group :('
+    })
+}
+
+socket.on('getNotifyChatCustomAndOut', data => {
     var eleParentLeftChat = $('#favourite-users');
     var messageHtml = '';
     var elementLeftChat = document.querySelector(`#group-id-${data.messId}`);

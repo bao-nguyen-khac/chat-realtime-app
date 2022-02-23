@@ -19,10 +19,11 @@ class ChatController {
                     updatedAt: Date.now()
                 })
             const chats = await Chat
-                .find({ messageId: data.messId });
-            return chats[chats.length - 1]._id;
+                .find({ messageId: data.messId })
+                .sort({ 'createdAt': -1 }).limit(1);
+            return chats[0]._id;
         } catch (error) {
-            next(error);
+            console.log(error);
         }
     }
     async addReactionChat(data) {

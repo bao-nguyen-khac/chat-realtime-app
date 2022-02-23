@@ -76,7 +76,7 @@ class MessageController {
             const message = await Message
                 .findOne({ _id: mess_id, 'member': req.user_id })
                 .populate('member');
-            let chats;
+            var chats;
             if (message) {
                 await Chat
                     .updateMany({ messageId: mess_id }, {
@@ -110,9 +110,9 @@ class MessageController {
     }
     async getAllContact(req, res, next) {
         try {
-            let listMessage = await Message
+            var listMessage = await Message
                 .find({ 'member': req.user_id })
-            let allContact = [];
+            var allContact = [];
             listMessage.forEach(message => {
                 if (message.type == 'single') {
                     message.member.forEach(memId => {
@@ -121,7 +121,7 @@ class MessageController {
                         }
                     })
                 } else {
-                    let userIdsGroup = message.member.filter(memId => memId != req.user_id)
+                    var userIdsGroup = message.member.filter(memId => memId != req.user_id)
                     allContact.push({ type: message.type, userIds: userIdsGroup, messageId: message._id })
                 }
             })
@@ -132,12 +132,12 @@ class MessageController {
     }
     async getAllContactSort(req, res, next) {
         try {
-            let listMessage = await Message
+            var listMessage = await Message
                 .find({ 'member': req.user_id })
                 .populate('member')
-            let allContactName = [];
-            let allContact = [];
-            let result = [];
+            var allContactName = [];
+            var allContact = [];
+            var result = [];
             listMessage.forEach(message => {
                 if (message.type == 'single') {
                     message.member.forEach(mem => {
@@ -159,7 +159,7 @@ class MessageController {
     }
     async addMemberGroup(req, res, next) {
         try {
-            if (typeof(req.body.list_member_add) == 'string'){
+            if (typeof (req.body.list_member_add) == 'string') {
                 req.body.list_member_add = [req.body.list_member_add]
             }
             await Message
@@ -171,6 +171,19 @@ class MessageController {
                     }
                 })
             res.redirect('back');
+        } catch (error) {
+            next(error)
+        }
+    }
+    async outGroup(req, res, next) {
+        try {
+            await Message
+                .updateOne({ _id: req.query.messId }, {
+                    $pull: {
+                        member: req.user_id
+                    }
+                })
+            res.redirect('/');
         } catch (error) {
             next(error)
         }

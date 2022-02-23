@@ -23,7 +23,6 @@ btnCloseResponsive.addEventListener('click', () => {
     document.querySelector('.user-chat').classList.remove('user-chat-show');
 })
 listElementChat.forEach(element => {
-
     element.addEventListener('click', () => {
         if(!document.querySelector('.user-chat').classList.contains('user-chat-show')){
             document.querySelector('.user-chat').classList.add('user-chat-show');
