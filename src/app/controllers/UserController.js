@@ -69,9 +69,16 @@ class UserController {
     }
     async storeAccount(req, res, next) {
         try {
-            const account = await Account.findOne({ username: req.body.username, phone: req.body.phone });
-            if (account) {
-                res.redirect('/auth/user/register?message=username%20or%20phone%20number%20is%20exit!!&checkRegister=error');
+            const account = await Account.find({
+                $or: [{
+                    username: req.body.username
+                }, {
+                    phone: req.body.phone
+                }]
+            });
+            console.log(account)
+            if (account.length > 0) {
+                res.redirect('/auth/user/register?message=Username%20or%20Phone%20number%20is%20exit!!&checkRegister=error');
             } else {
                 req.body.sub_desc = '';
                 req.body.main_desc = '';
@@ -84,6 +91,7 @@ class UserController {
                     await _account.save();
                     res.redirect('/auth/user/register?message=Register%20Successfull!!&checkRegister=susccess');
                 });
+                res.redirect('/auth/user/register?message=Register%20Successfull!!&checkRegister=susccess');
             }
         } catch (error) {
             next(error);
