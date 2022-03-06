@@ -16,7 +16,8 @@
   .carousel-item img{
     width: 600px;
     height: 400px;
-    margin-left: 24%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .carousel-item p{
     margin-bottom: -4rem;
