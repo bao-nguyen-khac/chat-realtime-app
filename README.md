@@ -1,17 +1,17 @@
 # Telegram clone (but features like Zalo :v)
 ## <img src="./src/public/img/logo-tele.png" width="50px"/>
 ## 🤖 Features
-* Login, Register
+* Login, register.
 * View and update personal information like: fullname, address, description, avatar.
 * Create new contact or new group.
 * Show unread conversation and number of messages unread.
-* Online or offline friend.
-* Like and unlike message.
+* Online or offline user.
+* Like and dislike message.
 * Message as text.
 * Conversation single:  
     * View his/her personal information.
 * Conversation group:
-    * Update name, avatar and description group.
+    * Update the group's name, avatar and description.
     * View list members in group.
     * Add new member to group.
     * Notification message of the conversation.
@@ -19,7 +19,7 @@
 ## 🤖 Tech stacks
 ### Back-end
 * Nodejs (Expressjs)
-* MongoDB (Monoogse)
+* MongoDB (Mongoose)
 * Socket IO
 ### Front-end
 * HTML5
@@ -29,4 +29,4 @@
 ### Link demo: https://chat--realtime--app.herokuapp.com/
 * username: admin5
 * password: admin5
-* phone: 012345678
+* phone: 0123456789
