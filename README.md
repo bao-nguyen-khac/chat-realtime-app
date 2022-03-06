@@ -1,4 +1,5 @@
-# Telegram clone <img src="./src/public/img/logo-tele.png" width="30px"/>
+# Telegram clone (but features like Zalo :v)
+## <img src="./src/public/img/logo-tele.png" width="50px"/>
 ## 🤖 Features
 * Login, Register
 * View and update personal information like: fullname, address, description, avatar.
@@ -22,7 +23,10 @@
 * Socket IO
 ### Front-end
 * HTML5
-* CSS (Bootstrap)
+* CSS (Bootstrap 5)
 * Javascript
 * Handlebarsjs (Template engine)
-## Link demo: https://chat--realtime--app.herokuapp.com/
+### Link demo: https://chat--realtime--app.herokuapp.com/
+* username: admin5
+* password: admin5
+* phone: 012345678
