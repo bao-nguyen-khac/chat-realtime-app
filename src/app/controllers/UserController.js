@@ -76,7 +76,6 @@ class UserController {
                     phone: req.body.phone
                 }]
             });
-            console.log(account)
             if (account.length > 0) {
                 res.redirect('/auth/user/register?message=Username%20or%20Phone%20number%20is%20exit!!&checkRegister=error');
             } else {
@@ -89,7 +88,6 @@ class UserController {
                     req.body.password = hash;
                     const _account = await new Account(req.body);
                     await _account.save();
-                    res.redirect('/auth/user/register?message=Register%20Successfull!!&checkRegister=susccess');
                 });
                 res.redirect('/auth/user/register?message=Register%20Successfull!!&checkRegister=susccess');
             }
