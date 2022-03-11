@@ -1,4 +1,4 @@
-# Telegram clone (but features like Zalo :v)
+## Telegram clone (but features like Zalo :v)
 ## <img src="./src/public/img/logo-tele.png" width="50px"/>
 ## 🤖 Features
 * Login, register.
