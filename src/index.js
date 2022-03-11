@@ -1,7 +1,7 @@
 require('dotenv').config()
 const path = require('path');
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const app = express();
 const port = process.env.PORT || 3000;
 const route = require('./routes');
@@ -12,8 +12,6 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server)
 
-const userController = require('./app/controllers/UserController');
-const MessageController = require('./app/controllers/MessageController');
 const ChatController = require('./app/controllers/ChatController');
 
 const { addUser, removeUser, getUser, getUserBySocketId, getStatusUsers } = require('./util/userSocket');
@@ -39,7 +37,7 @@ app.use(cookieParse(process.env.COOKIE_SECRECT)); //cookie parser
 // Middleware custome
 
 // Set up
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 app.engine('hbs', hbs.engine);
 
