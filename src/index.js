@@ -16,7 +16,7 @@ const ChatController = require('./app/controllers/ChatController');
 
 const { addUser, removeUser, getUser, getUserBySocketId, getStatusUsers } = require('./util/userSocket');
 
-const db = require('./confic/db/index');
+const db = require('./config/db/index');
 
 const hbs = handlebars.create({
     extname: '.hbs',

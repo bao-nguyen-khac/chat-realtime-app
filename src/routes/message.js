@@ -20,6 +20,8 @@ route.get('/get-all-contact', MessageController.getAllContact);
 
 route.get('/get-all-contact-sort', MessageController.getAllContactSort);
 
+route.get('/paging-chat', MessageController.pagingChat);
+
 route.get('/', MessageController.getMessage);
 
 module.exports = route;

@@ -8,6 +8,7 @@
 * Online or offline user.
 * Like and dislike message.
 * Message as text.
+* Use paging for message.
 * Conversation single:  
     * View his/her personal information.
 * Conversation group:

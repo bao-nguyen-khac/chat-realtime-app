@@ -107,6 +107,17 @@ display: block;
   color: #f33a58;
   margin-bottom: 4px;
 }
+
+.load-more-chat{
+  cursor: pointer;
+}
+.load-more-chat:hover{
+  opacity: 0.7;
+}
+
+.chat-conversation-list li{
+  display: flex;
+}
 @keyframes modalIN{
   from{
       opacity: 0;

@@ -70,6 +70,30 @@ class ChatController {
             next(error)
         }
     }
+    async pagingChat(messId, size, page) {
+        try {
+            const count = await Chat.find({ messageId: messId }).count();
+            var numSkip, numChat;
+            if (count - size * page < 0) {
+                numSkip = 0;
+                numChat = count - size * (page - 1);
+                if (numChat <= 0) {
+                    return false;
+                }
+            } else {
+                numSkip = count - size * page;
+                numChat = size;
+            }
+            return await Chat
+                .find({ messageId: messId })
+                .populate('user_id')
+                .limit(numChat)
+                .skip(numSkip);
+        } catch (error) {
+            return false;
+        }
+
+    }
 }
 
 module.exports = new ChatController();

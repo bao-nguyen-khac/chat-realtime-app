@@ -3,6 +3,7 @@ const Account = require('../models/Account');
 const Chat = require('../models/Chat');
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 const { MongooseToObject } = require('../../util/mongoose');
+const ChatController = require('./ChatController');
 class MessageController {
     async getAllMessage(req, res, next) {
         try {
@@ -84,9 +85,7 @@ class MessageController {
                             user_read: req.user_id
                         },
                     })
-                chats = await Chat
-                    .find({ messageId: mess_id })
-                    .populate('user_id');
+                chats = await ChatController.pagingChat(mess_id, 8, 1);
             }
             var infoMessage = await Message
                 .find({ 'member': req.user_id })
@@ -104,6 +103,14 @@ class MessageController {
                 chats: mutipleMongooseToObject(chats),
                 infoMessage: infoMessage
             })
+        } catch (error) {
+            next(error);
+        }
+    }
+    async pagingChat(req, res, next) {
+        try {
+            const chats = await ChatController.pagingChat(req.query.messId, 8, req.query.page);
+            res.send(chats);
         } catch (error) {
             next(error);
         }

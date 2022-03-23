@@ -120,100 +120,105 @@
         <div class="chat-conversation p-3 p-lg-4 " id="chat-conversation" style="overflow: overlay;">
 
             <ul class="list-unstyled chat-conversation-list" id="users-conversation">
-                {{#each chats}}
-                {{#if (compareID this.user_id._id ../userInfo.id)}}
-                {{#if (isSame this.type 'text')}}
-                <li class="chat-list right">
-                    <div class="conversation-list">
-                        <div class="user-chat-content">
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content">
-                                    <p class="mb-0 ctext-content">{{this.content}}</p>
-                                </div>
-                                <div class="reaction-icon-block">
-                                    {{#if (isEmptyArr this.like)}}
-                                    <div class="reaction-icon-disable" data-chat-id="{{this._id}}"></div>
-                                    {{else}}
-                                    <div class="reaction-icon-disable" data-chat-id="{{this._id}}"
-                                        style='background-image: url("/img/like.png");'>
+                <li class="chat-list notify-chat">
+                    <span class="load-more-chat">Load more ...</span>
+                </li>
+                <div class="chat--content">
+                    {{#each chats}}
+                    {{#if (compareID this.user_id._id ../userInfo.id)}}
+                    {{#if (isSame this.type 'text')}}
+                    <li class="chat-list right">
+                        <div class="conversation-list">
+                            <div class="user-chat-content">
+                                <div class="ctext-wrap">
+                                    <div class="ctext-wrap-content">
+                                        <p class="mb-0 ctext-content">{{this.content}}</p>
                                     </div>
-                                    {{/if}}
-                                    {{#if (isSame this.totalLike 0)}}
-                                    <div class="total-reactions"></div>
-                                    {{else}}
-                                    <div class="total-reactions">{{this.totalLike}}</div>
-                                    {{/if}}
+                                    <div class="reaction-icon-block">
+                                        {{#if (isEmptyArr this.like)}}
+                                        <div class="reaction-icon-disable" data-chat-id="{{this._id}}"></div>
+                                        {{else}}
+                                        <div class="reaction-icon-disable" data-chat-id="{{this._id}}"
+                                            style='background-image: url("/img/like.png");'>
+                                        </div>
+                                        {{/if}}
+                                        {{#if (isSame this.totalLike 0)}}
+                                        <div class="total-reactions"></div>
+                                        {{else}}
+                                        <div class="total-reactions">{{this.totalLike}}</div>
+                                        {{/if}}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">{{convertTime this.time}}</small>
-                                <span class="text-success check-message-icon">
-                                    <i class="fal fa-check"></i>
-                                </span>
+                                <div class="conversation-name">
+                                    <small class="text-muted time">{{convertTime this.time}}</small>
+                                    <span class="text-success check-message-icon">
+                                        <i class="fal fa-check"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                {{/if}}
-                {{#if (isSame this.type 'notify')}}
-                <li class="chat-list notify-chat">
-                    <span>You {{this.content}}</span>
-                </li>
-                {{/if}}
-                {{#if (isSame this.type 'addmember')}}
-                <li class="chat-list notify-chat">
-                    <span>You added {{this.content}} to group</span>
-                </li>
-                {{/if}}
-                {{else}}
-                {{#if (isSame this.type 'text')}}
-                <li class="chat-list left">
-                    <div class="conversation-list">
-                        <div class="chat-avatar"><img src="{{this.user_id.avatar}}" alt="">
-                        </div>
-                        <div class="user-chat-content">
-                            <div class="conversation-name">
-                                <small class="text-muted time">{{this.user_id.fullname}}</small>
+                    </li>
+                    {{/if}}
+                    {{#if (isSame this.type 'notify')}}
+                    <li class="chat-list notify-chat">
+                        <span>You {{this.content}}</span>
+                    </li>
+                    {{/if}}
+                    {{#if (isSame this.type 'addmember')}}
+                    <li class="chat-list notify-chat">
+                        <span>You added {{this.content}} to group</span>
+                    </li>
+                    {{/if}}
+                    {{else}}
+                    {{#if (isSame this.type 'text')}}
+                    <li class="chat-list left">
+                        <div class="conversation-list">
+                            <div class="chat-avatar"><img src="{{this.user_id.avatar}}" alt="">
                             </div>
-                            <div class="ctext-wrap">
-                                <div class="ctext-wrap-content">
-                                    <p class="mb-0 ctext-content">{{this.content}}</p>
+                            <div class="user-chat-content">
+                                <div class="conversation-name">
+                                    <small class="text-muted time">{{this.user_id.fullname}}</small>
                                 </div>
-                                <div class="reaction-icon-block">
-                                    {{#if (isEmptyArr this.like)}}
-                                    <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
-                                    {{else}}
-                                    <div class="reaction-icon" data-chat-id="{{this._id}}"
-                                        style='background-image: url("/img/like.png");'>
+                                <div class="ctext-wrap">
+                                    <div class="ctext-wrap-content">
+                                        <p class="mb-0 ctext-content">{{this.content}}</p>
                                     </div>
-                                    {{/if}}
-                                    {{#if (isSame this.totalLike 0)}}
-                                    <div class="total-reactions"></div>
-                                    {{else}}
-                                    <div class="total-reactions">{{this.totalLike}}</div>
-                                    {{/if}}
+                                    <div class="reaction-icon-block">
+                                        {{#if (isEmptyArr this.like)}}
+                                        <div class="reaction-icon" data-chat-id="{{this._id}}"></div>
+                                        {{else}}
+                                        <div class="reaction-icon" data-chat-id="{{this._id}}"
+                                            style='background-image: url("/img/like.png");'>
+                                        </div>
+                                        {{/if}}
+                                        {{#if (isSame this.totalLike 0)}}
+                                        <div class="total-reactions"></div>
+                                        {{else}}
+                                        <div class="total-reactions">{{this.totalLike}}</div>
+                                        {{/if}}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="conversation-name">
-                                <small class="text-muted time">{{convertTime this.time}}</small>
-                            </div>
+                                <div class="conversation-name">
+                                    <small class="text-muted time">{{convertTime this.time}}</small>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
-                </li>
-                {{/if}}
-                {{#if (isSame this.type 'notify')}}
-                <li class="chat-list notify-chat">
-                    <span>{{this.user_id.fullname}} {{this.content}}</span>
-                </li>
-                {{/if}}
-                {{#if (isSame this.type 'addmember')}}
-                <li class="chat-list notify-chat">
-                    <span>{{this.user_id.fullname}} has added {{this.content}} to group</span>
-                </li>
-                {{/if}}
-                {{/if}}
-                {{/each}}
+                    </li>
+                    {{/if}}
+                    {{#if (isSame this.type 'notify')}}
+                    <li class="chat-list notify-chat">
+                        <span>{{this.user_id.fullname}} {{this.content}}</span>
+                    </li>
+                    {{/if}}
+                    {{#if (isSame this.type 'addmember')}}
+                    <li class="chat-list notify-chat">
+                        <span>{{this.user_id.fullname}} has added {{this.content}} to group</span>
+                    </li>
+                    {{/if}}
+                    {{/if}}
+                    {{/each}}
+                </div>
             </ul>
         </div>
 
