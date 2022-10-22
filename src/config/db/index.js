@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 async function connect() {
     try {
-        await mongoose.connect(process.env.MONGODB_Atlas,{
+        await mongoose.connect(process.env.MONGODB_ATLAS,{
             useNewUrlParser: true,
             useUnifiedTopology: true
         });

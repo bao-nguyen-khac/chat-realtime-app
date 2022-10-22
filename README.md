@@ -1,4 +1,4 @@
-## Telegram clone (but features like Zalo :v)
+## Chat App
 ## <img src="./src/public/img/logo-tele.png" width="50px"/>
 ## 🤖 Features
 * Login, register.
