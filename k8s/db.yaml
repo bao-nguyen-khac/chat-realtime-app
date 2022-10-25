@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-app-db
+spec:
+  selector:
+    matchLabels:
+      app: chat-app-db
+  template:
+    metadata:
+      labels:
+        app: chat-app-db
+    spec:
+      containers:
+      - name: chat-app-db
+        image: mongo:6.0.2
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: 'root'
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: password
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /var/lib/mongo
+        ports:
+          - containerPort: 27017
+      volumes:
+        - name: mongo-persistent-storage
+          persistentVolumeClaim:
+            claimName: mongo-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-app-db
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  selector:
+    app: chat-app-db
