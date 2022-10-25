@@ -27,7 +27,7 @@
 * CSS (Bootstrap 5)
 * Javascript
 * Handlebarsjs (Template engine)
-### How I deployment it
+### How I deploy it
 * <a href="https://github.com/bao-nguyen-khac/devops-setup.git" target="_blank">Reference</a>
 ### Link demo: <a href="https://chat-app.baonk.site" target="_blank">Chat app</a>
 * username: admin1 (admin 2)
