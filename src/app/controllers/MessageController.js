@@ -87,6 +87,9 @@ class MessageController {
                     })
                 chats = await ChatController.pagingChat(mess_id, 8, 1);
             }
+            if (!chats) {
+                chats = []
+            }
             var infoMessage = await Message
                 .find({ 'member': req.user_id })
                 .populate('member')
