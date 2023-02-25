@@ -70,7 +70,7 @@ chatForm.addEventListener('submit', (e) => {
     const message = messageInput.value;
     var today = new Date();
     var hour = moment(today).format("HH:mm");
-    var date = moment(today).format("DD/MM");
+    var date = moment(today).format("DD/MM/YYYY");
     var dateTime = hour + ' | ' + date;
     if (messageType == 'single') {
         socket.emit('sendMessageSingle', {

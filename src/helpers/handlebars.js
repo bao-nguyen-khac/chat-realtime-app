@@ -30,7 +30,7 @@ module.exports = {
     },
     convertTime: (time) => {
         var hour = moment(time).format("HH:mm");
-        var date = moment(time).format("DD/MM");
+        var date = moment(time).format("DD/MM/YYYY");
         return hour + ' | ' + date;
     },
     isEmptyArr: (arr) => {

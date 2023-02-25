@@ -1,0 +1,18 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.23.3
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./chat-app.conf:/etc/nginx/conf.d/chat-app.conf
+  chat-app:
+    image: khacbaocsek19/chat-app:v3
+    # ports:
+    #   - 3000:3000
+    environment:
+      - MONGODB_SERVER=$MONGODB_SERVER
+      - COOKIE_SECRECT=$COOKIE_SECRECT
+      - JWT_SECRECT=$JWT_SECRECT
