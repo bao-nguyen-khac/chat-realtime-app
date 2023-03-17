@@ -5,47 +5,45 @@
 ## 🤖 Features
 
 -   Login, register.
--   View and update personal information like: fullname, address, description, avatar.
--   Create new contact or new group.
--   Show unread conversation and number of messages unread.
--   Online or offline user.
--   Like and dislike message.
--   Message as text.
--   Use paging for message.
+-   View and update personal information: fullname, address, description, avatar.
+-   Create a new contact and new group.
+-   Display the number of unread messages and unread conversations.
+-   User is online or offline.
+-   A message of likes and dislikes.
+-   Text-based message.
+-   Use paging for load messages.
 -   Conversation single:
     -   View his/her personal information.
 -   Conversation group:
     -   Update the group's name, avatar and description.
-    -   View list members in group.
+    -   See the list of group members.
     -   Add new member to group.
-    -   Notification message of the conversation.
+    -   Have the conversation's notification message.
     -   Out group.
 
 ## 🤖 Tech stacks
 
 ### Back-end
 
--   Nodejs (Expressjs)
+-   Node.js (Express.js)
 -   MongoDB (Mongoose)
--   Socket IO
+-   Socket IO, JWT
 
 ### Front-end
 
--   HTML5
--   CSS (Bootstrap 5)
--   Javascript
 -   Handlebarsjs (Template engine)
+-   HTML5, CSS, Javascript
+-   Clone from: https://doot-dark.react.themesbrand.com/dashboard
 
 ### Deploy
 
--   Docker
--   Nginx
--   Cloudflare (SSL cert)
+-   Docker, Kubernetes for deployment
+-   Nginx for reverse proxy, Cloudflare for SSL cert
+-   CI/CD with Jenkins
 
-### Link demo: <a href="https://chat-app.baonk.site" target="_blank">Chat app</a>
+#### Link demo: <a href="https://chat-app.baonk.site" target="_blank">https://chat-app.baonk.site</a>
 
--   username: admin1 (admin 2)
--   password: admin1 (admin 2)
+-   Account: admin1/admin1, admin2/admin2, admin3/admin3
 
 ### Screenshots
 
@@ -72,3 +70,5 @@
 |            New Group             |
 | :------------------------------: |
 | ![](./screenshots/new-group.png) |
+
+#### See this repository for more information about my setup: <a href="https://github.com/bao-nguyen-khac/devops-setup" target="_blank">https://github.com/bao-nguyen-khac/devops-setup</a>
